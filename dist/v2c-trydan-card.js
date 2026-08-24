@@ -1272,16 +1272,16 @@ var at = {
 		showCharger: "Il·lustració Trydan"
 	},
 	lcd: {
-		disconnected: "Esperant EV",
+		disconnected: "ESPERANT EV",
 		unavailable: "Sense dades",
-		charging: "Carregant",
+		charging: "VE CARREGANT",
 		complete: "Completa",
 		timer: "Programada",
 		updating: "Actualitza",
 		control_pilot: "Error",
 		load_balancing: "Error",
 		error: "Error",
-		waiting_power: "Connectat",
+		waiting_power: "VE CONECTAT",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Connectant"
 	}
@@ -1399,16 +1399,16 @@ var at = {
 		showCharger: "Trydan-illustration"
 	},
 	lcd: {
-		disconnected: "Intet EV",
+		disconnected: "VENTER EV",
 		unavailable: "Offline",
-		charging: "Oplader",
+		charging: "EV OPLADNING",
 		complete: "Færdig",
 		timer: "Timer",
 		updating: "Opdaterer",
 		control_pilot: "Fejl",
 		load_balancing: "Fejl",
 		error: "Fejl",
-		waiting_power: "Tilsluttet",
+		waiting_power: "EV TILSLUTTET",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Tilslutter"
 	}
@@ -1526,16 +1526,16 @@ var at = {
 		showCharger: "Trydan-Abbildung"
 	},
 	lcd: {
-		disconnected: "Kein EV",
+		disconnected: "WARTEN AUF EV",
 		unavailable: "Offline",
-		charging: "Laden",
+		charging: "EV LAEDT",
 		complete: "Fertig",
 		timer: "Timer",
 		updating: "Update",
 		control_pilot: "Fehler",
 		load_balancing: "Fehler",
 		error: "Fehler",
-		waiting_power: "Verbunden",
+		waiting_power: "VERBUNDENES EV",
 		wifi_connected: "WLAN OK",
 		wifi_connecting: "Verbinden"
 	}
@@ -1653,16 +1653,16 @@ var at = {
 		showCharger: "Illustration Trydan"
 	},
 	lcd: {
-		disconnected: "Sans EV",
+		disconnected: "EN ATTENTE VE",
 		unavailable: "Indispo",
-		charging: "En charge",
+		charging: "RECHARGER VE",
 		complete: "Terminée",
 		timer: "Minuteur",
 		updating: "MAJ",
 		control_pilot: "Erreur",
 		load_balancing: "Erreur",
 		error: "Erreur",
-		waiting_power: "Connecté",
+		waiting_power: "VE CONNECTE",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Connexion"
 	}
@@ -1780,16 +1780,16 @@ var at = {
 		showCharger: "Illustrazione Trydan"
 	},
 	lcd: {
-		disconnected: "Nessun EV",
+		disconnected: "IN ATTESA DI EV",
 		unavailable: "Non disp",
-		charging: "In carica",
+		charging: "RICARICA EV",
 		complete: "Completa",
 		timer: "Programma",
 		updating: "Aggiorna",
 		control_pilot: "Errore",
 		load_balancing: "Errore",
 		error: "Errore",
-		waiting_power: "Collegato",
+		waiting_power: "VE CONNESSO",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Connessione"
 	}
@@ -1907,16 +1907,16 @@ var at = {
 		showCharger: "Trydan-afbeelding"
 	},
 	lcd: {
-		disconnected: "Geen EV",
+		disconnected: "WACHTEN OP EV",
 		unavailable: "Offline",
-		charging: "Laden",
+		charging: "EV OPLADEN",
 		complete: "Klaar",
 		timer: "Timer",
 		updating: "Update",
 		control_pilot: "Fout",
 		load_balancing: "Fout",
 		error: "Fout",
-		waiting_power: "Verbonden",
+		waiting_power: "VERBONDEN MET EV",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Verbinden"
 	}
@@ -2161,9 +2161,9 @@ var at = {
 		showCharger: "Ilustrație Trydan"
 	},
 	lcd: {
-		disconnected: "Fără EV",
+		disconnected: "ASTEPTAND EV",
 		unavailable: "Indisponibil",
-		charging: "Încarcă",
+		charging: "VE INCARCARE",
 		complete: "Gata",
 		timer: "Program",
 		updating: "Actualizează",
@@ -2415,16 +2415,16 @@ var at = {
 		showCharger: "Trydan artwork"
 	},
 	lcd: {
-		disconnected: "No EV",
+		disconnected: "WAITING EV",
 		unavailable: "Offline",
-		charging: "Charging",
+		charging: "CHARGING EV",
 		complete: "Done",
 		timer: "Timer",
 		updating: "Updating",
 		control_pilot: "Error",
 		load_balancing: "Error",
 		error: "Error",
-		waiting_power: "Ready",
+		waiting_power: "CONNECTED EV",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Wifi..."
 	}
@@ -2542,16 +2542,16 @@ var at = {
 		showCharger: "Ilustración Trydan"
 	},
 	lcd: {
-		disconnected: "Sin EV",
+		disconnected: "ESPERANDO VE",
 		unavailable: "Sin datos",
-		charging: "Cargando",
+		charging: "VE CARGANDO",
 		complete: "Completa",
 		timer: "Programa",
 		updating: "Actualiza",
 		control_pilot: "Error",
 		load_balancing: "Error",
 		error: "Error",
-		waiting_power: "Conectado",
+		waiting_power: "VE CONECTADO",
 		wifi_connected: "Wifi OK",
 		wifi_connecting: "Conectando"
 	}
