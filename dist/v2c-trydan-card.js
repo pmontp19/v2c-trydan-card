@@ -29,11 +29,11 @@ var e = globalThis, t = e.ShadowRoot && (e.ShadyCSS === void 0 || e.ShadyCSS.nat
 	let t = "";
 	for (let n of e.cssRules) t += n.cssText;
 	return a(t);
-})(e) : e, { is: l, defineProperty: u, getOwnPropertyDescriptor: d, getOwnPropertyNames: f, getOwnPropertySymbols: p, getPrototypeOf: ee } = Object, m = globalThis, h = m.trustedTypes, g = h ? h.emptyScript : "", te = m.reactiveElementPolyfillSupport, _ = (e, t) => e, v = {
+})(e) : e, { is: l, defineProperty: u, getOwnPropertyDescriptor: d, getOwnPropertyNames: f, getOwnPropertySymbols: p, getPrototypeOf: m } = Object, h = globalThis, g = h.trustedTypes, ee = g ? g.emptyScript : "", te = h.reactiveElementPolyfillSupport, _ = (e, t) => e, v = {
 	toAttribute(e, t) {
 		switch (t) {
 			case Boolean:
-				e = e ? g : null;
+				e = e ? ee : null;
 				break;
 			case Object:
 			case Array: e = e == null ? e : JSON.stringify(e);
@@ -66,7 +66,7 @@ var e = globalThis, t = e.ShadowRoot && (e.ShadyCSS === void 0 || e.ShadyCSS.nat
 	useDefault: !1,
 	hasChanged: y
 };
-Symbol.metadata ??= Symbol("metadata"), m.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+Symbol.metadata ??= Symbol("metadata"), h.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 var b = class extends HTMLElement {
 	static addInitializer(e) {
 		this._$Ei(), (this.l ??= []).push(e);
@@ -104,7 +104,7 @@ var b = class extends HTMLElement {
 	}
 	static _$Ei() {
 		if (this.hasOwnProperty(_("elementProperties"))) return;
-		let e = ee(this);
+		let e = m(this);
 		e.finalize(), e.l !== void 0 && (this.l = [...e.l]), this.elementProperties = new Map(e.elementProperties);
 	}
 	static finalize() {
@@ -251,19 +251,19 @@ var b = class extends HTMLElement {
 	updated(e) {}
 	firstUpdated(e) {}
 };
-b.elementStyles = [], b.shadowRootOptions = { mode: "open" }, b[_("elementProperties")] = /* @__PURE__ */ new Map(), b[_("finalized")] = /* @__PURE__ */ new Map(), te?.({ ReactiveElement: b }), (m.reactiveElementVersions ??= []).push("2.1.2");
+b.elementStyles = [], b.shadowRootOptions = { mode: "open" }, b[_("elementProperties")] = /* @__PURE__ */ new Map(), b[_("finalized")] = /* @__PURE__ */ new Map(), te?.({ ReactiveElement: b }), (h.reactiveElementVersions ??= []).push("2.1.2");
 //#endregion
 //#region node_modules/.pnpm/lit-html@3.3.3/node_modules/lit-html/lit-html.js
-var x = globalThis, re = (e) => e, S = x.trustedTypes, ie = S ? S.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, ae = "$lit$", C = `lit$${Math.random().toFixed(9).slice(2)}$`, oe = "?" + C, se = `<${oe}>`, w = document, T = () => w.createComment(""), E = (e) => e === null || typeof e != "object" && typeof e != "function", ce = Array.isArray, le = (e) => ce(e) || typeof e?.[Symbol.iterator] == "function", ue = "[ 	\n\f\r]", D = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, de = /-->/g, fe = />/g, O = RegExp(`>|${ue}(?:([^\\s"'>=/]+)(${ue}*=${ue}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), pe = /'/g, me = /"/g, he = /^(?:script|style|textarea|title)$/i, k = ((e) => (t, ...n) => ({
+var x = globalThis, re = (e) => e, S = x.trustedTypes, ie = S ? S.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, ae = "$lit$", C = `lit$${Math.random().toFixed(9).slice(2)}$`, oe = "?" + C, se = `<${oe}>`, w = document, T = () => w.createComment(""), E = (e) => e === null || typeof e != "object" && typeof e != "function", ce = Array.isArray, le = (e) => ce(e) || typeof e?.[Symbol.iterator] == "function", ue = "[ 	\n\f\r]", D = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, de = /-->/g, fe = />/g, O = RegExp(`>|${ue}(?:([^\\s"'>=/]+)(${ue}*=${ue}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), pe = /'/g, me = /"/g, he = /^(?:script|style|textarea|title)$/i, ge = (e) => (t, ...n) => ({
 	_$litType$: e,
 	strings: t,
 	values: n
-}))(1), A = Symbol.for("lit-noChange"), j = Symbol.for("lit-nothing"), ge = /* @__PURE__ */ new WeakMap(), M = w.createTreeWalker(w, 129);
-function _e(e, t) {
+}), k = ge(1), A = ge(2), j = Symbol.for("lit-noChange"), M = Symbol.for("lit-nothing"), _e = /* @__PURE__ */ new WeakMap(), N = w.createTreeWalker(w, 129);
+function ve(e, t) {
 	if (!ce(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
 	return ie === void 0 ? t : ie.createHTML(t);
 }
-var ve = (e, t) => {
+var ye = (e, t) => {
 	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = D;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
@@ -271,17 +271,17 @@ var ve = (e, t) => {
 		let d = o === O && e[t + 1].startsWith("/>") ? " " : "";
 		a += o === D ? n + se : l >= 0 ? (r.push(s), n.slice(0, l) + ae + n.slice(l) + C + d) : n + C + (l === -2 ? t : d);
 	}
-	return [_e(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
-}, ye = class e {
+	return [ve(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+}, be = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ve(t, n);
-		if (this.el = e.createElement(l, r), M.currentNode = this.el.content, n === 2 || n === 3) {
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ye(t, n);
+		if (this.el = e.createElement(l, r), N.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
 		}
-		for (; (i = M.nextNode()) !== null && c.length < s;) {
+		for (; (i = N.nextNode()) !== null && c.length < s;) {
 			if (i.nodeType === 1) {
 				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(ae)) {
 					let t = u[o++], n = i.getAttribute(e).split(C), r = /([.?@])?(.*)/.exec(t);
@@ -290,7 +290,7 @@ var ve = (e, t) => {
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? Se : r[1] === "?" ? Ce : r[1] === "@" ? we : P
+						ctor: r[1] === "." ? Ce : r[1] === "?" ? we : r[1] === "@" ? Te : F
 					}), i.removeAttribute(e);
 				} else e.startsWith(C) && (c.push({
 					type: 6,
@@ -300,7 +300,7 @@ var ve = (e, t) => {
 					let e = i.textContent.split(C), t = e.length - 1;
 					if (t > 0) {
 						i.textContent = S ? S.emptyScript : "";
-						for (let n = 0; n < t; n++) i.append(e[n], T()), M.nextNode(), c.push({
+						for (let n = 0; n < t; n++) i.append(e[n], T()), N.nextNode(), c.push({
 							type: 2,
 							index: ++a
 						});
@@ -326,12 +326,12 @@ var ve = (e, t) => {
 		return n.innerHTML = e, n;
 	}
 };
-function N(e, t, n = e, r) {
-	if (t === A) return t;
+function P(e, t, n = e, r) {
+	if (t === j) return t;
 	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = E(t) ? void 0 : t._$litDirective$;
-	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = N(e, i._$AS(e, t.values), i, r)), t;
+	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = P(e, i._$AS(e, t.values), i, r)), t;
 }
-var be = class {
+var xe = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -343,27 +343,27 @@ var be = class {
 	}
 	u(e) {
 		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? w).importNode(t, !0);
-		M.currentNode = r;
-		let i = M.nextNode(), a = 0, o = 0, s = n[0];
+		N.currentNode = r;
+		let i = N.nextNode(), a = 0, o = 0, s = n[0];
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new xe(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new Te(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new Se(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new Ee(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
-			a !== s?.index && (i = M.nextNode(), a++);
+			a !== s?.index && (i = N.nextNode(), a++);
 		}
-		return M.currentNode = w, r;
+		return N.currentNode = w, r;
 	}
 	p(e) {
 		let t = 0;
 		for (let n of this._$AV) n !== void 0 && (n.strings === void 0 ? n._$AI(e[t]) : (n._$AI(e, n, t), t += n.strings.length - 2)), t++;
 	}
-}, xe = class e {
+}, Se = class e {
 	get _$AU() {
 		return this._$AM?._$AU ?? this._$Cv;
 	}
 	constructor(e, t, n, r) {
-		this.type = 2, this._$AH = j, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
+		this.type = 2, this._$AH = M, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
 	}
 	get parentNode() {
 		let e = this._$AA.parentNode, t = this._$AM;
@@ -376,7 +376,7 @@ var be = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = N(this, e, t), E(e) ? e === j || e == null || e === "" ? (this._$AH !== j && this._$AR(), this._$AH = j) : e !== this._$AH && e !== A && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? le(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = P(this, e, t), E(e) ? e === M || e == null || e === "" ? (this._$AH !== M && this._$AR(), this._$AH = M) : e !== this._$AH && e !== j && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? le(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -385,19 +385,19 @@ var be = class {
 		this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
 	}
 	_(e) {
-		this._$AH !== j && E(this._$AH) ? this._$AA.nextSibling.data = e : this.T(w.createTextNode(e)), this._$AH = e;
+		this._$AH !== M && E(this._$AH) ? this._$AA.nextSibling.data = e : this.T(w.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
-		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = ye.createElement(_e(n.h, n.h[0]), this.options)), n);
+		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = be.createElement(ve(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new be(r, this), n = e.u(this.options);
+			let e = new xe(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
 	_$AC(e) {
-		let t = ge.get(e.strings);
-		return t === void 0 && ge.set(e.strings, t = new ye(e)), t;
+		let t = _e.get(e.strings);
+		return t === void 0 && _e.set(e.strings, t = new be(e)), t;
 	}
 	k(t) {
 		ce(this._$AH) || (this._$AH = [], this._$AR());
@@ -414,7 +414,7 @@ var be = class {
 	setConnected(e) {
 		this._$AM === void 0 && (this._$Cv = e, this._$AP?.(e));
 	}
-}, P = class {
+}, F = class {
 	get tagName() {
 		return this.element.tagName;
 	}
@@ -422,47 +422,47 @@ var be = class {
 		return this._$AM._$AU;
 	}
 	constructor(e, t, n, r, i) {
-		this.type = 1, this._$AH = j, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = j;
+		this.type = 1, this._$AH = M, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = M;
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = N(this, e, t, 0), a = !E(e) || e !== this._$AH && e !== A, a && (this._$AH = e);
+		if (i === void 0) e = P(this, e, t, 0), a = !E(e) || e !== this._$AH && e !== j, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = N(this, r[n + o], t, o), s === A && (s = this._$AH[o]), a ||= !E(s) || s !== this._$AH[o], s === j ? e = j : e !== j && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = P(this, r[n + o], t, o), s === j && (s = this._$AH[o]), a ||= !E(s) || s !== this._$AH[o], s === M ? e = M : e !== M && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
 	j(e) {
-		e === j ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
+		e === M ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, Se = class extends P {
+}, Ce = class extends F {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
-		this.element[this.name] = e === j ? void 0 : e;
+		this.element[this.name] = e === M ? void 0 : e;
 	}
-}, Ce = class extends P {
+}, we = class extends F {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
-		this.element.toggleAttribute(this.name, !!e && e !== j);
+		this.element.toggleAttribute(this.name, !!e && e !== M);
 	}
-}, we = class extends P {
+}, Te = class extends F {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
 	_$AI(e, t = this) {
-		if ((e = N(this, e, t, 0) ?? j) === A) return;
-		let n = this._$AH, r = e === j && n !== j || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== j && (n === j || r);
+		if ((e = P(this, e, t, 0) ?? M) === j) return;
+		let n = this._$AH, r = e === M && n !== M || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== M && (n === M || r);
 		r && this.element.removeEventListener(this.name, this, n), i && this.element.addEventListener(this.name, this, e), this._$AH = e;
 	}
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, Te = class {
+}, Ee = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -470,18 +470,18 @@ var be = class {
 		return this._$AM._$AU;
 	}
 	_$AI(e) {
-		N(this, e);
+		P(this, e);
 	}
-}, Ee = x.litHtmlPolyfillSupport;
-Ee?.(ye, xe), (x.litHtmlVersions ??= []).push("3.3.3");
-var De = (e, t, n) => {
+}, De = x.litHtmlPolyfillSupport;
+De?.(be, Se), (x.litHtmlVersions ??= []).push("3.3.3");
+var Oe = (e, t, n) => {
 	let r = n?.renderBefore ?? t, i = r._$litPart$;
 	if (i === void 0) {
 		let e = n?.renderBefore ?? null;
-		r._$litPart$ = i = new xe(t.insertBefore(T(), e), e, void 0, n ?? {});
+		r._$litPart$ = i = new Se(t.insertBefore(T(), e), e, void 0, n ?? {});
 	}
 	return i._$AI(e), i;
-}, F = globalThis, I = class extends b {
+}, ke = globalThis, I = class extends b {
 	constructor() {
 		super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
 	}
@@ -491,7 +491,7 @@ var De = (e, t, n) => {
 	}
 	update(e) {
 		let t = this.render();
-		this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this._$Do = De(t, this.renderRoot, this.renderOptions);
+		this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this._$Do = Oe(t, this.renderRoot, this.renderOptions);
 	}
 	connectedCallback() {
 		super.connectedCallback(), this._$Do?.setConnected(!0);
@@ -500,21 +500,21 @@ var De = (e, t, n) => {
 		super.disconnectedCallback(), this._$Do?.setConnected(!1);
 	}
 	render() {
-		return A;
+		return j;
 	}
 };
-I._$litElement$ = !0, I.finalized = !0, F.litElementHydrateSupport?.({ LitElement: I });
-var Oe = F.litElementPolyfillSupport;
-Oe?.({ LitElement: I }), (F.litElementVersions ??= []).push("4.2.2");
+I._$litElement$ = !0, I.finalized = !0, ke.litElementHydrateSupport?.({ LitElement: I });
+var Ae = ke.litElementPolyfillSupport;
+Ae?.({ LitElement: I }), (ke.litElementVersions ??= []).push("4.2.2");
 //#endregion
 //#region node_modules/.pnpm/@lit+reactive-element@2.1.2/node_modules/@lit/reactive-element/decorators/property.js
-var ke = {
+var je = {
 	attribute: !0,
 	type: String,
 	converter: v,
 	reflect: !1,
 	hasChanged: y
-}, Ae = (e = ke, t, n) => {
+}, Me = (e = je, t, n) => {
 	let { kind: r, metadata: i } = n, a = globalThis.litPropertyMetadata.get(i);
 	if (a === void 0 && globalThis.litPropertyMetadata.set(i, a = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), a.set(n.name, e), r === "accessor") {
 		let { name: r } = n;
@@ -537,83 +537,523 @@ var ke = {
 	}
 	throw Error("Unsupported decorator location: " + r);
 };
-function L(e) {
-	return (t, n) => typeof n == "object" ? Ae(e, t, n) : ((e, t, n) => {
+function Ne(e) {
+	return (t, n) => typeof n == "object" ? Me(e, t, n) : ((e, t, n) => {
 		let r = t.hasOwnProperty(n);
 		return t.constructor.createProperty(n, e), r ? Object.getOwnPropertyDescriptor(t, n) : void 0;
 	})(e, t, n);
 }
 //#endregion
 //#region node_modules/.pnpm/@lit+reactive-element@2.1.2/node_modules/@lit/reactive-element/decorators/state.js
-function R(e) {
-	return L({
+function L(e) {
+	return Ne({
 		...e,
 		state: !0,
 		attribute: !1
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/lit-html@3.3.3/node_modules/lit-html/directive.js
-var je = {
-	ATTRIBUTE: 1,
-	CHILD: 2,
-	PROPERTY: 3,
-	BOOLEAN_ATTRIBUTE: 4,
-	EVENT: 5,
-	ELEMENT: 6
-}, Me = (e) => (...t) => ({
-	_$litDirective$: e,
-	values: t
-}), Ne = class {
-	constructor(e) {}
-	get _$AU() {
-		return this._$AM._$AU;
+//#region src/assets/trydan/body.webp
+var Pe = "data:image/webp;base64,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", Fe = "data:image/webp;base64,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", R = {
+	canvasWidth: 584,
+	canvasHeight: 649,
+	body: {
+		x: 120,
+		y: 37,
+		width: 354,
+		height: 492
+	},
+	logo: {
+		x: 248,
+		y: 130,
+		width: 94,
+		height: 41
+	},
+	display: {
+		x: 245,
+		y: 226,
+		width: 105,
+		height: 26
 	}
-	_$AT(e, t, n) {
-		this._$Ct = e, this._$AM = t, this._$Ci = n;
-	}
-	_$AS(e, t) {
-		return this.update(e, t);
-	}
-	update(e, t) {
-		return this.render(...t);
-	}
-}, Pe = class extends Ne {
-	constructor(e) {
-		if (super(e), this.it = j, e.type !== je.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
-	}
-	render(e) {
-		if (e === j || e == null) return this._t = void 0, this.it = e;
-		if (e === A) return e;
-		if (typeof e != "string") throw Error(this.constructor.directiveName + "() called with a non-string value");
-		if (e === this.it) return this._t;
-		this.it = e;
-		let t = [e];
-		return t.raw = t, this._t = {
-			_$litType$: this.constructor.resultType,
-			strings: t,
-			values: []
-		};
+}, z = {
+	top: 258,
+	bottom: 613,
+	right: 553
+};
+function Ie(e, t) {
+	let { body: n } = R, r = n.x - 6, i = t ? z.right + 6 : n.x + n.width + 6, a = n.y - 13, o = e === "focus" ? R.display.y + R.display.height + 22 : e === "mid" ? Math.round((z.top + z.bottom) / 2 + 62) : z.bottom + 12;
+	return {
+		x: r,
+		y: a,
+		width: i - r,
+		height: o - a
+	};
+}
+//#endregion
+//#region src/assets/trydan/logo.ts
+var Le = {
+	width: 378,
+	height: 163
+}, Re = "M301.5 0.2 288 3.2 287 4.2 285 4.2 275.5 8.2 260.5 18.2 248.2 30.5 240.2 42.5 236.2 51 233.2 60 230.8 75 231.2 93.5 235.2 109.5 242.2 124 250.2 135 263.5 147.2 274.5 154.2 289.5 160.2 298 162.2 302.5 162.2 304.5 163.2 320 163.2 321 162.2 326.5 162.2 335 160.2 346 156.2 353.5 152.2 365 144.2 375.2 134 378.2 129.5 360.5 112.2 352.8 122 344 129.2 337 133.2 326 137.2 315.5 138.8 304 138.2 295 136.2 284 131.2 275.5 125.2 268.2 118 263.2 111 258.2 100.5 255.2 88 255.2 75 259.2 60 265.2 49 275.5 37.8 281.5 33.2 289 29.2 301 25.2 315 24.2 323.5 25.2 335.5 29.2 343 33.2 349 37.8 359.5 49.2 360.5 49.2 377.2 32 372.8 26.5 363 17.2 347 7.2 336.5 3.2 328.5 1.2 325 1.2 323.5 0.2 301.5 0.2Z M165 1.2 149 4.2 135.5 10.2 129.5 14.2 120.8 22.5 115.2 31 128.5 43.2 132 46.2 133 46.2 141.5 35.2 152.5 28.2 158 26.2 166.5 24.8 174.5 24.8 182 26.2 189.5 30.2 193.2 34 196.2 39 197.8 45.5 197.2 54.5 196.2 58 189.2 72 174.2 90 156 107.2 116.2 140 116.2 159 259 159.2 247.5 149.8 235.5 135.8 159.8 136 160.5 134.2 184 114.2 203.2 94 212.2 81.5 218.2 70 222.2 55.5 222.2 40 221.2 38.5 220.2 32 215.2 22 206 12.2 200 8.2 188 3.2 176.5 1.2 165 1.2Z M0.5 3.2 0.2 5.5 1.2 6 8.2 25 14.2 38 17.2 47 30.2 77 35.2 91 39.2 99 44.2 113 48.2 121 48.2 122.5 63.2 159 86 159.2 89.2 153 94.2 139 100.2 126 100.2 124.5 127.2 58.5 109 41.2 108.2 41.5 83.2 103 83.2 104.5 82.2 105.5 82.2 107 81.2 108 81.2 109.5 80.2 110.5 80.2 112 79.2 113 79.2 114.5 78.2 115.5 78.2 117 77.2 118 77.2 119.5 76.2 120.5 76.2 122 75.5 122.2 27.8 4 27 3.2 0.5 3.2Z M296 46.8 294 47.2 292.2 49 291.2 52 293.5 55.8 297.5 56.8 301.2 54 301.8 51 299 47.2 296 46.8Z M328.5 46.8 325.2 48.5 324.2 53 326 55.8 330 56.8 333.2 55 334.2 50.5 332 47.2 328.5 46.8Z M273 70.2 268.2 75 268.2 82 272.5 86.2 279.5 86.2 284.2 81.5 284.2 75.5 282.2 72.5 279 70.2 273 70.2Z M310 70.2 305.2 74.5 304.2 78 305.2 82.5 309.5 86.2 316.5 86.2 320.2 83 321.2 80.5 321.2 76 319.2 72.5 317.5 71.2 315.5 70.2 310 70.2Z M347 70.2 343.2 73 341.2 77 342.2 82.5 346 86.2 353.5 86.2 357.8 81.5 357.8 75.5 356.2 73 352.5 70.2 347 70.2Z M293.5 104.2 289.2 108 288.2 110 288.2 114.5 290.2 118 293 120.2 300 120.2 304.2 116 305.2 113 304.2 108.5 299.5 104.2 293.5 104.2Z M326.5 104.2 324.5 105.2 321.2 109 321.2 115.5 325.5 120.2 333 120.2 337.2 116 337.2 109 334 105.2 332 104.2 326.5 104.2Z", ze = {
+	" ": [
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	0: [
+		62,
+		81,
+		73,
+		69,
+		62
+	],
+	1: [
+		0,
+		66,
+		127,
+		64,
+		0
+	],
+	2: [
+		66,
+		97,
+		81,
+		73,
+		70
+	],
+	3: [
+		33,
+		65,
+		69,
+		75,
+		49
+	],
+	4: [
+		24,
+		20,
+		18,
+		127,
+		16
+	],
+	5: [
+		39,
+		69,
+		69,
+		69,
+		57
+	],
+	6: [
+		60,
+		74,
+		73,
+		73,
+		48
+	],
+	7: [
+		1,
+		113,
+		9,
+		5,
+		3
+	],
+	8: [
+		54,
+		73,
+		73,
+		73,
+		54
+	],
+	9: [
+		6,
+		73,
+		73,
+		41,
+		30
+	],
+	A: [
+		126,
+		17,
+		17,
+		17,
+		126
+	],
+	B: [
+		127,
+		73,
+		73,
+		73,
+		54
+	],
+	C: [
+		62,
+		65,
+		65,
+		65,
+		34
+	],
+	D: [
+		127,
+		65,
+		65,
+		34,
+		28
+	],
+	E: [
+		127,
+		73,
+		73,
+		73,
+		65
+	],
+	F: [
+		127,
+		9,
+		9,
+		9,
+		1
+	],
+	G: [
+		62,
+		65,
+		73,
+		73,
+		122
+	],
+	H: [
+		127,
+		8,
+		8,
+		8,
+		127
+	],
+	I: [
+		0,
+		65,
+		127,
+		65,
+		0
+	],
+	J: [
+		32,
+		64,
+		65,
+		63,
+		1
+	],
+	K: [
+		127,
+		8,
+		20,
+		34,
+		65
+	],
+	L: [
+		127,
+		64,
+		64,
+		64,
+		64
+	],
+	M: [
+		127,
+		2,
+		12,
+		2,
+		127
+	],
+	N: [
+		127,
+		4,
+		8,
+		16,
+		127
+	],
+	O: [
+		62,
+		65,
+		65,
+		65,
+		62
+	],
+	P: [
+		127,
+		9,
+		9,
+		9,
+		6
+	],
+	Q: [
+		62,
+		65,
+		81,
+		33,
+		94
+	],
+	R: [
+		127,
+		9,
+		25,
+		41,
+		70
+	],
+	S: [
+		70,
+		73,
+		73,
+		73,
+		49
+	],
+	T: [
+		1,
+		1,
+		127,
+		1,
+		1
+	],
+	U: [
+		63,
+		64,
+		64,
+		64,
+		63
+	],
+	V: [
+		31,
+		32,
+		64,
+		32,
+		31
+	],
+	W: [
+		127,
+		32,
+		24,
+		32,
+		127
+	],
+	X: [
+		99,
+		20,
+		8,
+		20,
+		99
+	],
+	Y: [
+		3,
+		4,
+		120,
+		4,
+		3
+	],
+	Z: [
+		97,
+		81,
+		73,
+		69,
+		67
+	],
+	".": [
+		0,
+		0,
+		64,
+		0,
+		0
+	],
+	",": [
+		0,
+		0,
+		96,
+		0,
+		0
+	],
+	":": [
+		0,
+		0,
+		20,
+		0,
+		0
+	],
+	"-": [
+		8,
+		8,
+		8,
+		8,
+		8
+	],
+	"/": [
+		32,
+		16,
+		8,
+		4,
+		2
+	],
+	">": [
+		0,
+		65,
+		34,
+		20,
+		8
+	],
+	"%": [
+		99,
+		19,
+		8,
+		100,
+		99
+	],
+	"+": [
+		8,
+		8,
+		62,
+		8,
+		8
+	],
+	"*": [
+		20,
+		8,
+		62,
+		8,
+		20
+	]
+}, Be = 6, B = 8, Ve = {
+	authentic: {
+		columns: 16,
+		rows: 2
+	},
+	mid: {
+		columns: 12,
+		rows: 2
+	},
+	big: {
+		columns: 7,
+		rows: 1
 	}
 };
-Pe.directiveName = "unsafeHTML", Pe.resultType = 1;
+function He(e, t, n, r = {
+	x: 3.6,
+	y: 2.6
+}) {
+	let { columns: i, rows: a } = Ve[e], o = Math.min((t - r.x) / (i * Be), (n - r.y) / (a * B)), s = i * Be * o, c = a * B * o;
+	return {
+		pitch: o,
+		dot: o * .78,
+		offsetX: (t - s) / 2,
+		offsetY: (n - c) / 2
+	};
+}
+function Ue(e) {
+	return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ñ/g, "n").replace(/Ñ/g, "N").replace(/ç/g, "c").replace(/Ç/g, "C").replace(/º|ª/g, "").toUpperCase();
+}
+function We(e, t, n, r) {
+	let { columns: i, rows: a } = Ve[t], o = He(t, n, r), { pitch: s, dot: c } = o, l = (s - c) / 2, u = /* @__PURE__ */ new Set();
+	for (let t = 0; t < Math.min(e.length, a); t += 1) {
+		let n = Ue(String(e[t] ?? ""));
+		for (let e = 0; e < i; e += 1) {
+			let r = ze[n[e] ?? " "] ?? ze[" "];
+			for (let n = 0; n < 5; n += 1) for (let i = 0; i < 7; i += 1) r[n] >> i & 1 && u.add(`${e * Be + n},${t * B + i}`);
+		}
+	}
+	let d = (e, t) => `M${(e * s + l).toFixed(2)} ${(t * s + l).toFixed(2)}h${c.toFixed(2)}v${c.toFixed(2)}h-${c.toFixed(2)}z`, f = [], p = [];
+	for (let e = 0; e < i * Be - 1; e += 1) for (let t = 0; t < a * B - 1; t += 1) (u.has(`${e},${t}`) ? f : p).push(d(e, t));
+	return {
+		...o,
+		on: f.join(""),
+		off: p.join("")
+	};
+}
 //#endregion
-//#region node_modules/.pnpm/lit-html@3.3.3/node_modules/lit-html/directives/unsafe-svg.js
-var Fe = class extends Pe {};
-Fe.directiveName = "unsafeSVG", Fe.resultType = 2;
-var Ie = Me(Fe), Le = {
-	disconnected: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#f4f6f8\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	charging: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"blink-current\" transform=\"translate(107 104) scale(.92)\" fill=\"#123cc9\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	complete: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#3fce6b\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	timer: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#43dbe7\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	updating: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#f050bd\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	control_pilot: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#ffd43b\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	load_balancing: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#ff9dd8\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	error: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#ef3340\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	waiting_power: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"\" transform=\"translate(107 104) scale(.92)\" fill=\"#f28c28\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	wifi_connected: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"blink-once\" transform=\"translate(107 104) scale(.92)\" fill=\"#3fce6b\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>",
-	wifi_connecting: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"24 0 312 480\">\n<defs>\n  <linearGradient id=\"case\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#15171a\"/><stop offset=\".55\" stop-color=\"#070809\"/><stop offset=\"1\" stop-color=\"#020304\"/></linearGradient>\n  <linearGradient id=\"rim\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f0f2f3\"/><stop offset=\".18\" stop-color=\"#70757a\"/><stop offset=\".7\" stop-color=\"#151719\"/><stop offset=\"1\" stop-color=\"#d4d7da\"/></linearGradient>\n  <linearGradient id=\"lcd\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#18314a\"/><stop offset=\"1\" stop-color=\"#050a0f\"/></linearGradient>\n  <filter id=\"shadow\" x=\"-30%\" y=\"-30%\" width=\"170%\" height=\"180%\"><feDropShadow dx=\"5\" dy=\"10\" stdDeviation=\"10\" flood-opacity=\".35\"/></filter>\n  <filter id=\"glow\" x=\"-70%\" y=\"-100%\" width=\"240%\" height=\"300%\"><feGaussianBlur stdDeviation=\"2.8\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter>\n  <style>\n    @keyframes slow{0%,46%{opacity:1}50%,100%{opacity:.18}}\n    @keyframes current{0%,38%{opacity:1}45%,100%{opacity:.18}}\n    @keyframes once{0%,20%{opacity:.15}45%,72%{opacity:1}100%{opacity:.45}}\n    .blink-slow{animation:slow 1.35s steps(1,end) infinite}\n    .blink-current{animation:current .65s steps(1,end) infinite}\n    .blink-once{animation:once 1s ease-out 1}\n    .lcd{font-family:monospace;font-weight:700;letter-spacing:.4px}\n  </style>\n</defs>\n<g filter=\"url(#shadow)\">\n  <rect x=\"62\" y=\"24\" width=\"236\" height=\"410\" rx=\"29\" fill=\"url(#rim)\"/>\n  <rect x=\"66\" y=\"28\" width=\"228\" height=\"402\" rx=\"26\" fill=\"url(#case)\" stroke=\"#70757b\" stroke-width=\"1.2\"/>\n  <path d=\"M83 52 Q92 39 111 39 H250 Q276 40 286 61\" fill=\"none\" stroke=\"#34383d\" stroke-width=\"1.4\"/>\n  <path d=\"M77 397 Q90 419 115 422 H249 Q275 419 286 397\" fill=\"none\" stroke=\"#24272a\" stroke-width=\"1.3\"/>\n\n  <g class=\"blink-slow\" transform=\"translate(107 104) scale(.92)\" fill=\"#f4f6f8\" filter=\"url(#glow)\">\n    <!-- V -->\n    <path d=\"M0 0 H12 L28 39 L44 0 H56 L34 52 H22 Z\"/>\n    <!-- 2 -->\n    <path d=\"M51 9 C59 2 68 0 78 0 C95 0 106 9 106 23 C106 34 99 41 88 49 L68 63 H109 L116 73 H51 V62 L81 41 C90 35 95 30 95 23 C95 15 88 11 78 11 C70 11 64 14 59 20 Z\"/>\n    <!-- C with seven physical cut-outs arranged 2-3-2 -->\n    <path fill-rule=\"evenodd\" d=\"M143 8 A35 35 0 1 0 143 66 L135 55 A22 22 0 1 1 135 19 Z\"/>\n    <!-- Seven illuminated dots inside the C: 2-3-2, like the physical V2C logo. -->\n    <g class=\"c-led-dots\" opacity=\"0.78\">\n      <circle cx=\"124\" cy=\"23\" r=\"3.4\"/><circle cx=\"136\" cy=\"23\" r=\"3.4\"/>\n      <circle cx=\"118\" cy=\"36\" r=\"3.4\"/><circle cx=\"130\" cy=\"36\" r=\"3.4\"/><circle cx=\"142\" cy=\"36\" r=\"3.4\"/>\n      <circle cx=\"124\" cy=\"49\" r=\"3.4\"/><circle cx=\"136\" cy=\"49\" r=\"3.4\"/>\n    </g>\n  </g>\n\n  <rect x=\"130\" y=\"192\" width=\"100\" height=\"27\" fill=\"#020303\" stroke=\"#d9dcde\" stroke-width=\"1\"/>\n  <rect x=\"133\" y=\"195\" width=\"94\" height=\"21\" fill=\"url(#lcd)\" opacity=\".9\"/>\n</g>\n</svg>"
-}, z = [
+//#region src/card/charger-art.ts
+function Ge(e) {
+	return e.reduce((e, t) => Math.max(e, t.length), 0) <= Ve.mid.columns ? "mid" : "authentic";
+}
+function Ke(e) {
+	let { crop: t, showConnector: n, connectorHoldered: r, lcdLines: i, flashSeconds: a, logoOff: o, state: s, flash: c } = e, l = Ie(t, n), { canvasWidth: u, canvasHeight: d, logo: f, display: p } = R, m = f.width / Le.width, h = p.width / 65, g = We(i, Ge(i), 65, 13.7);
+	return k`<div
+    class="charger-art"
+    style=${(a ? `--v2c-flash:${a.toFixed(2)}s` : void 0) ?? ""}
+    data-crop=${t}
+    data-state=${s}
+    ?data-flash=${c}
+    data-connector=${n ? r ? "in" : "out" : "hidden"}
+    aria-hidden="true"
+  >
+    ${A`<svg
+      viewBox="${l.x} ${l.y} ${l.width} ${l.height}"
+      preserveAspectRatio="xMidYMin meet"
+    >
+      <defs>
+        <filter id="v2c-glow-wide" x="-260%" y="-420%" width="640%" height="960%">
+          <feGaussianBlur stdDeviation="15" />
+        </filter>
+        <filter id="v2c-glow-mid" x="-220%" y="-360%" width="560%" height="820%">
+          <feGaussianBlur stdDeviation="6" />
+        </filter>
+        <filter id="v2c-glow-tight" x="-220%" y="-360%" width="560%" height="820%">
+          <feGaussianBlur stdDeviation="1.9" />
+        </filter>
+        <radialGradient id="v2c-backlight" cx=".5" cy=".5" r=".78">
+          <stop offset="0" stop-color="#4a56ff" stop-opacity=".5" />
+          <stop offset="1" stop-color="#0d1180" stop-opacity=".32" />
+        </radialGradient>
+        ${t === "full" ? "" : A`<linearGradient id="v2c-crop-fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" />
+              <stop offset=".88" stop-color="#fff" />
+              <stop offset="1" stop-color="#fff" stop-opacity="0" />
+            </linearGradient>
+            <mask id="v2c-crop-mask">
+              <rect x=${l.x} y=${l.y} width=${l.width} height=${l.height}
+                fill="url(#v2c-crop-fade)" />
+            </mask>`}
+      </defs>
+      <g mask=${t === "full" ? "none" : "url(#v2c-crop-mask)"}>
+      <image href=${Pe} x="0" y="0" width=${u} height=${d} />
+      ${n ? A`<image class="charger-connector" href=${Fe} x="0" y="0"
+            width=${u} height=${d} />` : ""}
+      ${o ? "" : A`<g class="charger-logo-glow">
+            <g filter="url(#v2c-glow-wide)" opacity=".3">
+              <g transform="translate(${f.x} ${f.y}) scale(${m})">
+                <path d=${Re} fill="currentColor" fill-rule="evenodd" />
+              </g>
+            </g>
+            <g filter="url(#v2c-glow-mid)" opacity=".55">
+              <g transform="translate(${f.x} ${f.y}) scale(${m})">
+                <path d=${Re} fill="currentColor" fill-rule="evenodd" />
+              </g>
+            </g>
+            <g filter="url(#v2c-glow-tight)" opacity=".5">
+              <g transform="translate(${f.x} ${f.y}) scale(${m})">
+                <path d=${Re} fill="currentColor" fill-rule="evenodd" />
+              </g>
+            </g>
+          </g>
+          <g class="charger-logo" transform="translate(${f.x} ${f.y}) scale(${m})">
+            <path d=${Re} fill="currentColor" fill-rule="evenodd" />
+          </g>`}
+      <g class="charger-display" data-lcd=${i.join("|")}
+        transform="translate(${p.x} ${p.y}) scale(${h})">
+        <rect x="-1" y="-1" width="67" height="15.7" rx="2.8" fill="#0a0c14" />
+        <rect width="65" height="13.7" rx="2" fill="#1b22b4" />
+        <rect width="65" height="13.7" rx="2" fill="url(#v2c-backlight)" />
+        <g transform="translate(${g.offsetX} ${g.offsetY})">
+          <path d=${g.off} fill="#000" opacity=".16" />
+          <path d=${g.on} fill="#dce4ff" opacity=".95" />
+        </g>
+        <rect width="65" height="13.7" rx="2" fill="none" stroke="#000" stroke-opacity=".45"
+          stroke-width=".5" />
+      </g>
+      </g>
+    </svg>`}
+  </div>`;
+}
+function qe(e, t) {
+	let n = Ie(e, t);
+	return n.width / n.height;
+}
+//#endregion
+//#region src/config.ts
+var V = [
 	6,
 	10,
 	13,
@@ -621,59 +1061,63 @@ var Ie = Me(Fe), Le = {
 	20,
 	25,
 	32
-], Re = [
+], Je = [
 	"xxl",
 	"standard",
 	"compact",
 	"ultra_compact"
-], ze = [
+], Ye = [
 	"auto",
 	"centered",
 	"split",
 	"inline"
-], Be = [
+], Xe = [
 	"power",
 	"energy",
 	"time"
-], Ve = [
+], Ze = [
 	"solar",
 	"grid",
 	"home",
 	"battery",
 	"charger"
-], He = [
+], Qe = [
 	"hero",
 	"metrics",
 	"controls",
 	"energy",
 	"advanced"
+], $e = [
+	"focus",
+	"mid",
+	"full"
 ];
-function B(e, t, n) {
+function H(e, t, n) {
 	return typeof e == "string" && t.includes(e) ? e : n;
 }
-function Ue(e, t) {
+function et(e, t) {
 	return [...new Set(Array.isArray(e) ? e.filter((e) => typeof e == "string" && t.includes(e)) : t)];
 }
-function We(e, t) {
-	let n = Ue(e, t);
+function tt(e, t) {
+	let n = et(e, t);
 	return [...n, ...t.filter((e) => !n.includes(e))];
 }
-function Ge(e) {
+function nt(e) {
 	if (!e || typeof e != "object") throw Error("V2C Trydan Card: configuración no válida");
 	if (!e.entity || typeof e.entity != "string") throw Error("V2C Trydan Card: debes indicar una entidad V2C principal");
-	let t = Array.isArray(e.current_presets) ? e.current_presets : z, n = [...new Set(t)].map(Number).filter((e) => Number.isFinite(e) && e > 0).sort((e, t) => e - t), r = B(e.display_mode, Re, "standard"), i = typeof e.accent_color == "string" && /^#[0-9a-fA-F]{6}$/.test(e.accent_color) ? e.accent_color.toUpperCase() : void 0;
+	let t = Array.isArray(e.current_presets) ? e.current_presets : V, n = [...new Set(t)].map(Number).filter((e) => Number.isFinite(e) && e > 0).sort((e, t) => e - t), r = H(e.display_mode, Je, "standard"), i = typeof e.accent_color == "string" && /^#[0-9a-fA-F]{6}$/.test(e.accent_color) ? e.accent_color.toUpperCase() : void 0;
 	return {
 		...e,
 		type: "custom:v2c-trydan-card",
-		theme: B(e.theme, [
+		theme: H(e.theme, [
 			"auto",
 			"light",
 			"dark"
 		], "auto"),
 		display_mode: r,
 		language: e.language ?? "auto",
-		layout: B(e.layout, ze, "auto"),
-		color_scheme: e.color_scheme === "custom" && !i ? "monochrome" : B(e.color_scheme, [
+		layout: H(e.layout, Ye, "auto"),
+		color_scheme: e.color_scheme === "custom" && !i ? "monochrome" : H(e.color_scheme, [
 			"monochrome",
 			"v2c_blue",
 			"teal",
@@ -682,21 +1126,21 @@ function Ge(e) {
 			"custom"
 		], "monochrome"),
 		accent_color: i,
-		surface_style: B(e.surface_style, [
+		surface_style: H(e.surface_style, [
 			"solid",
 			"tinted",
 			"transparent"
 		], "solid"),
 		hero_scale: Math.min(1.25, Math.max(.75, Number(e.hero_scale) || 1)),
 		card_radius: Number.isFinite(e.card_radius) ? Math.min(40, Math.max(0, Number(e.card_radius))) : void 0,
-		metrics: Ue(e.metrics, Be),
-		energy_sources: Ue(e.energy_sources, Ve),
-		intensity_control: B(e.intensity_control, [
+		metrics: et(e.metrics, Xe),
+		energy_sources: et(e.energy_sources, Ze),
+		intensity_control: H(e.intensity_control, [
 			"slider",
 			"presets",
 			"both"
 		], "both"),
-		section_order: We(e.section_order, He),
+		section_order: tt(e.section_order, Qe),
 		show_header: e.show_header ?? !0,
 		show_badges: e.show_badges ?? !0,
 		show_presets: e.show_presets ?? r !== "ultra_compact",
@@ -705,13 +1149,15 @@ function Ge(e) {
 		show_controls: e.show_controls ?? !0,
 		show_advanced: e.show_advanced ?? !0,
 		show_charger: e.show_charger ?? !0,
+		charger_art: H(e.charger_art, $e, "focus"),
+		show_connector: e.show_connector ?? !1,
 		confirm_lock: e.confirm_lock ?? !0,
 		flow_threshold_w: Number.isFinite(e.flow_threshold_w) ? Math.max(0, Number(e.flow_threshold_w)) : 50,
 		current_presets: n,
 		entities: e.entities && typeof e.entities == "object" && !Array.isArray(e.entities) ? { ...e.entities } : {}
 	};
 }
-function Ke(e) {
+function rt(e) {
 	let t = Object.values(e?.entities ?? {}).find((e) => e.platform === "v2c" && e.translation_key === "connected"), n = Object.keys(e?.states ?? {}).find((e) => e.startsWith("binary_sensor.") && e.toLowerCase().includes("v2c"));
 	return {
 		type: "custom:v2c-trydan-card",
@@ -722,7 +1168,7 @@ function Ke(e) {
 }
 //#endregion
 //#region src/localization/da.ts
-var qe = {
+var it = {
 	states: {
 		disconnected: "Intet køretøj",
 		unavailable: "Ikke tilgængelig",
@@ -835,7 +1281,7 @@ var qe = {
 		showAdvanced: "Avancerede kontroller",
 		showCharger: "Trydan-illustration"
 	}
-}, Je = {
+}, at = {
 	states: {
 		disconnected: "Kein Fahrzeug",
 		unavailable: "Nicht verfügbar",
@@ -948,7 +1394,7 @@ var qe = {
 		showAdvanced: "Erweiterte Steuerung",
 		showCharger: "Trydan-Abbildung"
 	}
-}, Ye = {
+}, ot = {
 	states: {
 		disconnected: "Aucun véhicule",
 		unavailable: "Indisponible",
@@ -1061,7 +1507,7 @@ var qe = {
 		showAdvanced: "Commandes avancées",
 		showCharger: "Illustration Trydan"
 	}
-}, Xe = {
+}, st = {
 	states: {
 		disconnected: "Nessun veicolo",
 		unavailable: "Non disponibile",
@@ -1174,7 +1620,7 @@ var qe = {
 		showAdvanced: "Controlli avanzati",
 		showCharger: "Illustrazione Trydan"
 	}
-}, Ze = {
+}, ct = {
 	states: {
 		disconnected: "Geen voertuig",
 		unavailable: "Niet beschikbaar",
@@ -1287,7 +1733,7 @@ var qe = {
 		showAdvanced: "Geavanceerde bediening",
 		showCharger: "Trydan-afbeelding"
 	}
-}, Qe = {
+}, lt = {
 	states: {
 		disconnected: "Ingen bil",
 		unavailable: "Ikke tilgjengelig",
@@ -1400,7 +1846,7 @@ var qe = {
 		showAdvanced: "Avanserte kontroller",
 		showCharger: "Trydan-illustrasjon"
 	}
-}, $e = {
+}, ut = {
 	states: {
 		disconnected: "Niciun vehicul",
 		unavailable: "Indisponibil",
@@ -1513,7 +1959,7 @@ var qe = {
 		showAdvanced: "Comenzi avansate",
 		showCharger: "Ilustrație Trydan"
 	}
-}, et = {
+}, dt = {
 	states: {
 		disconnected: "Inget fordon",
 		unavailable: "Inte tillgänglig",
@@ -1626,7 +2072,7 @@ var qe = {
 		showAdvanced: "Avancerade kontroller",
 		showCharger: "Trydan-illustration"
 	}
-}, tt = {
+}, ft = {
 	states: {
 		disconnected: "No vehicle",
 		unavailable: "Unavailable",
@@ -1739,7 +2185,7 @@ var qe = {
 		showAdvanced: "Advanced controls",
 		showCharger: "Trydan artwork"
 	}
-}, nt = {
+}, pt = {
 	states: {
 		disconnected: "Sin vehículo",
 		unavailable: "No disponible",
@@ -1852,7 +2298,7 @@ var qe = {
 		showAdvanced: "Controles avanzados",
 		showCharger: "Ilustración Trydan"
 	}
-}, rt = [
+}, mt = [
 	"en",
 	"it",
 	"de",
@@ -1863,26 +2309,26 @@ var qe = {
 	"no",
 	"ro",
 	"es"
-], it = {
-	en: tt,
-	it: Xe,
-	de: Je,
-	fr: Ye,
-	nl: Ze,
-	sv: et,
-	da: qe,
-	no: Qe,
-	ro: $e,
-	es: nt
+], ht = {
+	en: ft,
+	it: st,
+	de: at,
+	fr: ot,
+	nl: ct,
+	sv: dt,
+	da: it,
+	no: lt,
+	ro: ut,
+	es: pt
 };
-function at(e, t) {
+function gt(e, t) {
 	let n = (e === "auto" ? t : e)?.toLowerCase().split(/[-_]/)[0] ?? "en", r = n === "nb" || n === "nn" ? "no" : n;
-	return rt.includes(r) ? r : "en";
+	return mt.includes(r) ? r : "en";
 }
-function V(e) {
-	return it[at(e)];
+function U(e) {
+	return ht[gt(e)];
 }
-function H(e, t) {
+function W(e, t) {
 	let n = t.split(".").reduce((e, t) => {
 		if (!(typeof e != "object" || !e)) return e[t];
 	}, e);
@@ -1890,13 +2336,13 @@ function H(e, t) {
 }
 //#endregion
 //#region src/localization/lcd-copy.ts
-function ot(e, t, n = {}) {
-	let r = V(e), i = t === "disconnected" ? {
-		primary: H(r, "details.disconnected"),
-		secondary: H(r, "states.disconnected")
+function _t(e, t, n = {}) {
+	let r = U(e), i = t === "disconnected" ? {
+		primary: W(r, "details.disconnected"),
+		secondary: W(r, "states.disconnected")
 	} : {
-		primary: H(r, `states.${t}`),
-		secondary: H(r, `details.${t}`)
+		primary: W(r, `states.${t}`),
+		secondary: W(r, `details.${t}`)
 	};
 	return t === "charging" ? {
 		primary: n.power && n.power !== "—" ? `${i.primary} ${n.power}` : i.primary,
@@ -1908,28 +2354,28 @@ function ot(e, t, n = {}) {
 }
 //#endregion
 //#region src/services/actions.ts
-async function st(e, t, n) {
+async function vt(e, t, n) {
 	return e.callService("number", "set_value", {
 		entity_id: t,
 		value: n
 	});
 }
-async function ct(e, t, n) {
+async function yt(e, t, n) {
 	return e.callService("switch", n ? "turn_on" : "turn_off", { entity_id: t });
 }
-async function lt(e, t, n) {
+async function bt(e, t, n) {
 	return e.callService("select", "select_option", {
 		entity_id: t,
 		option: n
 	});
 }
-async function ut(e, t, n, r) {
+async function xt(e, t, n, r) {
 	let i = { entity_id: t };
 	return n && r !== void 0 && (i.brightness = r), e.callService("light", n ? "turn_on" : "turn_off", i);
 }
 //#endregion
 //#region src/services/discovery.ts
-var U = {
+var G = {
 	connected: {
 		translationKeys: ["connected"],
 		domains: ["binary_sensor"],
@@ -2100,21 +2546,21 @@ var U = {
 		legacySuffixes: ["_charge_mode", "_modo_de_carga"],
 		writable: !0
 	}
-}, dt = (e) => U[e].writable === !0;
-function ft(e) {
+}, St = (e) => G[e].writable === !0;
+function Ct(e) {
 	return e.split(".", 1)[0] ?? "";
 }
-function pt(e) {
+function wt(e) {
 	return Array.isArray(e) ? e : Object.values(e);
 }
-function mt(e, t) {
+function Tt(e, t) {
 	return !e || e[t] !== void 0;
 }
-function W(e, t) {
-	return U[e].domains.includes(ft(t));
+function K(e, t) {
+	return G[e].domains.includes(Ct(t));
 }
-function ht(e, t, n) {
-	if (ft(t) !== "sensor") return !1;
+function Et(e, t, n) {
+	if (Ct(t) !== "sensor") return !1;
 	let r = n?.[t];
 	if (!r) return !1;
 	let i = r.attributes.unit_of_measurement?.toLowerCase(), a = r.attributes.device_class;
@@ -2124,27 +2570,27 @@ function ht(e, t, n) {
 		"mw"
 	].includes(i)) && (!a || a === "power") : (!i || i === "v") && (!a || a === "voltage")) ? r.state === "unknown" || r.state === "unavailable" || Number.isFinite(Number(r.state)) : !1;
 }
-function gt(e, t) {
+function Dt(e, t) {
 	if (t.length === 0) return;
-	let n = U[e].preferredDomains ?? U[e].domains;
+	let n = G[e].preferredDomains ?? G[e].domains;
 	for (let e of n) {
-		let n = t.filter((t) => ft(t.entity_id) === e);
+		let n = t.filter((t) => Ct(t.entity_id) === e);
 		if (n.length === 1) return n[0].entity_id;
 		if (n.length > 1) return;
 	}
 	return t.length === 1 ? t[0].entity_id : void 0;
 }
-function _t(e, t, n = {}, r) {
-	let i = pt(e), a = new Map(i.map((e) => [e.entity_id, e])), o = a.get(t), s = i.length === 0 ? "loading" : o ? o.platform === "v2c" ? o.device_id ? void 0 : "seed_missing_device" : "seed_not_v2c" : "seed_not_found", c = s ? void 0 : o?.device_id, l = c ? i.filter((e) => e.device_id === c && e.platform === "v2c" && mt(r, e.entity_id)) : [], u = {}, d = {}, f = {}, p = [];
-	for (let e of Object.keys(U)) {
+function Ot(e, t, n = {}, r) {
+	let i = wt(e), a = new Map(i.map((e) => [e.entity_id, e])), o = a.get(t), s = i.length === 0 ? "loading" : o ? o.platform === "v2c" ? o.device_id ? void 0 : "seed_missing_device" : "seed_not_v2c" : "seed_not_found", c = s ? void 0 : o?.device_id, l = c ? i.filter((e) => e.device_id === c && e.platform === "v2c" && Tt(r, e.entity_id)) : [], u = {}, d = {}, f = {}, p = [];
+	for (let e of Object.keys(G)) {
 		let t = n[e];
 		if (!t) continue;
-		let o = a.get(t), s = U[e], l = !!(s.externalMeasurement && ht(s.externalMeasurement, t, r)), f = !!(c && o && o.device_id === c && o.platform === "v2c" && W(e, t) && mt(r, t)), p = i.length === 0 && mt(r, t) && W(e, t);
+		let o = a.get(t), s = G[e], l = !!(s.externalMeasurement && Et(s.externalMeasurement, t, r)), f = !!(c && o && o.device_id === c && o.platform === "v2c" && K(e, t) && Tt(r, t)), p = i.length === 0 && Tt(r, t) && K(e, t);
 		l || f || p ? (u[e] = t, d[e] = "manual") : d[e] = "invalid";
 	}
-	for (let e of Object.keys(U)) {
+	for (let e of Object.keys(G)) {
 		if (u[e] || !c) continue;
-		let t = U[e], n = l.filter((n) => !!(n.translation_key && t.translationKeys.includes(n.translation_key)) && W(e, n.entity_id)), r = gt(e, n);
+		let t = G[e], n = l.filter((n) => !!(n.translation_key && t.translationKeys.includes(n.translation_key)) && K(e, n.entity_id)), r = Dt(e, n);
 		if (r) {
 			u[e] = r, d[e] = "automatic";
 			continue;
@@ -2153,37 +2599,37 @@ function _t(e, t, n = {}, r) {
 			f[e] = n.map((e) => e.entity_id), d[e] = "ambiguous";
 			continue;
 		}
-		let i = l.filter((n) => W(e, n.entity_id) && (t.legacySuffixes ?? []).some((e) => n.entity_id.endsWith(e))), a = gt(e, i);
+		let i = l.filter((n) => K(e, n.entity_id) && (t.legacySuffixes ?? []).some((e) => n.entity_id.endsWith(e))), a = Dt(e, i);
 		a ? (u[e] = a, d[e] = "automatic", p.push(e)) : i.length > 1 && (f[e] = i.map((e) => e.entity_id), d[e] = "ambiguous");
 	}
 	return {
 		entities: u,
 		ambiguities: f,
-		missing: Object.keys(U).filter((e) => !u[e]),
+		missing: Object.keys(G).filter((e) => !u[e]),
 		deviceId: c,
-		statuses: Object.fromEntries(Object.keys(U).map((e) => [e, d[e] ?? "missing"])),
+		statuses: Object.fromEntries(Object.keys(G).map((e) => [e, d[e] ?? "missing"])),
 		diagnostic: s,
 		legacyRoles: p
 	};
 }
-function vt(e, t, n, r) {
+function kt(e, t, n, r) {
 	let i = e.entities?.[n], a = e.states[n];
-	return !!(r && dt(t) && i?.device_id === r && i.platform === "v2c" && W(t, n) && a && a.state !== "unknown" && a.state !== "unavailable");
+	return !!(r && St(t) && i?.device_id === r && i.platform === "v2c" && K(t, n) && a && a.state !== "unknown" && a.state !== "unavailable");
 }
 //#endregion
 //#region src/services/energy.ts
-function yt(e) {
+function At(e) {
 	if (!e || e.state === "unknown" || e.state === "unavailable") return null;
 	let t = Number(e.state);
 	if (!Number.isFinite(t)) return null;
 	let n = e.attributes.unit_of_measurement?.toLowerCase();
 	return n === "kw" ? t * 1e3 : n === "mw" ? t * 1e6 : t;
 }
-function bt(e, t, n) {
+function jt(e, t, n) {
 	return Math.abs(t) < n ? "idle" : e === "grid" ? t > 0 ? "import" : "export" : e === "battery" ? t > 0 ? "discharge" : "charge" : e === "solar" ? t > 0 ? "produce" : "unknown" : t > 0 ? "consume" : "export";
 }
-function xt(e, t, n = {}) {
-	let r = yt(t);
+function Mt(e, t, n = {}) {
+	let r = At(t);
 	if (r === null) return {
 		role: e,
 		watts: null,
@@ -2194,13 +2640,13 @@ function xt(e, t, n = {}) {
 	return {
 		role: e,
 		watts: i,
-		direction: bt(e, i, n.thresholdW ?? 50),
+		direction: jt(e, i, n.thresholdW ?? 50),
 		available: !0
 	};
 }
 //#endregion
 //#region src/services/format.ts
-var St = {
+var Nt = {
 	en: "en-US",
 	it: "it-IT",
 	de: "de-DE",
@@ -2212,34 +2658,34 @@ var St = {
 	ro: "ro-RO",
 	es: "es-ES"
 };
-function G(e) {
-	return St[e ?? "es"] ?? "en-US";
+function q(e) {
+	return Nt[e ?? "es"] ?? "en-US";
 }
-function Ct(e, t = "es") {
+function Pt(e, t = "es") {
 	if (e === null || !Number.isFinite(e)) return "—";
 	let n = Math.abs(e);
-	return n >= 1e3 ? `${new Intl.NumberFormat(G(t), { maximumFractionDigits: 1 }).format(n / 1e3)} kW` : `${new Intl.NumberFormat(G(t), { maximumFractionDigits: 0 }).format(n)} W`;
+	return n >= 1e3 ? `${new Intl.NumberFormat(q(t), { maximumFractionDigits: 1 }).format(n / 1e3)} kW` : `${new Intl.NumberFormat(q(t), { maximumFractionDigits: 0 }).format(n)} W`;
 }
-function wt(e, t = "es") {
+function Ft(e, t = "es") {
 	if (e === null || e === "") return "—";
 	let n = Number(e);
-	return Number.isFinite(n) ? `${new Intl.NumberFormat(G(t), { maximumFractionDigits: 2 }).format(n)} kWh` : "—";
+	return Number.isFinite(n) ? `${new Intl.NumberFormat(q(t), { maximumFractionDigits: 2 }).format(n)} kWh` : "—";
 }
-function Tt(e) {
+function It(e) {
 	if (e === null || e === "") return "—";
 	let t = Number(e);
 	if (!Number.isFinite(t) || t < 0) return "—";
 	let n = Math.floor(t / 3600), r = Math.floor(t % 3600 / 60);
 	return `${String(n).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
 }
-function Et(e, t, n = "es") {
+function Lt(e, t, n = "es") {
 	if (e === null || e === "") return;
 	let r = Number(e);
-	if (Number.isFinite(r)) return `${new Intl.NumberFormat(G(n), { maximumFractionDigits: 1 }).format(r)} ${t}`;
+	if (Number.isFinite(r)) return `${new Intl.NumberFormat(q(n), { maximumFractionDigits: 1 }).format(r)} ${t}`;
 }
 //#endregion
 //#region src/models/types.ts
-var Dt = /* @__PURE__ */ "connected.charging.ready.charge_power.charge_energy.charge_time.house_power.fv_power.battery_power.grid_power.voltage.intensity.min_intensity.max_intensity.meter_error.ssid.ip_address.signal_status.paused.locked.timer.dynamic.pause_dynamic.logo_led.light_led.charge_mode".split("."), Ot = [
+var Rt = /* @__PURE__ */ "connected.charging.ready.charge_power.charge_energy.charge_time.house_power.fv_power.battery_power.grid_power.voltage.intensity.min_intensity.max_intensity.meter_error.ssid.ip_address.signal_status.paused.locked.timer.dynamic.pause_dynamic.logo_led.light_led.charge_mode".split("."), zt = [
 	"disconnected",
 	"charging",
 	"complete",
@@ -2251,7 +2697,7 @@ var Dt = /* @__PURE__ */ "connected.charging.ready.charge_power.charge_energy.ch
 	"waiting_power",
 	"wifi_connected",
 	"wifi_connecting"
-], kt = {
+], Bt = {
 	sin_vehiculo: "disconnected",
 	desconectado: "disconnected",
 	cargando: "charging",
@@ -2268,7 +2714,7 @@ var Dt = /* @__PURE__ */ "connected.charging.ready.charge_power.charge_energy.ch
 	esperando_potencia: "waiting_power",
 	wifi_conectado: "wifi_connected",
 	conectando_wifi: "wifi_connecting"
-}, At = {
+}, Vt = {
 	disconnected: "neutral",
 	charging: "info",
 	complete: "success",
@@ -2281,16 +2727,16 @@ var Dt = /* @__PURE__ */ "connected.charging.ready.charge_power.charge_energy.ch
 	wifi_connected: "success",
 	wifi_connecting: "info"
 };
-function jt(e) {
+function Ht(e) {
 	return e.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 }
-function Mt(e) {
+function Ut(e) {
 	if (!e) return;
-	let t = jt(e);
-	return Ot.includes(t) ? t : kt[t];
+	let t = Ht(e);
+	return zt.includes(t) ? t : Bt[t];
 }
-function Nt(e) {
-	let t = Mt(e.externalStatus), n = (e.connected === void 0 || e.connected === "unknown") && (e.charging === void 0 || e.charging === "unknown") ? e.ready === void 0 || e.ready === "unknown" : !1, r;
+function Wt(e) {
+	let t = Ut(e.externalStatus), n = (e.connected === void 0 || e.connected === "unknown") && (e.charging === void 0 || e.charging === "unknown") ? e.ready === void 0 || e.ready === "unknown" : !1, r;
 	r = e.charging === !0 ? "charging" : e.ready === !0 ? "complete" : e.connected === !0 ? "connected" : n || e.seedAvailable === !1 ? "unavailable" : "disconnected";
 	let i = [];
 	e.paused === !0 && i.push("paused"), e.locked === !0 && i.push("locked"), e.timer === !0 && i.push("timer");
@@ -2307,26 +2753,26 @@ function Nt(e) {
 		diagnostic: l ? c : void 0
 	};
 }
-function K(e, t, n = !1) {
+function J(e, t, n = !1) {
 	return {
 		key: e,
 		labelKey: n ? "states.unavailable" : `states.${e}`,
 		detailKey: n ? "details.unavailable" : `details.${e}`,
-		severity: At[e],
+		severity: Vt[e],
 		badges: t.inhibitors,
 		diagnostic: t.diagnostic,
 		unavailable: n
 	};
 }
-function Pt(e) {
-	return e.externalStatus ? K(e.externalStatus, e) : e.fault === "control_pilot" ? K("control_pilot", e) : e.fault === "load_balancing" ? K("load_balancing", e) : e.fault === "meter" || e.fault === "generic" ? K("error", e) : e.maintenance === "updating" ? K("updating", e) : e.phase === "charging" ? K("charging", e) : e.phase === "complete" ? K("complete", e) : e.inhibitors.includes("timer") ? K("timer", e) : e.connectivity === "wifi_connecting" ? K("wifi_connecting", e) : e.connectivity === "wifi_connected" ? K("wifi_connected", e) : e.phase === "connected" || e.inhibitors.includes("paused") ? K("waiting_power", e) : K("disconnected", e, e.phase === "unavailable");
+function Gt(e) {
+	return e.externalStatus ? J(e.externalStatus, e) : e.fault === "control_pilot" ? J("control_pilot", e) : e.fault === "load_balancing" ? J("load_balancing", e) : e.fault === "meter" || e.fault === "generic" ? J("error", e) : e.maintenance === "updating" ? J("updating", e) : e.phase === "charging" ? J("charging", e) : e.phase === "complete" ? J("complete", e) : e.inhibitors.includes("timer") ? J("timer", e) : e.connectivity === "wifi_connecting" ? J("wifi_connecting", e) : e.connectivity === "wifi_connected" ? J("wifi_connected", e) : e.phase === "connected" || e.inhibitors.includes("paused") ? J("waiting_power", e) : J("disconnected", e, e.phase === "unavailable");
 }
-function q(e) {
+function Y(e) {
 	return e === "on" || e === "true" ? !0 : e === "off" || e === "false" ? !1 : "unknown";
 }
 //#endregion
 //#region src/card/advanced-controls.ts
-var Ft = [
+var Kt = [
 	{
 		role: "locked",
 		label: "actions.lock"
@@ -2344,66 +2790,66 @@ var Ft = [
 		label: "actions.pauseDynamic"
 	}
 ];
-function It(e) {
+function qt(e) {
 	return !!(e && e.state !== "unknown" && e.state !== "unavailable");
 }
-function Lt(e, t, n) {
+function Jt(e, t, n) {
 	let r = e.entities[t];
-	if (!r) return j;
+	if (!r) return M;
 	let i = e.hass.states[r], a = i?.state === "on";
 	return k`
     <div class="toggle-row">
-      <span>${t === "locked" && a ? H(e.dictionary, "actions.unlock") : H(e.dictionary, n)}</span>
+      <span>${t === "locked" && a ? W(e.dictionary, "actions.unlock") : W(e.dictionary, n)}</span>
       <button
         data-role=${t}
         role="switch"
         aria-checked=${String(a)}
         aria-pressed=${String(a)}
         aria-busy=${String(e.pending.includes(t))}
-        ?disabled=${!It(i) || e.pending.includes(t)}
+        ?disabled=${!qt(i) || e.pending.includes(t)}
         @click=${() => e.onToggle(t)}
       >${a ? "ON" : "OFF"}</button>
     </div>
   `;
 }
-function Rt(e) {
-	let t = Ft.map(({ role: t, label: n }) => Lt(e, t, n)), n = e.entities.charge_mode, r = n ? e.hass.states[n] : void 0, i = e.entities.logo_led, a = i ? e.hass.states[i] : void 0, o = e.entities.light_led, s = !!(e.voltage || e.diagnostic || e.ambiguityRoles?.length);
-	return !t.some((e) => e !== j) && !n && !i && !o && !s ? j : k`
+function Yt(e) {
+	let t = Kt.map(({ role: t, label: n }) => Jt(e, t, n)), n = e.entities.charge_mode, r = n ? e.hass.states[n] : void 0, i = e.entities.logo_led, a = i ? e.hass.states[i] : void 0, o = e.entities.light_led, s = !!(e.voltage || e.diagnostic || e.ambiguityRoles?.length);
+	return !t.some((e) => e !== M) && !n && !i && !o && !s ? M : k`
     <details ?open=${e.advancedOpen === !0}>
-      <summary>${H(e.dictionary, "labels.advanced")}</summary>
+      <summary>${W(e.dictionary, "labels.advanced")}</summary>
       <div class="advanced-grid">
-        ${t.slice(0, 2).some((e) => e !== j) || n ? k`
+        ${t.slice(0, 2).some((e) => e !== M) || n ? k`
               <section class="control-group">
-                <h3>${H(e.dictionary, "labels.chargingControls")}</h3>
+                <h3>${W(e.dictionary, "labels.chargingControls")}</h3>
                 ${t.slice(0, 2)}
                 ${n ? k`
                       <label class="select-row">
-                        <span>${H(e.dictionary, "actions.chargeMode")}</span>
+                        <span>${W(e.dictionary, "actions.chargeMode")}</span>
                         <select
                           data-role="charge_mode"
                           .value=${r?.state ?? ""}
-                          ?disabled=${!It(r) || e.pending.includes("charge_mode")}
+                          ?disabled=${!qt(r) || e.pending.includes("charge_mode")}
                           @change=${(t) => e.onSelect(t.target.value)}
                         >
                           ${(r?.attributes.options ?? []).map((e) => k`<option .value=${String(e)}>${String(e)}</option>`)}
                         </select>
                       </label>
-                    ` : j}
+                    ` : M}
               </section>
-            ` : j}
-        ${t.slice(2).some((e) => e !== j) ? k`
+            ` : M}
+        ${t.slice(2).some((e) => e !== M) ? k`
               <section class="control-group">
-                <h3>${H(e.dictionary, "labels.energyControls")}</h3>
+                <h3>${W(e.dictionary, "labels.energyControls")}</h3>
                 ${t.slice(2)}
               </section>
-            ` : j}
+            ` : M}
         ${i || o ? k`
               <section class="control-group">
-                <h3>${H(e.dictionary, "labels.lightControls")}</h3>
-                ${Lt(e, "logo_led", "actions.logoLed")}
-                ${i && It(a) ? k`
+                <h3>${W(e.dictionary, "labels.lightControls")}</h3>
+                ${Jt(e, "logo_led", "actions.logoLed")}
+                ${i && qt(a) ? k`
                       <label class="range-head" for="v2c-logo-brightness">
-                        <span>${H(e.dictionary, "actions.logoLed")}</span>
+                        <span>${W(e.dictionary, "actions.logoLed")}</span>
                         <output>${Math.round((Number(a?.attributes.brightness ?? 0) || 0) / 255 * 100)}%</output>
                       </label>
                       <input
@@ -2414,53 +2860,53 @@ function Rt(e) {
                         .value=${String(a?.attributes.brightness ?? 128)}
                         @change=${(t) => e.onBrightness(Number(t.target.value))}
                       />
-                    ` : j}
-                ${Lt(e, "light_led", "actions.lightLed")}
+                    ` : M}
+                ${Jt(e, "light_led", "actions.lightLed")}
               </section>
-            ` : j}
+            ` : M}
         ${s ? k`
               <section class="control-group">
-                <h3>${H(e.dictionary, "labels.diagnostics")}</h3>
+                <h3>${W(e.dictionary, "labels.diagnostics")}</h3>
                 <dl class="technical-list">
                   ${e.voltage ? k`
                         <div class="technical-row">
-                          <dt>${H(e.dictionary, "labels.voltage")}</dt>
+                          <dt>${W(e.dictionary, "labels.voltage")}</dt>
                           <dd>${e.voltage.state} ${e.voltage.attributes.unit_of_measurement ?? "V"}</dd>
                         </div>
-                      ` : j}
+                      ` : M}
                   ${e.diagnostic ? k`
                         <div class="technical-row" data-severity="error">
-                          <dt>${H(e.dictionary, "labels.diagnostics")}</dt>
+                          <dt>${W(e.dictionary, "labels.diagnostics")}</dt>
                           <dd>${e.diagnostic}</dd>
                         </div>
-                      ` : j}
+                      ` : M}
                   ${e.ambiguityRoles?.length ? k`
                         <div class="technical-row">
-                          <dt>${H(e.dictionary, "labels.configuration")}</dt>
+                          <dt>${W(e.dictionary, "labels.configuration")}</dt>
                           <dd>YAML · ${e.ambiguityRoles.join(", ")}</dd>
                         </div>
-                      ` : j}
+                      ` : M}
                 </dl>
               </section>
-            ` : j}
+            ` : M}
       </div>
     </details>
   `;
 }
 //#endregion
 //#region src/card/energy-flow.ts
-var zt = {
+var Xt = {
 	solar: "mdi:solar-power",
 	grid: "mdi:transmission-tower",
 	home: "mdi:home-lightning-bolt",
 	battery: "mdi:home-battery",
 	charger: "mdi:ev-station"
 };
-function Bt(e, t, n) {
-	if (e.length === 0) return j;
-	let r = e.filter((e) => e.available), i = e.length - r.length, a = r.filter((e) => !["idle", "unknown"].includes(e.direction)), o = a.length > 0 ? "active" : r.length === 0 ? "unavailable" : i > 0 ? "partial" : "idle", s = `${H(t, o === "active" ? "flows.activeFlow" : o === "partial" ? "flows.partialData" : o === "unavailable" ? "flows.noData" : "flows.noFlow")}${o === "idle" ? " · 0 W" : ""}`;
+function Zt(e, t, n) {
+	if (e.length === 0) return M;
+	let r = e.filter((e) => e.available), i = e.length - r.length, a = r.filter((e) => !["idle", "unknown"].includes(e.direction)), o = a.length > 0 ? "active" : r.length === 0 ? "unavailable" : i > 0 ? "partial" : "idle", s = `${W(t, o === "active" ? "flows.activeFlow" : o === "partial" ? "flows.partialData" : o === "unavailable" ? "flows.noData" : "flows.noFlow")}${o === "idle" ? " · 0 W" : ""}`;
 	return k`
-    <section class="energy-section" aria-label=${H(t, "labels.energyFlow")}>
+    <section class="energy-section" aria-label=${W(t, "labels.energyFlow")}>
       <div class="energy-summary" data-kind=${o}>
         <p class="energy-summary-title">
           <ha-icon icon="mdi:lightning-bolt-outline" aria-hidden="true"></ha-icon>
@@ -2469,10 +2915,10 @@ function Bt(e, t, n) {
         ${a.length ? k`
               <div class="energy-nodes">
                 ${a.map((e) => {
-		let r = H(t, `flows.${e.role}`), i = H(t, `flows.${e.direction}`), a = Ct(e.watts, n);
+		let r = W(t, `flows.${e.role}`), i = W(t, `flows.${e.direction}`), a = Pt(e.watts, n);
 		return k`
                     <div class="flow-node" aria-label=${`${r}: ${a}, ${i}`}>
-                      <span class="flow-name" aria-hidden="true"><ha-icon icon=${zt[e.role]}></ha-icon></span>
+                      <span class="flow-name" aria-hidden="true"><ha-icon icon=${Xt[e.role]}></ha-icon></span>
                       <span class="flow-name-text">${r}</span>
                       <strong class="flow-value">${a}</strong>
                       <span class="flow-direction">${i}</span>
@@ -2480,35 +2926,35 @@ function Bt(e, t, n) {
                   `;
 	})}
               </div>
-            ` : j}
-        ${a.length && i ? k`<p class="energy-note">${H(t, "flows.partialData")}</p>` : j}
+            ` : M}
+        ${a.length && i ? k`<p class="energy-note">${W(t, "flows.partialData")}</p>` : M}
       </div>
     </section>
   `;
 }
 //#endregion
 //#region src/card/session-controls.ts
-function J(e) {
+function X(e) {
 	return !!(e && e.state !== "unknown" && e.state !== "unavailable");
 }
-function Vt(e) {
+function Qt(e) {
 	let t = e.entities.intensity, n = e.entities.paused, r = t ? e.hass.states[t] : void 0, i = n ? e.hass.states[n] : void 0;
-	if (!t && !n) return j;
+	if (!t && !n) return M;
 	let a = Number(r?.attributes.min ?? 6), o = Number(r?.attributes.max ?? 32), s = Number(r?.attributes.step ?? 1), c = Number(r?.state), l = e.sliderValue ?? (Number.isFinite(c) ? c : a), u = e.presets.filter((e) => e >= a && e <= o), d = i?.state === "on", f = e.intensityControl !== "presets", p = e.showPresets !== !1 && e.intensityControl !== "slider";
 	return k`
-    <section class="session-controls" aria-label=${H(e.dictionary, "labels.chargingControls")}>
+    <section class="session-controls" aria-label=${W(e.dictionary, "labels.chargingControls")}>
       ${t ? k`<div class="range-control">
-        ${f ? k`<label class="range-head" for="v2c-intensity"><span>${H(e.dictionary, "labels.intensity")}</span><output>${Math.round(l)} A</output></label>
-        <input id="v2c-intensity" data-role="intensity" type="range" .min=${String(a)} .max=${String(o)} .step=${String(s)} .value=${String(l)} ?disabled=${!J(r) || e.pending.includes("intensity")} aria-busy=${String(e.pending.includes("intensity"))} @input=${(t) => e.onSliderInput(Number(t.target.value))} @change=${(t) => e.onIntensity(Number(t.target.value))} />` : j}
-        ${p ? k`<div class="presets" aria-label=${H(e.dictionary, "labels.intensity")}>${u.map((t) => k`<button class="preset" aria-pressed=${String(Math.round(l) === t)} ?disabled=${!J(r) || e.pending.includes("intensity")} @click=${() => e.onIntensity(t)}>${t} A</button>`)}</div>` : j}
-      </div>` : j}
-      ${n ? k`<button class="primary-action" data-role="paused" aria-busy=${String(e.pending.includes("paused"))} ?disabled=${!J(i) || e.pending.includes("paused")} title=${J(i) ? "" : H(e.dictionary, "labels.unavailableEntity")} @click=${e.onPause}>${H(e.dictionary, d ? "actions.resume" : "actions.pause")}</button>` : j}
+        ${f ? k`<label class="range-head" for="v2c-intensity"><span>${W(e.dictionary, "labels.intensity")}</span><output>${Math.round(l)} A</output></label>
+        <input id="v2c-intensity" data-role="intensity" type="range" .min=${String(a)} .max=${String(o)} .step=${String(s)} .value=${String(l)} ?disabled=${!X(r) || e.pending.includes("intensity")} aria-busy=${String(e.pending.includes("intensity"))} @input=${(t) => e.onSliderInput(Number(t.target.value))} @change=${(t) => e.onIntensity(Number(t.target.value))} />` : M}
+        ${p ? k`<div class="presets" aria-label=${W(e.dictionary, "labels.intensity")}>${u.map((t) => k`<button class="preset" aria-pressed=${String(Math.round(l) === t)} ?disabled=${!X(r) || e.pending.includes("intensity")} @click=${() => e.onIntensity(t)}>${t} A</button>`)}</div>` : M}
+      </div>` : M}
+      ${n ? k`<button class="primary-action" data-role="paused" aria-busy=${String(e.pending.includes("paused"))} ?disabled=${!X(i) || e.pending.includes("paused")} title=${X(i) ? "" : W(e.dictionary, "labels.unavailableEntity")} @click=${e.onPause}>${W(e.dictionary, d ? "actions.resume" : "actions.pause")}</button>` : M}
     </section>
   `;
 }
 //#endregion
 //#region src/card/styles.ts
-var Ht = o`
+var $t = o`
   :host {
     --v2c-surface: var(--ha-card-background, var(--card-background-color, light-dark(#ffffff, #181b1e)));
     --v2c-surface-soft: var(--secondary-background-color, light-dark(#f4f5f6, #202428));
@@ -2581,7 +3027,13 @@ var Ht = o`
     display: flex;
     min-width: 0;
     max-width: 100%;
-    margin-top: clamp(-36px, -7cqw, -26px);
+    /*
+     * No negative margin. The old illustration was a full-height charger with two thirds
+     * of it empty below the display, so the status text was pulled up into that void.
+     * The cropped artwork ends just past the display, and pulling up now lands the text
+     * on top of the picture.
+     */
+    margin-top: 6px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -2592,45 +3044,75 @@ var Ht = o`
   .charger-stage {
     display: grid;
     width: min(100%, clamp(260px, 66cqw, 340px));
-    aspect-ratio: 312 / 480;
     place-items: center;
   }
+
+  /*
+   * The artwork is two bitmap layers with the lit parts drawn as vectors on top.
+   * 'color' carries the LED state: it interpolates inside a shadow root, which a
+   * registered custom property does not, and 'fill="currentColor"' follows it.
+   */
   .charger-art {
     position: relative;
-    container-type: inline-size;
     width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 18px 14px rgb(0 0 0 / 16%));
+    color: var(--v2c-led, #f4f6f8);
+    transition: color 700ms ease;
+    filter: drop-shadow(0 14px 12px rgb(0 0 0 / 18%));
   }
 
-  .charger-art svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .charger-art svg { display: block; width: 100%; height: auto; }
+  .charger-art image { image-rendering: auto; }
+
+  .charger-logo-glow {
+    opacity: var(--v2c-glow, 0.5);
+    transition: opacity 700ms ease;
   }
 
-  .charger-lcd {
-    position: absolute;
-    top: 40.6%;
-    left: 34.9%;
-    display: grid;
-    width: 30.1%;
-    height: 4.4%;
-    grid-template-rows: 1fr 1fr;
-    place-items: center;
-    color: #cde6ef;
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 2.05cqi;
-    font-weight: 700;
-    letter-spacing: .04em;
-    line-height: 1;
-    pointer-events: none;
+  .charger-connector { transition: opacity 550ms ease; }
+  .charger-art[data-connector="out"] .charger-connector { opacity: 0; }
+
+  /* Charging and wifi-reconnect are the only two states the hardware blinks. */
+  .charger-art[data-flash] .charger-logo-glow {
+    animation: v2c-flash-glow var(--v2c-flash, 900ms) steps(1, end) infinite;
+  }
+  .charger-art[data-flash] .charger-logo {
+    animation: v2c-flash-core var(--v2c-flash, 900ms) steps(1, end) infinite;
   }
 
-  .charger-lcd span { display: block; max-width: 100%; overflow: hidden; text-overflow: clip; white-space: nowrap; }
-  .charger-lcd span + span { color: #9dc0cd; font-size: .92em; }
-  .charger-lcd.is-long { font-size: 1.72cqi; }
-  .charger-lcd.is-very-long { font-size: 1.48cqi; }
+  @keyframes v2c-flash-glow {
+    0%, 52% { opacity: var(--v2c-glow, 0.5); }
+    53%, 100% { opacity: 0.06; }
+  }
+
+  @keyframes v2c-flash-core {
+    0%, 52% { opacity: 1; }
+    53%, 100% { opacity: 0.16; }
+  }
+  /*
+   * LED colours, from V2C's own table at
+   * v2charge.com/support/trydan/led-lighting-instructions. The hues are the documented
+   * ones lifted a little towards white: the wordmark is a light source behind black
+   * glass, and the flat brand colours read as dead paint at card size. Only 'fix' and
+   * 'intermitent' are documented behaviours - the glow is our addition, not the
+   * device's, which is why it is a separate variable that can go to zero.
+   */
+  .charger-art[data-state="disconnected"] { --v2c-led: #f4f6f8; --v2c-glow: .42; }
+  .charger-art[data-state="wifi_connecting"] { --v2c-led: #f4f6f8; --v2c-glow: .42; }
+  .charger-art[data-state="wifi_connected"] { --v2c-led: #4fe07e; --v2c-glow: .5; }
+  .charger-art[data-state="charging"] { --v2c-led: #2e5bf0; --v2c-glow: .55; }
+  .charger-art[data-state="complete"] { --v2c-led: #4fe07e; --v2c-glow: .4; }
+  .charger-art[data-state="timer"] { --v2c-led: #58e6f0; --v2c-glow: .5; }
+  .charger-art[data-state="waiting_power"] { --v2c-led: #ff9c3c; --v2c-glow: .5; }
+  .charger-art[data-state="control_pilot"] { --v2c-led: #ffdc55; --v2c-glow: .5; }
+  .charger-art[data-state="updating"] { --v2c-led: #ff6acc; --v2c-glow: .5; }
+  .charger-art[data-state="load_balancing"] { --v2c-led: #ffb0e0; --v2c-glow: .5; }
+  .charger-art[data-state="error"] { --v2c-led: #ff4d57; --v2c-glow: .55; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .charger-art[data-flash] .charger-logo-glow,
+    .charger-art[data-flash] .charger-logo { animation: none; }
+  }
+
 
   .charger-status {
     max-width: 100%;
@@ -3033,7 +3515,7 @@ var Ht = o`
 
   ha-card[data-mode="compact"] .shell { padding: 18px; }
   ha-card[data-mode="compact"] .hero { gap: 0; margin-top: 12px; }
-  ha-card[data-mode="compact"] .hero-copy { margin-top: clamp(-26px, -6cqw, -18px); }
+  ha-card[data-mode="compact"] .hero-copy { margin-top: 4px; }
   ha-card[data-mode="compact"] .charger-stage { width: min(100%, clamp(210px, 62cqw, 280px)); }
   ha-card[data-mode="compact"] .charger-status { margin-top: 0; font-size: clamp(1.65rem, 6cqw, 2rem); }
   ha-card[data-mode="compact"] .metrics-section { margin-top: 12px; }
@@ -3079,11 +3561,12 @@ var Ht = o`
   ha-card[data-surface="transparent"] { background: transparent; }
   ha-card[data-surface="tinted"] { background: color-mix(in srgb, var(--v2c-control) 8%, var(--v2c-surface)); }
   .charger-stage { transform: scale(var(--v2c-hero-scale, 1)); transform-origin: center bottom; }
+  .charger-art { aspect-ratio: var(--v2c-art-ratio, 1.33); }
 
   ha-card[data-mode="xxl"] .shell { padding: clamp(26px, 5cqw, 36px); }
   ha-card[data-mode="xxl"] .hero { margin-top: 24px; }
   ha-card[data-mode="xxl"] .charger-stage { width: min(100%, clamp(320px, 84cqw, 430px)); }
-  ha-card[data-mode="xxl"] .hero-copy { margin-top: clamp(-44px, -8cqw, -31px); }
+  ha-card[data-mode="xxl"] .hero-copy { margin-top: 8px; }
   ha-card[data-mode="xxl"] .charger-status { font-size: clamp(2.35rem, 8cqw, 3rem); }
   ha-card[data-mode="xxl"] .metric { padding: 16px; }
   ha-card[data-mode="xxl"] .metric-value { font-size: clamp(1.2rem, 4.8cqw, 1.7rem); }
@@ -3120,7 +3603,7 @@ var Ht = o`
 `;
 //#endregion
 //#region \0@oxc-project+runtime@0.139.0/helpers/esm/decorate.js
-function Y(e, t, n, r) {
+function Z(e, t, n, r) {
 	var i = arguments.length, a = i < 3 ? t : r === null ? r = Object.getOwnPropertyDescriptor(t, n) : r, o;
 	if (typeof Reflect == "object" && typeof Reflect.decorate == "function") a = Reflect.decorate(e, t, n, r);
 	else for (var s = e.length - 1; s >= 0; s--) (o = e[s]) && (a = (i < 3 ? o(a) : i > 3 ? o(t, n, a) : o(t, n)) || a);
@@ -3128,12 +3611,16 @@ function Y(e, t, n, r) {
 }
 //#endregion
 //#region src/card/v2c-trydan-card.ts
-var X = class extends I {
+function en(e) {
+	let t = Number(e);
+	return !Number.isFinite(t) || t <= 0 ? .9 : Math.min(1.45, Math.max(.5, 1.45 - Math.min(t, 32) / 32 * .95));
+}
+var Q = class extends I {
 	constructor(...e) {
 		super(...e), this.resolvedEntities = {}, this.ambiguities = {}, this.pendingRoles = [], this.actionMessage = "", this.#e = /* @__PURE__ */ new Map();
 	}
 	static {
-		this.styles = Ht;
+		this.styles = $t;
 	}
 	#e;
 	#t;
@@ -3141,10 +3628,10 @@ var X = class extends I {
 		return document.createElement("v2c-trydan-card-editor");
 	}
 	static getStubConfig(e) {
-		return Ke(e);
+		return rt(e);
 	}
 	setConfig(e) {
-		this.config = Ge(e), this.#n(), this.sliderValue = void 0;
+		this.config = nt(e), this.#n(), this.sliderValue = void 0;
 	}
 	getCardSize() {
 		return this.config?.display_mode === "ultra_compact" ? 3 : this.config?.display_mode === "compact" ? 4 : this.config?.display_mode === "standard" ? 6 : 8;
@@ -3176,7 +3663,7 @@ var X = class extends I {
 			this.resolvedEntities = {}, this.ambiguities = {}, this.#t = void 0;
 			return;
 		}
-		let e = _t(this.hass.entities ?? {}, this.config.entity, this.config.entities, this.hass.states);
+		let e = Ot(this.hass.entities ?? {}, this.config.entity, this.config.entities, this.hass.states);
 		this.resolvedEntities = e.entities, this.ambiguities = e.ambiguities, this.#t = e.deviceId, this.discoveryDiagnostic = e.diagnostic;
 	}
 	#r() {
@@ -3200,7 +3687,7 @@ var X = class extends I {
 		return (e ? `--v2c-control:${e};--v2c-on-control:${t};` : "") + (this.config?.card_radius === void 0 ? "" : `--v2c-radius:${this.config.card_radius}px;`) + `--v2c-hero-scale:${this.config?.hero_scale ?? 1};`;
 	}
 	#o() {
-		return at(this.config?.language, this.hass?.locale?.language ?? this.hass?.language);
+		return gt(this.config?.language, this.hass?.locale?.language ?? this.hass?.language);
 	}
 	#s(e, t) {
 		this.#e.set(e, t), this.pendingRoles = [...this.#e.keys()];
@@ -3208,20 +3695,20 @@ var X = class extends I {
 	#c(e, t) {
 		let n = this.#e.get(e);
 		n?.timer && clearTimeout(n.timer), this.#e.delete(e), this.pendingRoles = [...this.#e.keys()];
-		let r = V(this.#o());
-		this.actionMessage = H(r, t ? "labels.actionDone" : "labels.actionFailed");
+		let r = U(this.#o());
+		this.actionMessage = W(r, t ? "labels.actionDone" : "labels.actionFailed");
 	}
 	#l() {
 		if (this.hass) for (let [e, t] of this.#e) t.matches(this.hass.states[t.entityId]) && this.#c(e, !0);
 	}
 	async #u(e, t, n, r) {
-		if (!this.hass || !vt(this.hass, e, t, this.#t)) {
-			this.actionMessage = H(V(this.#o()), "labels.actionFailed");
+		if (!this.hass || !kt(this.hass, e, t, this.#t)) {
+			this.actionMessage = W(U(this.#o()), "labels.actionFailed");
 			return;
 		}
 		if (this.#e.has(e)) return;
-		let i = V(this.#o());
-		this.actionMessage = H(i, "labels.actionPending");
+		let i = U(this.#o());
+		this.actionMessage = W(i, "labels.actionPending");
 		let a = {
 			entityId: t,
 			matches: n
@@ -3241,43 +3728,43 @@ var X = class extends I {
 		let t = this.resolvedEntities.intensity, n = t ? this.hass?.states[t] : void 0;
 		if (!this.hass || !t || !n) return;
 		let r = Number(n.attributes.min ?? 6), i = Number(n.attributes.max ?? 32), a = Number(n.attributes.step ?? 1), o = Number.isFinite(a) && a > 0 ? a : 1, s = Math.min(i, Math.max(r, Math.round((e - r) / o) * o + r));
-		this.sliderValue = s, this.#u("intensity", t, (e) => Number(e?.state) === s, () => st(this.hass, t, s));
+		this.sliderValue = s, this.#u("intensity", t, (e) => Number(e?.state) === s, () => vt(this.hass, t, s));
 	}
 	#f(e) {
 		let t = this.resolvedEntities[e], n = t ? this.hass?.states[t] : void 0;
 		if (!this.hass || !t || !n) return;
 		let r = n.state !== "on";
-		e === "locked" && r && this.config?.confirm_lock !== !1 && !window.confirm(H(V(this.#o()), "actions.confirmLock")) || this.#u(e, t, (e) => e?.state === (r ? "on" : "off"), () => ct(this.hass, t, r));
+		e === "locked" && r && this.config?.confirm_lock !== !1 && !window.confirm(W(U(this.#o()), "actions.confirmLock")) || this.#u(e, t, (e) => e?.state === (r ? "on" : "off"), () => yt(this.hass, t, r));
 	}
 	#p(e) {
 		let t = this.resolvedEntities.charge_mode, n = t ? this.hass?.states[t] : void 0;
-		!this.hass || !t || !n || !n.attributes.options?.includes(e) || this.#u("charge_mode", t, (t) => t?.state === e, () => lt(this.hass, t, e));
+		!this.hass || !t || !n || !n.attributes.options?.includes(e) || this.#u("charge_mode", t, (t) => t?.state === e, () => bt(this.hass, t, e));
 	}
 	#m(e) {
 		let t = this.resolvedEntities[e], n = t ? this.hass?.states[t] : void 0;
 		if (!this.hass || !t || !n) return;
 		let r = n.state !== "on";
-		this.#u(e, t, (e) => e?.state === (r ? "on" : "off"), () => ut(this.hass, t, r));
+		this.#u(e, t, (e) => e?.state === (r ? "on" : "off"), () => xt(this.hass, t, r));
 	}
 	#h(e) {
 		let t = this.resolvedEntities.logo_led, n = t ? this.hass?.states[t] : void 0;
-		!this.hass || !t || !n || !Number.isFinite(e) || e < 0 || e > 255 || this.#u("logo_led", t, (t) => Number(t?.attributes.brightness) === e, () => ut(this.hass, t, !0, e));
+		!this.hass || !t || !n || !Number.isFinite(e) || e < 0 || e > 255 || this.#u("logo_led", t, (t) => Number(t?.attributes.brightness) === e, () => xt(this.hass, t, !0, e));
 	}
 	render() {
 		if (!this.config || !this.hass) return k`<ha-card><div class="empty">V2C Trydan Card - configuration pending</div></ha-card>`;
-		let e = this.#o(), t = V(e), n = this.hass.states[this.config.entity], r = xt("charger", this.#i("charge_power"), { thresholdW: this.config.flow_threshold_w }), i = Pt(Nt({
+		let e = this.#o(), t = U(e), n = this.hass.states[this.config.entity], r = Mt("charger", this.#i("charge_power"), { thresholdW: this.config.flow_threshold_w }), i = Wt({
 			seedAvailable: !!(n && n.state !== "unknown" && n.state !== "unavailable"),
-			connected: q(this.#i("connected")?.state),
-			charging: q(this.#i("charging")?.state),
-			ready: q(this.#i("ready")?.state),
-			paused: q(this.#i("paused")?.state),
-			locked: q(this.#i("locked")?.state),
-			timer: q(this.#i("timer")?.state),
-			dynamic: q(this.#i("dynamic")?.state),
+			connected: Y(this.#i("connected")?.state),
+			charging: Y(this.#i("charging")?.state),
+			ready: Y(this.#i("ready")?.state),
+			paused: Y(this.#i("paused")?.state),
+			locked: Y(this.#i("locked")?.state),
+			timer: Y(this.#i("timer")?.state),
+			dynamic: Y(this.#i("dynamic")?.state),
 			meterError: this.#i("meter_error")?.state,
 			externalStatus: this.config.status_entity ? this.hass.states[this.config.status_entity]?.state : void 0,
 			chargePowerW: r.watts
-		})), a = this.config.name ?? "V2C Trydan", o = this.#i("charge_energy"), s = this.#i("charge_time"), c = this.#i("intensity"), l = this.#i("voltage"), u = [
+		}), a = Gt(i), o = this.config.name ?? "V2C Trydan", s = this.#i("charge_energy"), c = this.#i("charge_time"), l = this.#i("intensity"), u = this.#i("voltage"), d = [
 			[
 				"solar",
 				"fv_power",
@@ -3303,22 +3790,31 @@ var X = class extends I {
 				"charge_power",
 				!1
 			]
-		], d = this.config.energy_sources ?? [], f = u.filter(([e, t]) => d.includes(e) && !!this.resolvedEntities[t]).map(([e, t, n]) => xt(e, this.#i(t), {
+		], f = this.config.energy_sources ?? [], p = d.filter(([e, t]) => f.includes(e) && !!this.resolvedEntities[t]).map(([e, t, n]) => Mt(e, this.#i(t), {
 			invert: n,
 			thresholdW: this.config?.flow_threshold_w
-		})), p = (this.config.metrics ?? []).map((n) => n === "power" ? k`<div class="metric metric-power"><span class="metric-label">${H(t, "labels.power")}</span><strong class="metric-value">${Ct(r.watts, e)}</strong></div>` : n === "energy" ? k`<div class="metric"><span class="metric-label">${H(t, "labels.energy")}</span><strong class="metric-value">${wt(o?.state ?? null, e)}</strong></div>` : k`<div class="metric"><span class="metric-label">${H(t, "labels.time")}</span><strong class="metric-value">${Tt(s?.state ?? null)}</strong></div>`), ee = Object.keys(this.ambiguities), m = i.diagnostic && i.diagnostic !== "no_error" ? i.diagnostic.replaceAll("_", " ") : void 0, h = this.config.show_charger !== !1 && this.config.display_mode !== "ultra_compact", g = ot(e, i.unavailable ? "unavailable" : i.key, {
-			power: Ct(r.watts, e),
-			current: Et(c?.state ?? null, "A", e),
-			voltage: Et(l?.state ?? null, "V", e),
-			energy: wt(o?.state ?? null, e)
-		}), te = Math.max(g.primary.length, g.secondary.length), _ = k`
-      <section class="hero ${h ? "has-charger" : "without-charger"}" data-section="hero">
-        ${h ? k`<div class="charger-stage"><div class="charger-art" aria-hidden="true">${Ie(Le[i.key])}<div class="charger-lcd ${te > 24 ? "is-very-long" : te > 18 ? "is-long" : ""}"><span>${g.primary}</span><span>${g.secondary}</span></div></div></div>` : j}
+		})), m = (this.config.metrics ?? []).map((n) => n === "power" ? k`<div class="metric metric-power"><span class="metric-label">${W(t, "labels.power")}</span><strong class="metric-value">${Pt(r.watts, e)}</strong></div>` : n === "energy" ? k`<div class="metric"><span class="metric-label">${W(t, "labels.energy")}</span><strong class="metric-value">${Ft(s?.state ?? null, e)}</strong></div>` : k`<div class="metric"><span class="metric-label">${W(t, "labels.time")}</span><strong class="metric-value">${It(c?.state ?? null)}</strong></div>`), h = Object.keys(this.ambiguities), g = a.diagnostic && a.diagnostic !== "no_error" ? a.diagnostic.replaceAll("_", " ") : void 0, ee = this.config.show_charger !== !1 && this.config.display_mode !== "ultra_compact", te = _t(e, a.unavailable ? "unavailable" : a.key, {
+			power: Pt(r.watts, e),
+			current: Lt(l?.state ?? null, "A", e),
+			voltage: Lt(u?.state ?? null, "V", e),
+			energy: Ft(s?.state ?? null, e)
+		}), _ = this.config.charger_art ?? "focus", v = i.phase === "disconnected" || i.phase === "unavailable", y = this.config.show_connector === !0, ne = qe(_, y), b = Ke({
+			crop: _,
+			showConnector: y,
+			connectorHoldered: v,
+			lcdLines: [te.primary, te.secondary],
+			flashSeconds: en(l?.state),
+			logoOff: this.#i("logo_led")?.state === "off",
+			state: a.key,
+			flash: a.key === "charging" || a.key === "wifi_connecting"
+		}), x = k`
+      <section class="hero ${ee ? "has-charger" : "without-charger"}" data-section="hero">
+        ${ee ? k`<div class="charger-stage" style=${`--v2c-art-ratio:${ne.toFixed(3)}`}>${b}</div>` : M}
         <div class="hero-copy">
-          <div class="charger-status" data-severity=${i.severity} role="status">${H(t, i.labelKey)}</div>
-          ${this.config.show_badges !== !1 && i.badges.length ? k`<div class="badges" aria-label=${H(t, "labels.additionalStatus")}>${i.badges.map((e) => k`<span class="badge">${H(t, `badges.${e}`)}</span>`)}</div>` : j}
+          <div class="charger-status" data-severity=${a.severity} role="status">${W(t, a.labelKey)}</div>
+          ${this.config.show_badges !== !1 && a.badges.length ? k`<div class="badges" aria-label=${W(t, "labels.additionalStatus")}>${a.badges.map((e) => k`<span class="badge">${W(t, `badges.${e}`)}</span>`)}</div>` : M}
         </div>
-      </section>`, v = p.length ? k`<section class="metrics-section" data-section="metrics"><div class="primary-metrics">${p}</div></section>` : j, y = this.config.show_controls ? k`<div data-section="controls">${Vt({
+      </section>`, re = m.length ? k`<section class="metrics-section" data-section="metrics"><div class="primary-metrics">${m}</div></section>` : M, S = this.config.show_controls ? k`<div data-section="controls">${Qt({
 			hass: this.hass,
 			entities: this.resolvedEntities,
 			dictionary: t,
@@ -3330,48 +3826,48 @@ var X = class extends I {
 			onSliderInput: (e) => this.sliderValue = e,
 			onIntensity: (e) => this.#d(e),
 			onPause: () => this.#f("paused")
-		})}</div>` : j, ne = this.config.show_energy_flow ? k`<div data-section="energy">${Bt(f, t, e)}</div>` : j, b = this.config.show_advanced ? k`<div data-section="advanced">${Rt({
+		})}</div>` : M, ie = this.config.show_energy_flow ? k`<div data-section="energy">${Zt(p, t, e)}</div>` : M, ae = this.config.show_advanced ? k`<div data-section="advanced">${Yt({
 			hass: this.hass,
 			entities: this.resolvedEntities,
 			dictionary: t,
 			pending: this.pendingRoles,
 			voltage: this.#i("voltage"),
-			diagnostic: m,
-			ambiguityRoles: ee,
+			diagnostic: g,
+			ambiguityRoles: h,
 			advancedOpen: this.config.advanced_open,
 			onToggle: (e) => e === "logo_led" || e === "light_led" ? this.#m(e) : this.#f(e),
 			onSelect: (e) => this.#p(e),
 			onBrightness: (e) => this.#h(e)
-		})}</div>` : j, x = (e) => {
+		})}</div>` : M, C = (e) => {
 			switch (e) {
-				case "hero": return _;
-				case "metrics": return v;
-				case "controls": return y;
-				case "energy": return ne;
-				default: return b;
+				case "hero": return x;
+				case "metrics": return re;
+				case "controls": return S;
+				case "energy": return ie;
+				default: return ae;
 			}
-		}, re = this.config.section_order ?? [
+		}, oe = this.config.section_order ?? [
 			"hero",
 			"metrics",
 			"controls",
 			"energy",
 			"advanced"
-		], S = this.discoveryDiagnostic ? k`<p class="live-region" data-diagnostic=${this.discoveryDiagnostic} role="status">${this.discoveryDiagnostic.replaceAll("_", " ")}</p>` : j;
+		], se = this.discoveryDiagnostic ? k`<p class="live-region" data-diagnostic=${this.discoveryDiagnostic} role="status">${this.discoveryDiagnostic.replaceAll("_", " ")}</p>` : M;
 		return k`
       <ha-card data-theme=${this.config.theme ?? "auto"} data-mode=${this.config.display_mode ?? "standard"} data-layout=${this.config.layout ?? "auto"} data-surface=${this.config.surface_style ?? "solid"} data-show-header=${String(this.config.show_header !== !1)} style=${this.#a()}>
         <div class="shell">
-          ${this.config.show_header === !1 ? j : k`<header class="card-heading"><h2>${a}</h2>${this.config.location ? k`<span class="location">${this.config.location}</span>` : j}</header>`}
-          <div class="content-sections">${re.map(x)}</div>
-          ${S}
+          ${this.config.show_header === !1 ? M : k`<header class="card-heading"><h2>${o}</h2>${this.config.location ? k`<span class="location">${this.config.location}</span>` : M}</header>`}
+          <div class="content-sections">${oe.map(C)}</div>
+          ${se}
           <p class="live-region" aria-live="polite">${this.actionMessage}</p>
         </div>
       </ha-card>`;
 	}
 };
-Y([L({ attribute: !1 })], X.prototype, "hass", void 0), Y([R()], X.prototype, "config", void 0), Y([R()], X.prototype, "resolvedEntities", void 0), Y([R()], X.prototype, "ambiguities", void 0), Y([R()], X.prototype, "discoveryDiagnostic", void 0), Y([R()], X.prototype, "sliderValue", void 0), Y([R()], X.prototype, "pendingRoles", void 0), Y([R()], X.prototype, "actionMessage", void 0);
+Z([Ne({ attribute: !1 })], Q.prototype, "hass", void 0), Z([L()], Q.prototype, "config", void 0), Z([L()], Q.prototype, "resolvedEntities", void 0), Z([L()], Q.prototype, "ambiguities", void 0), Z([L()], Q.prototype, "discoveryDiagnostic", void 0), Z([L()], Q.prototype, "sliderValue", void 0), Z([L()], Q.prototype, "pendingRoles", void 0), Z([L()], Q.prototype, "actionMessage", void 0);
 //#endregion
 //#region src/localization/editor-copy.ts
-var Ut = {
+var tn = {
 	en: {
 		general: "General",
 		appearance: "Appearance",
@@ -3942,7 +4438,7 @@ var Ut = {
 		statusInvalid: "Invalidă",
 		statusMissing: "Negăsită"
 	}
-}, Wt = {
+}, nn = {
 	en: {
 		connected: "Vehicle connected",
 		charging: "Charging",
@@ -4224,18 +4720,18 @@ var Ut = {
 		charge_mode: "Mod de încărcare"
 	}
 };
-function Gt(e) {
-	return Ut[e];
+function rn(e) {
+	return tn[e];
 }
-function Kt(e, t) {
-	return Wt[e][t];
+function an(e, t) {
+	return nn[e][t];
 }
-function qt(e, t) {
+function on(e, t) {
 	return e[`status${t[0].toUpperCase()}${t.slice(1)}`];
 }
 //#endregion
 //#region src/editor/v2c-trydan-card-editor.ts
-var Jt = {
+var sn = {
 	en: "English",
 	it: "Italiano",
 	de: "Deutsch",
@@ -4246,7 +4742,7 @@ var Jt = {
 	no: "Norsk",
 	ro: "Romana",
 	es: "Espanol"
-}, Yt = {
+}, cn = {
 	en: "Ultra compact mode hides charger artwork. Setting remains for other sizes.",
 	es: "Modo ultracompacto oculta cargador. Ajuste se conserva para otros tamanos.",
 	it: "Modalita ultra compatta nasconde caricatore.",
@@ -4257,28 +4753,28 @@ var Jt = {
 	da: "Ultrakompakt skjuler laderen.",
 	no: "Ultrakompakt skjuler laderen.",
 	ro: "Modul ultra compact ascunde incarcatorul."
-}, Xt = [
+}, ln = [
 	"power",
 	"energy",
 	"time"
-], Z = [
+], un = [
 	"solar",
 	"grid",
 	"home",
 	"battery",
 	"charger"
-], Zt = [
+], dn = [
 	"hero",
 	"metrics",
 	"controls",
 	"energy",
 	"advanced"
-], Qt = [
+], fn = [
 	["show_energy_flow", "editor.showEnergyFlow"],
 	["show_controls", "editor.showControls"],
 	["show_advanced", "editor.showAdvanced"],
 	["show_charger", "editor.showCharger"]
-], Q = class extends I {
+], $ = class extends I {
 	constructor(...e) {
 		super(...e), this.accentDraft = "#0067D9", this.presetDraft = "";
 	}
@@ -4379,7 +4875,7 @@ var Jt = {
 	}
 	#i(e) {
 		if (!this.config) return;
-		let t = this.config.metrics ?? [...Xt], n = t.includes(e) ? t.filter((t) => t !== e) : [...t, e];
+		let t = this.config.metrics ?? [...ln], n = t.includes(e) ? t.filter((t) => t !== e) : [...t, e];
 		this.#e({
 			...this.config,
 			metrics: n
@@ -4387,15 +4883,15 @@ var Jt = {
 	}
 	#a(e) {
 		if (!this.config) return;
-		let t = this.config.energy_sources ?? [...Z], n = t.includes(e) ? t.filter((t) => t !== e) : [...t, e];
+		let t = this.config.energy_sources ?? [...un], n = t.includes(e) ? t.filter((t) => t !== e) : [...t, e];
 		this.#e({
 			...this.config,
 			energy_sources: n
 		});
 	}
 	#o() {
-		let e = (this.config?.section_order ?? []).filter((e) => Zt.includes(e));
-		return [.../* @__PURE__ */ new Set([...e, ...Zt])];
+		let e = (this.config?.section_order ?? []).filter((e) => dn.includes(e));
+		return [.../* @__PURE__ */ new Set([...e, ...dn])];
 	}
 	#s(e, t) {
 		if (!this.config) return;
@@ -4430,7 +4926,7 @@ var Jt = {
 		if (!this.config) return;
 		let e = Number(this.presetDraft);
 		if (!Number.isInteger(e) || e <= 0 || e > 80) return;
-		let t = [.../* @__PURE__ */ new Set([...this.config.current_presets ?? z, e])].sort((e, t) => e - t);
+		let t = [.../* @__PURE__ */ new Set([...this.config.current_presets ?? V, e])].sort((e, t) => e - t);
 		this.presetDraft = "", this.#e({
 			...this.config,
 			current_presets: t
@@ -4439,7 +4935,7 @@ var Jt = {
 	#f(e) {
 		this.config && this.#e({
 			...this.config,
-			current_presets: (this.config.current_presets ?? z).filter((t) => t !== e)
+			current_presets: (this.config.current_presets ?? V).filter((t) => t !== e)
 		});
 	}
 	#p(e, t) {
@@ -4451,40 +4947,40 @@ var Jt = {
 		});
 	}
 	render() {
-		if (!this.config) return j;
-		let e = at(this.config.language ?? this.hass?.locale?.language ?? this.hass?.language), t = V(e), n = Gt(e), r = Object.keys(this.hass?.entities ?? {}), i = this.hass ? _t(Object.values(this.hass.entities ?? {}), this.config.entity, this.config.entities, this.hass.states) : void 0, a = this.#o(), o = this.config.metrics ?? [...Xt], s = this.config.energy_sources ?? [...Z], c = this.config.current_presets ?? z, l = this.accentDraft !== "" && !/^#[0-9A-F]{6}$/.test(this.accentDraft), u = (this.config.display_mode ?? "standard") === "ultra_compact", d = {
-			hero: H(t, "editor.showCharger"),
+		if (!this.config) return M;
+		let e = gt(this.config.language ?? this.hass?.locale?.language ?? this.hass?.language), t = U(e), n = rn(e), r = Object.keys(this.hass?.entities ?? {}), i = this.hass ? Ot(Object.values(this.hass.entities ?? {}), this.config.entity, this.config.entities, this.hass.states) : void 0, a = this.#o(), o = this.config.metrics ?? [...ln], s = this.config.energy_sources ?? [...un], c = this.config.current_presets ?? V, l = this.accentDraft !== "" && !/^#[0-9A-F]{6}$/.test(this.accentDraft), u = (this.config.display_mode ?? "standard") === "ultra_compact", d = {
+			hero: W(t, "editor.showCharger"),
 			metrics: n.metrics,
-			controls: H(t, "editor.showControls"),
-			energy: H(t, "editor.showEnergyFlow"),
-			advanced: H(t, "editor.showAdvanced")
+			controls: W(t, "editor.showControls"),
+			energy: W(t, "editor.showEnergyFlow"),
+			advanced: W(t, "editor.showAdvanced")
 		}, f = {
-			power: H(t, "labels.power"),
-			energy: H(t, "labels.energy"),
-			time: H(t, "labels.time")
+			power: W(t, "labels.power"),
+			energy: W(t, "labels.energy"),
+			time: W(t, "labels.time")
 		}, p = {
-			solar: H(t, "flows.solar"),
-			grid: H(t, "flows.grid"),
-			home: H(t, "flows.home"),
-			battery: H(t, "flows.battery"),
-			charger: H(t, "flows.charger")
+			solar: W(t, "flows.solar"),
+			grid: W(t, "flows.grid"),
+			home: W(t, "flows.home"),
+			battery: W(t, "flows.battery"),
+			charger: W(t, "flows.charger")
 		};
 		return k`
       <div class="editor">
         <details class="group" open>
           <summary>${n.general}</summary><div class="group-body">
-            <label><span>${H(t, "editor.entity")}</span><input data-field="entity" list="v2c-entities" .value=${this.config.entity} @change=${(e) => this.#t("entity", e.target.value)} /></label>
+            <label><span>${W(t, "editor.entity")}</span><input data-field="entity" list="v2c-entities" .value=${this.config.entity} @change=${(e) => this.#t("entity", e.target.value)} /></label>
             <div class="grid">
-              <label><span>${H(t, "editor.name")}</span><input data-field="name" .value=${this.config.name ?? ""} @change=${(e) => this.#t("name", e.target.value)} /></label>
-              <label><span>${H(t, "editor.location")}</span><input data-field="location" .value=${this.config.location ?? ""} @change=${(e) => this.#t("location", e.target.value)} /></label>
-              <label><span>${H(t, "editor.language")}</span><select data-field="language" .value=${this.config.language ?? "auto"} @change=${(e) => this.#t("language", e.target.value)}><option value="auto">${n.automatic}</option>${rt.map((e) => k`<option .value=${e}>${Jt[e]}</option>`)}</select></label>
-              <label><span>${H(t, "editor.theme")}</span><select data-field="theme" .value=${this.config.theme ?? "auto"} @change=${(e) => this.#t("theme", e.target.value)}><option value="auto">${H(t, "editor.themeAuto")}</option><option value="light">${H(t, "editor.themeLight")}</option><option value="dark">${H(t, "editor.themeDark")}</option></select></label>
+              <label><span>${W(t, "editor.name")}</span><input data-field="name" .value=${this.config.name ?? ""} @change=${(e) => this.#t("name", e.target.value)} /></label>
+              <label><span>${W(t, "editor.location")}</span><input data-field="location" .value=${this.config.location ?? ""} @change=${(e) => this.#t("location", e.target.value)} /></label>
+              <label><span>${W(t, "editor.language")}</span><select data-field="language" .value=${this.config.language ?? "auto"} @change=${(e) => this.#t("language", e.target.value)}><option value="auto">${n.automatic}</option>${mt.map((e) => k`<option .value=${e}>${sn[e]}</option>`)}</select></label>
+              <label><span>${W(t, "editor.theme")}</span><select data-field="theme" .value=${this.config.theme ?? "auto"} @change=${(e) => this.#t("theme", e.target.value)}><option value="auto">${W(t, "editor.themeAuto")}</option><option value="light">${W(t, "editor.themeLight")}</option><option value="dark">${W(t, "editor.themeDark")}</option></select></label>
             </div>
-            <div class="field"><span class="field-title">${H(t, "editor.displayMode")}</span><div class="choices">${[
+            <div class="field"><span class="field-title">${W(t, "editor.displayMode")}</span><div class="choices">${[
 			["xxl", n.modeXxl],
-			["standard", H(t, "editor.modeStandard")],
-			["compact", H(t, "editor.modeCompact")],
-			["ultra_compact", H(t, "editor.modeUltra")]
+			["standard", W(t, "editor.modeStandard")],
+			["compact", W(t, "editor.modeCompact")],
+			["ultra_compact", W(t, "editor.modeUltra")]
 		].map(([e, t]) => k`<button type="button" class="choice" data-field="display_mode" data-value=${e} aria-pressed=${String((this.config?.display_mode ?? "standard") === e)} @click=${() => this.#t("display_mode", e)}><span class="layout-icon" data-kind="centered"></span>${t}</button>`)}</div></div>
           </div>
         </details>
@@ -4529,7 +5025,7 @@ var Jt = {
 				this.config.accent_color ?? "#0067D9"
 			]
 		].map(([e, t, n]) => k`<button type="button" class="swatch" style=${`--swatch:${n}`} title=${t} aria-label=${t} aria-pressed=${String((this.config?.color_scheme ?? "monochrome") === e)} @click=${() => this.#l(e)}></button>`)}</div></div>
-            ${this.config.color_scheme === "custom" ? k`<div class="field"><span class="field-title">${n.accentColor}</span><div class="color-row"><input data-field="accent_picker" type="color" .value=${/^#[0-9A-F]{6}$/.test(this.accentDraft) ? this.accentDraft : "#0067D9"} @input=${(e) => this.#u(e.target.value)} /><input data-field="accent_color" inputmode="text" .value=${this.accentDraft} @input=${(e) => this.#u(e.target.value)} /></div><p class="help">${n.accentHelp}</p>${l ? k`<p class="error" role="alert">${n.invalidHex}</p>` : j}</div>` : j}
+            ${this.config.color_scheme === "custom" ? k`<div class="field"><span class="field-title">${n.accentColor}</span><div class="color-row"><input data-field="accent_picker" type="color" .value=${/^#[0-9A-F]{6}$/.test(this.accentDraft) ? this.accentDraft : "#0067D9"} @input=${(e) => this.#u(e.target.value)} /><input data-field="accent_color" inputmode="text" .value=${this.accentDraft} @input=${(e) => this.#u(e.target.value)} /></div><p class="help">${n.accentHelp}</p>${l ? k`<p class="error" role="alert">${n.invalidHex}</p>` : M}</div>` : M}
             <div class="field"><span class="field-title">${n.surface}</span><div class="chips">${[
 			["solid", n.solid],
 			["tinted", n.tinted],
@@ -4544,11 +5040,11 @@ var Jt = {
 
         <details class="group" open>
           <summary>${n.contentOrder}</summary><div class="group-body">
-            <div class="field"><span class="field-title">${n.metrics}</span><div class="chips">${Xt.map((e) => k`<button type="button" class="chip" data-metric=${e} aria-pressed=${String(o.includes(e))} @click=${() => this.#i(e)}>${f[e]}</button>`)}</div></div>
-            <div class="field"><span class="field-title">${n.energySources}</span><div class="chips">${Z.map((e) => k`<button type="button" class="chip" data-source=${e} aria-pressed=${String(s.includes(e))} @click=${() => this.#a(e)}>${p[e]}</button>`)}</div></div>
+            <div class="field"><span class="field-title">${n.metrics}</span><div class="chips">${ln.map((e) => k`<button type="button" class="chip" data-metric=${e} aria-pressed=${String(o.includes(e))} @click=${() => this.#i(e)}>${f[e]}</button>`)}</div></div>
+            <div class="field"><span class="field-title">${n.energySources}</span><div class="chips">${un.map((e) => k`<button type="button" class="chip" data-source=${e} aria-pressed=${String(s.includes(e))} @click=${() => this.#a(e)}>${p[e]}</button>`)}</div></div>
             <div class="field"><span class="field-title">${n.sectionOrder}</span><ol class="order-list">${a.map((e, t) => k`<li class="order-item" data-order=${e}><span class="order-index">${t + 1}</span><span>${d[e]}</span><button type="button" class="icon-button" aria-label=${`${n.moveUp}: ${d[e]}`} ?disabled=${t === 0} @click=${() => this.#s(t, -1)}>&#8593;</button><button type="button" class="icon-button" aria-label=${`${n.moveDown}: ${d[e]}`} ?disabled=${t === a.length - 1} @click=${() => this.#s(t, 1)}>&#8595;</button></li>`)}</ol><button type="button" class="reset" @click=${() => this.#c()}>${n.resetOrder}</button></div>
-            <div class="checks">${Qt.map(([e, n]) => k`<label><input data-field=${e} type="checkbox" .checked=${this.#n(e)} ?disabled=${e === "show_charger" && u} @change=${(t) => this.#t(e, t.target.checked)} /><span>${H(t, n)}</span></label>`)}<label><input data-field="show_header" type="checkbox" .checked=${this.config.show_header !== !1} @change=${(e) => this.#t("show_header", e.target.checked)} />${n.header}</label><label><input data-field="show_badges" type="checkbox" .checked=${this.config.show_badges !== !1} @change=${(e) => this.#t("show_badges", e.target.checked)} />${n.badges}</label><label><input data-field="show_presets" type="checkbox" .checked=${this.config.show_presets !== !1} @change=${(e) => this.#t("show_presets", e.target.checked)} />${n.presets}</label></div>
-            ${u ? k`<p class="help" data-help="ultra-artwork">${Yt[e]}</p>` : j}
+            <div class="checks">${fn.map(([e, n]) => k`<label><input data-field=${e} type="checkbox" .checked=${this.#n(e)} ?disabled=${e === "show_charger" && u} @change=${(t) => this.#t(e, t.target.checked)} /><span>${W(t, n)}</span></label>`)}<label><input data-field="show_header" type="checkbox" .checked=${this.config.show_header !== !1} @change=${(e) => this.#t("show_header", e.target.checked)} />${n.header}</label><label><input data-field="show_badges" type="checkbox" .checked=${this.config.show_badges !== !1} @change=${(e) => this.#t("show_badges", e.target.checked)} />${n.badges}</label><label><input data-field="show_presets" type="checkbox" .checked=${this.config.show_presets !== !1} @change=${(e) => this.#t("show_presets", e.target.checked)} />${n.presets}</label></div>
+            ${u ? k`<p class="help" data-help="ultra-artwork">${cn[e]}</p>` : M}
           </div>
         </details>
 
@@ -4568,21 +5064,21 @@ var Jt = {
         </details>
 
         <details class="group">
-          <summary>${n.entities}</summary><div class="group-body"><p class="help">${n.entityOverrides}</p>${i?.diagnostic ? k`<p class="help" data-diagnostic=${i.diagnostic}>${i.diagnostic.replaceAll("_", " ")}</p>` : j}${i?.legacyRoles.length ? k`<p class="help" data-diagnostic="legacy">legacy: ${i.legacyRoles.join(", ")}</p>` : j}<div class="grid">${Dt.map((t) => {
+          <summary>${n.entities}</summary><div class="group-body"><p class="help">${n.entityOverrides}</p>${i?.diagnostic ? k`<p class="help" data-diagnostic=${i.diagnostic}>${i.diagnostic.replaceAll("_", " ")}</p>` : M}${i?.legacyRoles.length ? k`<p class="help" data-diagnostic="legacy">legacy: ${i.legacyRoles.join(", ")}</p>` : M}<div class="grid">${Rt.map((t) => {
 			let r = i?.statuses[t] ?? "missing";
-			return k`<label><span>${Kt(e, t)}</span><input data-role=${t} list="v2c-entities" .value=${this.config?.entities?.[t] ?? ""} @change=${(e) => this.#p(t, e.target.value)} /><small class="entity-status" data-status=${r}>${qt(n, r)}</small></label>`;
+			return k`<label><span>${an(e, t)}</span><input data-role=${t} list="v2c-entities" .value=${this.config?.entities?.[t] ?? ""} @change=${(e) => this.#p(t, e.target.value)} /><small class="entity-status" data-status=${r}>${on(n, r)}</small></label>`;
 		})}</div></div>
         </details>
         <datalist id="v2c-entities">${r.map((e) => k`<option value=${e}></option>`)}</datalist>
       </div>`;
 	}
 };
-Y([L({ attribute: !1 })], Q.prototype, "hass", void 0), Y([R()], Q.prototype, "config", void 0), Y([R()], Q.prototype, "accentDraft", void 0), Y([R()], Q.prototype, "presetDraft", void 0);
+Z([Ne({ attribute: !1 })], $.prototype, "hass", void 0), Z([L()], $.prototype, "config", void 0), Z([L()], $.prototype, "accentDraft", void 0), Z([L()], $.prototype, "presetDraft", void 0);
 //#endregion
 //#region src/index.ts
-var $ = "v2c-trydan-card", $t = "v2c-trydan-card-editor";
-customElements.get($) || customElements.define($, X), customElements.get($t) || customElements.define($t, Q), window.customCards = window.customCards ?? [], window.customCards.some((e) => e.type === $) || window.customCards.push({
-	type: $,
+var pn = "v2c-trydan-card", mn = "v2c-trydan-card-editor";
+customElements.get(pn) || customElements.define(pn, Q), customElements.get(mn) || customElements.define(mn, $), window.customCards = window.customCards ?? [], window.customCards.some((e) => e.type === pn) || window.customCards.push({
+	type: pn,
 	name: "V2C Trydan Card",
 	description: "Home Assistant V2C Trydan EV charger card with visual editor, controls and energy monitoring.",
 	documentationURL: "https://github.com/mactron254/v2c-trydan-card#readme",
@@ -4596,4 +5092,4 @@ customElements.get($) || customElements.define($, X), customElements.get($t) || 
 	}
 });
 //#endregion
-export { X as V2cTrydanCard, Q as V2cTrydanCardEditor };
+export { Q as V2cTrydanCard, $ as V2cTrydanCardEditor };

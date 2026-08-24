@@ -1,7 +1,6 @@
 import { LitElement, html, nothing, type PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
-import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import { TRYDAN_ASSETS } from "../assets/trydan";
+import { chargerArtRatio, renderChargerArt } from "./charger-art";
 import { normalizeConfig, stubConfig } from "../config";
 import { getDictionary, getLanguage, translate, type Language } from "../localization";
 import { getLcdCopy } from "../localization/lcd-copy";
@@ -27,6 +26,17 @@ interface PendingExpectation {
   entityId: string;
   matches: (state: HassEntity | undefined) => boolean;
   timer?: ReturnType<typeof setTimeout>;
+}
+
+/**
+ * The logo blinks faster the harder it is charging. V2C documents the relationship but
+ * not the numbers, so this is a linear ramp across the 6-32 A the charger accepts: slow
+ * and calm at the bottom, brisk at full current.
+ */
+function flashSecondsFor(intensity?: string | null): number {
+  const amps = Number(intensity);
+  if (!Number.isFinite(amps) || amps <= 0) return 0.9;
+  return Math.min(1.45, Math.max(0.5, 1.45 - (Math.min(amps, 32) / 32) * 0.95));
 }
 
 export class V2cTrydanCard extends LitElement {
@@ -271,23 +281,22 @@ export class V2cTrydanCard extends LitElement {
     const chargePower = normalizeEnergyFlow("charger", this.#entity("charge_power"), {
       thresholdW: this.config.flow_threshold_w,
     });
-    const visual = resolveVisualState(
-      resolveSnapshot({
-        seedAvailable: Boolean(seed && seed.state !== "unknown" && seed.state !== "unavailable"),
-        connected: entityBoolean(this.#entity("connected")?.state),
-        charging: entityBoolean(this.#entity("charging")?.state),
-        ready: entityBoolean(this.#entity("ready")?.state),
-        paused: entityBoolean(this.#entity("paused")?.state),
-        locked: entityBoolean(this.#entity("locked")?.state),
-        timer: entityBoolean(this.#entity("timer")?.state),
-        dynamic: entityBoolean(this.#entity("dynamic")?.state),
-        meterError: this.#entity("meter_error")?.state,
-        externalStatus: this.config.status_entity
-          ? this.hass.states[this.config.status_entity]?.state
-          : undefined,
-        chargePowerW: chargePower.watts,
-      }),
-    );
+    const snapshot = resolveSnapshot({
+      seedAvailable: Boolean(seed && seed.state !== "unknown" && seed.state !== "unavailable"),
+      connected: entityBoolean(this.#entity("connected")?.state),
+      charging: entityBoolean(this.#entity("charging")?.state),
+      ready: entityBoolean(this.#entity("ready")?.state),
+      paused: entityBoolean(this.#entity("paused")?.state),
+      locked: entityBoolean(this.#entity("locked")?.state),
+      timer: entityBoolean(this.#entity("timer")?.state),
+      dynamic: entityBoolean(this.#entity("dynamic")?.state),
+      meterError: this.#entity("meter_error")?.state,
+      externalStatus: this.config.status_entity
+        ? this.hass.states[this.config.status_entity]?.state
+        : undefined,
+      chargePowerW: chargePower.watts,
+    });
+    const visual = resolveVisualState(snapshot);
 
     const title = this.config.name ?? "V2C Trydan";
     const energy = this.#entity("charge_energy");
@@ -323,10 +332,25 @@ export class V2cTrydanCard extends LitElement {
       voltage:formatMeasure(voltage?.state ?? null,"V",language),
       energy:formatEnergy(energy?.state ?? null,language),
     });
-    const lcdLength = Math.max(lcd.primary.length,lcd.secondary.length);
+    const crop = this.config.charger_art ?? "focus";
+    // The connector is in the car from the moment it is plugged in, not only while charging.
+    const connectorHoldered = snapshot.phase === "disconnected" || snapshot.phase === "unavailable";
+    const showConnector = this.config.show_connector === true;
+    const artRatio = chargerArtRatio(crop, showConnector);
+    const chargerArt = renderChargerArt({
+      crop,
+      showConnector,
+      connectorHoldered,
+      lcdLines: [lcd.primary, lcd.secondary],
+      // The hardware ties its blink rate to charge intensity, so the card does too.
+      flashSeconds: flashSecondsFor(intensity?.state),
+      logoOff: this.#entity("logo_led")?.state === "off",
+      state: visual.key,
+      flash: visual.key === "charging" || visual.key === "wifi_connecting",
+    });
     const heroSection = html`
       <section class="hero ${showArtwork ? "has-charger" : "without-charger"}" data-section="hero">
-        ${showArtwork ? html`<div class="charger-stage"><div class="charger-art" aria-hidden="true">${unsafeSVG(TRYDAN_ASSETS[visual.key])}<div class="charger-lcd ${lcdLength > 24 ? "is-very-long" : lcdLength > 18 ? "is-long" : ""}"><span>${lcd.primary}</span><span>${lcd.secondary}</span></div></div></div>` : nothing}
+        ${showArtwork ? html`<div class="charger-stage" style=${`--v2c-art-ratio:${artRatio.toFixed(3)}`}>${chargerArt}</div>` : nothing}
         <div class="hero-copy">
           <div class="charger-status" data-severity=${visual.severity} role="status">${translate(dictionary, visual.labelKey)}</div>
           ${this.config.show_badges !== false && visual.badges.length ? html`<div class="badges" aria-label=${translate(dictionary, "labels.additionalStatus")}>${visual.badges.map((badge) => html`<span class="badge">${translate(dictionary, `badges.${badge}`)}</span>`)}</div>` : nothing}

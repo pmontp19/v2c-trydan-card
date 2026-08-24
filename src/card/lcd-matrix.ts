@@ -102,9 +102,32 @@ export function lcdGeometry(
 }
 
 /**
- * Render `lines` as two SVG path strings. Text is upper-cased because the device only
- * ever shows caps; unknown characters fall back to a blank cell rather than throwing,
- * so a stray accent in a translation degrades to a gap instead of a broken screen.
+ * Fold accents away, the way the hardware does.
+ *
+ * A character LCD of this class has no accented glyphs, and V2C's own screens show that:
+ * the language menu in the installation manual reads "ESPANOL", not "ESPAÑOL". Passing a
+ * translated string straight through would punch holes in every accented word, so the
+ * card strips the marks instead of rendering gaps. Decomposing and dropping the combining
+ * marks handles the vowels; the two letters that are not a base plus a mark are mapped by
+ * hand.
+ */
+export function foldForLcd(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ñ/g, "n")
+    .replace(/Ñ/g, "N")
+    .replace(/ç/g, "c")
+    .replace(/Ç/g, "C")
+    .replace(/º|ª/g, "")
+    .toUpperCase();
+}
+
+/**
+ * Render `lines` as two SVG path strings. Text is upper-cased because the device only ever
+ * shows caps, and accents are folded because it has no glyphs for them. Anything still
+ * unmapped falls back to a blank cell rather than throwing, so one stray symbol costs a
+ * gap and not the whole screen.
  */
 export function lcdPaths(
   lines: readonly string[],
@@ -119,7 +142,7 @@ export function lcdPaths(
   const lit = new Set<string>();
 
   for (let line = 0; line < Math.min(lines.length, rows); line += 1) {
-    const text = String(lines[line] ?? "").toUpperCase();
+    const text = foldForLcd(String(lines[line] ?? ""));
     for (let cell = 0; cell < columns; cell += 1) {
       const glyph = FONT_5X7[text[cell] ?? " "] ?? FONT_5X7[" "]!;
       for (let gx = 0; gx < 5; gx += 1) {

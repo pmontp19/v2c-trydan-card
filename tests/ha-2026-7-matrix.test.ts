@@ -64,8 +64,10 @@ function statusText(card: V2cTrydanCard): string {
 }
 
 function lcdLines(card: V2cTrydanCard): string[] {
-  return Array.from(card.shadowRoot?.querySelectorAll(".charger-lcd span") ?? [])
-    .map((element) => element.textContent?.trim() ?? "");
+  // The LCD renders as dot-matrix paths, so the text lives on data-lcd.
+  const lcd = card.shadowRoot?.querySelector(".charger-display");
+  const raw = lcd?.getAttribute("data-lcd");
+  return raw === null || raw === undefined ? [] : raw.split("|")
 }
 
 describe("Home Assistant 2026.7 V2C fixture", () => {

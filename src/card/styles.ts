@@ -73,7 +73,13 @@ export const cardStyles = css`
     display: flex;
     min-width: 0;
     max-width: 100%;
-    margin-top: clamp(-36px, -7cqw, -26px);
+    /*
+     * No negative margin. The old illustration was a full-height charger with two thirds
+     * of it empty below the display, so the status text was pulled up into that void.
+     * The cropped artwork ends just past the display, and pulling up now lands the text
+     * on top of the picture.
+     */
+    margin-top: 6px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -84,45 +90,75 @@ export const cardStyles = css`
   .charger-stage {
     display: grid;
     width: min(100%, clamp(260px, 66cqw, 340px));
-    aspect-ratio: 312 / 480;
     place-items: center;
   }
+
+  /*
+   * The artwork is two bitmap layers with the lit parts drawn as vectors on top.
+   * 'color' carries the LED state: it interpolates inside a shadow root, which a
+   * registered custom property does not, and 'fill="currentColor"' follows it.
+   */
   .charger-art {
     position: relative;
-    container-type: inline-size;
     width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 18px 14px rgb(0 0 0 / 16%));
+    color: var(--v2c-led, #f4f6f8);
+    transition: color 700ms ease;
+    filter: drop-shadow(0 14px 12px rgb(0 0 0 / 18%));
   }
 
-  .charger-art svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .charger-art svg { display: block; width: 100%; height: auto; }
+  .charger-art image { image-rendering: auto; }
+
+  .charger-logo-glow {
+    opacity: var(--v2c-glow, 0.5);
+    transition: opacity 700ms ease;
   }
 
-  .charger-lcd {
-    position: absolute;
-    top: 40.6%;
-    left: 34.9%;
-    display: grid;
-    width: 30.1%;
-    height: 4.4%;
-    grid-template-rows: 1fr 1fr;
-    place-items: center;
-    color: #cde6ef;
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 2.05cqi;
-    font-weight: 700;
-    letter-spacing: .04em;
-    line-height: 1;
-    pointer-events: none;
+  .charger-connector { transition: opacity 550ms ease; }
+  .charger-art[data-connector="out"] .charger-connector { opacity: 0; }
+
+  /* Charging and wifi-reconnect are the only two states the hardware blinks. */
+  .charger-art[data-flash] .charger-logo-glow {
+    animation: v2c-flash-glow var(--v2c-flash, 900ms) steps(1, end) infinite;
+  }
+  .charger-art[data-flash] .charger-logo {
+    animation: v2c-flash-core var(--v2c-flash, 900ms) steps(1, end) infinite;
   }
 
-  .charger-lcd span { display: block; max-width: 100%; overflow: hidden; text-overflow: clip; white-space: nowrap; }
-  .charger-lcd span + span { color: #9dc0cd; font-size: .92em; }
-  .charger-lcd.is-long { font-size: 1.72cqi; }
-  .charger-lcd.is-very-long { font-size: 1.48cqi; }
+  @keyframes v2c-flash-glow {
+    0%, 52% { opacity: var(--v2c-glow, 0.5); }
+    53%, 100% { opacity: 0.06; }
+  }
+
+  @keyframes v2c-flash-core {
+    0%, 52% { opacity: 1; }
+    53%, 100% { opacity: 0.16; }
+  }
+  /*
+   * LED colours, from V2C's own table at
+   * v2charge.com/support/trydan/led-lighting-instructions. The hues are the documented
+   * ones lifted a little towards white: the wordmark is a light source behind black
+   * glass, and the flat brand colours read as dead paint at card size. Only 'fix' and
+   * 'intermitent' are documented behaviours - the glow is our addition, not the
+   * device's, which is why it is a separate variable that can go to zero.
+   */
+  .charger-art[data-state="disconnected"] { --v2c-led: #f4f6f8; --v2c-glow: .42; }
+  .charger-art[data-state="wifi_connecting"] { --v2c-led: #f4f6f8; --v2c-glow: .42; }
+  .charger-art[data-state="wifi_connected"] { --v2c-led: #4fe07e; --v2c-glow: .5; }
+  .charger-art[data-state="charging"] { --v2c-led: #2e5bf0; --v2c-glow: .55; }
+  .charger-art[data-state="complete"] { --v2c-led: #4fe07e; --v2c-glow: .4; }
+  .charger-art[data-state="timer"] { --v2c-led: #58e6f0; --v2c-glow: .5; }
+  .charger-art[data-state="waiting_power"] { --v2c-led: #ff9c3c; --v2c-glow: .5; }
+  .charger-art[data-state="control_pilot"] { --v2c-led: #ffdc55; --v2c-glow: .5; }
+  .charger-art[data-state="updating"] { --v2c-led: #ff6acc; --v2c-glow: .5; }
+  .charger-art[data-state="load_balancing"] { --v2c-led: #ffb0e0; --v2c-glow: .5; }
+  .charger-art[data-state="error"] { --v2c-led: #ff4d57; --v2c-glow: .55; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .charger-art[data-flash] .charger-logo-glow,
+    .charger-art[data-flash] .charger-logo { animation: none; }
+  }
+
 
   .charger-status {
     max-width: 100%;
@@ -525,7 +561,7 @@ export const cardStyles = css`
 
   ha-card[data-mode="compact"] .shell { padding: 18px; }
   ha-card[data-mode="compact"] .hero { gap: 0; margin-top: 12px; }
-  ha-card[data-mode="compact"] .hero-copy { margin-top: clamp(-26px, -6cqw, -18px); }
+  ha-card[data-mode="compact"] .hero-copy { margin-top: 4px; }
   ha-card[data-mode="compact"] .charger-stage { width: min(100%, clamp(210px, 62cqw, 280px)); }
   ha-card[data-mode="compact"] .charger-status { margin-top: 0; font-size: clamp(1.65rem, 6cqw, 2rem); }
   ha-card[data-mode="compact"] .metrics-section { margin-top: 12px; }
@@ -571,11 +607,12 @@ export const cardStyles = css`
   ha-card[data-surface="transparent"] { background: transparent; }
   ha-card[data-surface="tinted"] { background: color-mix(in srgb, var(--v2c-control) 8%, var(--v2c-surface)); }
   .charger-stage { transform: scale(var(--v2c-hero-scale, 1)); transform-origin: center bottom; }
+  .charger-art { aspect-ratio: var(--v2c-art-ratio, 1.33); }
 
   ha-card[data-mode="xxl"] .shell { padding: clamp(26px, 5cqw, 36px); }
   ha-card[data-mode="xxl"] .hero { margin-top: 24px; }
   ha-card[data-mode="xxl"] .charger-stage { width: min(100%, clamp(320px, 84cqw, 430px)); }
-  ha-card[data-mode="xxl"] .hero-copy { margin-top: clamp(-44px, -8cqw, -31px); }
+  ha-card[data-mode="xxl"] .hero-copy { margin-top: 8px; }
   ha-card[data-mode="xxl"] .charger-status { font-size: clamp(2.35rem, 8cqw, 3rem); }
   ha-card[data-mode="xxl"] .metric { padding: 16px; }
   ha-card[data-mode="xxl"] .metric-value { font-size: clamp(1.2rem, 4.8cqw, 1.7rem); }

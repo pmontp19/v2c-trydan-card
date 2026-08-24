@@ -66,3 +66,37 @@ export const ARTWORK_CROPS = {
 } as const;
 
 export type ArtworkCrop = keyof typeof ARTWORK_CROPS;
+
+/** Where the connector layer lives on the canvas, so a frame can decide to include it. */
+export const CONNECTOR_PX = { top: 258, bottom: 613, right: 553 } as const;
+
+export interface ArtworkFrame {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+/**
+ * The visible window onto the artwork canvas.
+ *
+ * Cropping vertically alone is not enough. The bitmaps were cut from a photograph whose
+ * frame has to leave room for the coiled cable, so the body only fills 61% of the canvas
+ * width. Showing the full width when the connector is hidden would shrink the display to
+ * an unreadable smear and pad the card with empty space, so the frame closes in
+ * horizontally too and only opens up when there is a connector to make room for.
+ */
+export function chargerArtFrame(crop: ArtworkCrop, showConnector: boolean): ArtworkFrame {
+  const { body } = ARTWORK_PX;
+  const margin = 6;
+  const x = body.x - margin;
+  const right = showConnector ? CONNECTOR_PX.right + margin : body.x + body.width + margin;
+  const y = body.y - 13;
+  // Each crop stops just past the last feature it is meant to show.
+  const bottom = crop === "focus"
+    ? ARTWORK_PX.display.y + ARTWORK_PX.display.height + 22
+    : crop === "mid"
+      ? Math.round((CONNECTOR_PX.top + CONNECTOR_PX.bottom) / 2 + 62)
+      : CONNECTOR_PX.bottom + 12;
+  return { x, y, width: right - x, height: bottom - y };
+}

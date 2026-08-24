@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import "../src/index";
-import { TRYDAN_ASSETS } from "../src/assets/trydan";
 import { V2cTrydanCard } from "../src/card/v2c-trydan-card";
 import { normalizeConfig } from "../src/config";
 import { formatDuration, formatEnergy, formatMeasure } from "../src/services/format";
@@ -37,14 +36,6 @@ describe("v0.4.2 localization and defaults", () => {
     expect(getLcdCopy("es","complete",{ energy:"8,6 kWh" }).secondary).toBe("8,6 kWh");
   });
 
-  it("keeps SVGs decorative and free from embedded copy or fake readings", () => {
-    expect(Object.values(TRYDAN_ASSETS)).toHaveLength(11);
-    for (const svg of Object.values(TRYDAN_ASSETS)) {
-      expect(svg).not.toMatch(/<text|role="img"|aria-label=/i);
-      expect(svg).not.toMatch(/3\.9\s*kW|17A|233V|12\.46\s*kWh/i);
-    }
-  });
-
   it("renders real LCD measurements and never renders artwork in ultra compact", async () => {
     const hass = {
       language:"en",
@@ -61,9 +52,17 @@ describe("v0.4.2 localization and defaults", () => {
     const card=document.createElement("v2c-trydan-card") as V2cTrydanCard;
     card.setConfig({ type:"custom:v2c-trydan-card", entity:"binary_sensor.trydan", language:"en", entities:{ connected:"binary_sensor.trydan", charging:"binary_sensor.charging", charge_power:"sensor.power", charge_energy:"sensor.energy", voltage:"sensor.voltage", intensity:"number.intensity" } });
     card.hass=hass;document.body.append(card);await card.updateComplete;await new Promise((resolve)=>setTimeout(resolve,0));await card.updateComplete;
-    const lcd=card.shadowRoot?.querySelector(".charger-lcd");
-    expect(lcd?.textContent).toContain("Charging 4.2 kW");
-    expect(lcd?.textContent).toContain("18 A · 236.7 V");
+    const art=card.shadowRoot?.querySelector(".charger-art");
+    // Decorative: the status text and the metric tiles carry this for a screen reader.
+    expect(art?.getAttribute("aria-hidden")).toBe("true");
+    // No live text in the artwork - the LCD is dot-matrix paths.
+    expect(art?.querySelectorAll("text").length).toBe(0);
+    const lcd=art?.querySelector(".charger-display")?.getAttribute("data-lcd") ?? "";
+    expect(lcd).toContain("Charging 4.2 kW");
+    expect(lcd).toContain("18 A · 236.7 V");
+    // The product photo the body layer came from had its own screen lit, reading
+    // "WAITING EV / INTENSITY 8 A". It must have been erased, not merely covered.
+    expect(lcd).not.toMatch(/WAITING EV|INTENSITY 8/i);
     card.setConfig({ type:"custom:v2c-trydan-card", entity:"binary_sensor.trydan", display_mode:"ultra_compact", show_charger:true });
     card.hass=hass;await card.updateComplete;
     expect(card.shadowRoot?.querySelector(".charger-stage")).toBeNull();

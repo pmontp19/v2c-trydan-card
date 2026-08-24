@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { LCD_GRIDS, lcdGeometry, lcdPaths } from "../src/card/lcd-matrix";
+import { LCD_GRIDS, foldForLcd, lcdGeometry, lcdPaths } from "../src/card/lcd-matrix";
 import { TRYDAN_MM } from "../src/assets/trydan/geometry";
 
 const GLASS_W = TRYDAN_MM.displayWidth;
@@ -63,5 +63,30 @@ describe("LCD dot matrix", () => {
     const { on, off } = lcdPaths(["EV      4.2KW", "T/GRID  5.1KW"], "authentic", GLASS_W, GLASS_H);
     // Two path strings, not 1536 elements.
     expect(on.length + off.length).toBeLessThan(80_000);
+  });
+});
+
+describe("grid choice", () => {
+  it("never cuts a word: long copy falls back to the hardware's own 16 cells", () => {
+    // "Trydan preparado" is 16 characters and must survive whole.
+    const long = lcdPaths(["Trydan preparado", "Sin vehiculo"], "authentic", GLASS_W, GLASS_H);
+    const cut = lcdPaths(["Trydan prepa", "Sin vehiculo"], "mid", GLASS_W, GLASS_H);
+    expect(countSquares(long.on)).toBeGreaterThan(countSquares(cut.on));
+  });
+});
+
+describe("accent folding", () => {
+  it("strips accents the way the hardware does", () => {
+    // V2C's own language menu, photographed in the installation manual, reads "ESPANOL".
+    expect(foldForLcd("Español")).toBe("ESPANOL");
+    expect(foldForLcd("Sin vehículo")).toBe("SIN VEHICULO");
+    expect(foldForLcd("Potència")).toBe("POTENCIA");
+    expect(foldForLcd("Carga programada")).toBe("CARGA PROGRAMADA");
+  });
+
+  it("renders folded text as fully lit glyphs, not gaps", () => {
+    const accented = lcdPaths(["Sin vehículo"], "mid", GLASS_W, GLASS_H);
+    const plain = lcdPaths(["Sin vehiculo"], "mid", GLASS_W, GLASS_H);
+    expect(accented.on).toBe(plain.on);
   });
 });
