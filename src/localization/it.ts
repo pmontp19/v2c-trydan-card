@@ -114,16 +114,16 @@ export const it = {
                    "showCharger":  "Illustrazione Trydan"
                },
     "lcd":  {
-                "disconnected":  "Nessun EV",
+                "disconnected":  "IN ATTESA DI EV",
                 "unavailable":  "Non disp",
-                "charging":  "In carica",
+                "charging":  "RICARICA EV",
                 "complete":  "Completa",
                 "timer":  "Programma",
                 "updating":  "Aggiorna",
                 "control_pilot":  "Errore",
                 "load_balancing":  "Errore",
                 "error":  "Errore",
-                "waiting_power":  "Collegato",
+                "waiting_power":  "VE CONNESSO",
                 "wifi_connected":  "Wifi OK",
                 "wifi_connecting":  "Connessione"
             }

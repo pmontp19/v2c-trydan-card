@@ -114,16 +114,16 @@ export const nl = {
                    "showCharger":  "Trydan-afbeelding"
                },
     "lcd":  {
-                "disconnected":  "Geen EV",
+                "disconnected":  "WACHTEN OP EV",
                 "unavailable":  "Offline",
-                "charging":  "Laden",
+                "charging":  "EV OPLADEN",
                 "complete":  "Klaar",
                 "timer":  "Timer",
                 "updating":  "Update",
                 "control_pilot":  "Fout",
                 "load_balancing":  "Fout",
                 "error":  "Fout",
-                "waiting_power":  "Verbonden",
+                "waiting_power":  "VERBONDEN MET EV",
                 "wifi_connected":  "Wifi OK",
                 "wifi_connecting":  "Verbinden"
             }

@@ -114,16 +114,16 @@ export const da = {
                    "showCharger":  "Trydan-illustration"
                },
     "lcd":  {
-                "disconnected":  "Intet EV",
+                "disconnected":  "VENTER EV",
                 "unavailable":  "Offline",
-                "charging":  "Oplader",
+                "charging":  "EV OPLADNING",
                 "complete":  "Færdig",
                 "timer":  "Timer",
                 "updating":  "Opdaterer",
                 "control_pilot":  "Fejl",
                 "load_balancing":  "Fejl",
                 "error":  "Fejl",
-                "waiting_power":  "Tilsluttet",
+                "waiting_power":  "EV TILSLUTTET",
                 "wifi_connected":  "Wifi OK",
                 "wifi_connecting":  "Tilslutter"
             }

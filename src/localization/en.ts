@@ -119,16 +119,16 @@ export const en = {
    * numeric code.
    */
   lcd: {
-    disconnected: "No EV",
+    disconnected: "WAITING EV",
     unavailable: "Offline",
-    charging: "Charging",
+    charging: "CHARGING EV",
     complete: "Done",
     timer: "Timer",
     updating: "Updating",
     control_pilot: "Error",
     load_balancing: "Error",
     error: "Error",
-    waiting_power: "Ready",
+    waiting_power: "CONNECTED EV",
     wifi_connected: "Wifi OK",
     wifi_connecting: "Wifi...",
   },

@@ -114,9 +114,9 @@ export const ro = {
                    "showCharger":  "Ilustrație Trydan"
                },
     "lcd":  {
-                "disconnected":  "Fără EV",
+                "disconnected":  "ASTEPTAND EV",
                 "unavailable":  "Indisponibil",
-                "charging":  "Încarcă",
+                "charging":  "VE INCARCARE",
                 "complete":  "Gata",
                 "timer":  "Program",
                 "updating":  "Actualizează",

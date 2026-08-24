@@ -115,16 +115,16 @@ export const ca = {
     // "Esperant EV" is what the hardware itself prints in Catalan, so the replica says
     // the same thing as the charger on the wall. Every string here has to survive
     // foldForLcd and fit twelve cells.
-    disconnected: "Esperant EV",
+    disconnected: "ESPERANT EV",
     unavailable: "Sense dades",
-    charging: "Carregant",
+    charging: "VE CARREGANT",
     complete: "Completa",
     timer: "Programada",
     updating: "Actualitza",
     control_pilot: "Error",
     load_balancing: "Error",
     error: "Error",
-    waiting_power: "Connectat",
+    waiting_power: "VE CONECTAT",
     wifi_connected: "Wifi OK",
     wifi_connecting: "Connectant",
   },

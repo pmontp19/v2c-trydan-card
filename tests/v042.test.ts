@@ -36,7 +36,17 @@ describe("v0.4.2 localization and defaults", () => {
       expect(copy.secondary).toBe("");
     }
     expect(getLcdCopy("de","complete").primary).toBe("Fertig");
-    expect(getLcdCopy("es","charging").primary).toBe("Cargando");
+    // Three states print the firmware's own words, read out of trydanpro_v2.5.0.bin,
+    // so the replica says what the charger on the wall says. Slot order in that binary
+    // is EN ES PT FR IT DE NL DK VAL RO.
+    expect(getLcdCopy("es","charging").primary).toBe("VE CARGANDO");
+    expect(getLcdCopy("en","charging").primary).toBe("CHARGING EV");
+    expect(getLcdCopy("ca","disconnected").primary).toBe("ESPERANT EV");
+    expect(getLcdCopy("it","disconnected").primary).toBe("IN ATTESA DI EV");
+    expect(getLcdCopy("da","waiting_power").primary).toBe("EV TILSLUTTET");
+    // Swedish and Norwegian have no firmware slot, so they keep our own wording.
+    expect(getLcdCopy("sv","charging").primary).not.toBe("CHARGING EV");
+    expect(getLcdCopy("no","charging").primary).not.toBe("CHARGING EV");
   });
 
   it("prefers the device's own EV/T/FV format over the translated status word once the readings exist", () => {
@@ -136,7 +146,7 @@ describe("v0.4.2 localization and defaults", () => {
     // "waiting_power": the connected-but-idle state, shown as a bare status word with no
     // measurement line to pair it with - and no stray "T:"/"FV:" printed for a reading the
     // card never received.
-    expect(lcd).toBe("Ready|");
+    expect(lcd).toBe("CONNECTED EV|");
   });
 
   it("falls back to the localized charging word when there is no charge_power sensor to read", async () => {
@@ -152,7 +162,7 @@ describe("v0.4.2 localization and defaults", () => {
     card.setConfig({ type:"custom:v2c-trydan-card", entity:"binary_sensor.trydan", language:"en", entities:{ connected:"binary_sensor.trydan", charging:"binary_sensor.charging" } });
     card.hass=hass;document.body.append(card);await card.updateComplete;await new Promise((resolve)=>setTimeout(resolve,0));await card.updateComplete;
     const lcd=card.shadowRoot?.querySelector(".charger-display")?.getAttribute("data-lcd") ?? "";
-    expect(lcd).toBe("Charging|");
+    expect(lcd).toBe("CHARGING EV|");
   });
 
   it("shows a fault's real XX YYY code end to end once the meter reports one", async () => {

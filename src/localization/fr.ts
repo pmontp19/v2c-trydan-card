@@ -114,16 +114,16 @@ export const fr = {
                    "showCharger":  "Illustration Trydan"
                },
     "lcd":  {
-                "disconnected":  "Sans EV",
+                "disconnected":  "EN ATTENTE VE",
                 "unavailable":  "Indispo",
-                "charging":  "En charge",
+                "charging":  "RECHARGER VE",
                 "complete":  "Terminée",
                 "timer":  "Minuteur",
                 "updating":  "MAJ",
                 "control_pilot":  "Erreur",
                 "load_balancing":  "Erreur",
                 "error":  "Erreur",
-                "waiting_power":  "Connecté",
+                "waiting_power":  "VE CONNECTE",
                 "wifi_connected":  "Wifi OK",
                 "wifi_connecting":  "Connexion"
             }
