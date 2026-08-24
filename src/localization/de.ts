@@ -112,5 +112,19 @@ export const de = {
                    "showControls":  "Ladesteuerung",
                    "showAdvanced":  "Erweiterte Steuerung",
                    "showCharger":  "Trydan-Abbildung"
-               }
+               },
+    "lcd":  {
+                "disconnected":  "Kein EV",
+                "unavailable":  "Offline",
+                "charging":  "Laden",
+                "complete":  "Fertig",
+                "timer":  "Timer",
+                "updating":  "Update",
+                "control_pilot":  "Fehler",
+                "load_balancing":  "Fehler",
+                "error":  "Fehler",
+                "waiting_power":  "Verbunden",
+                "wifi_connected":  "WLAN OK",
+                "wifi_connecting":  "Verbinden"
+            }
 } satisfies Dictionary;

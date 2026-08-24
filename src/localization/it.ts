@@ -112,5 +112,19 @@ export const it = {
                    "showControls":  "Controlli di ricarica",
                    "showAdvanced":  "Controlli avanzati",
                    "showCharger":  "Illustrazione Trydan"
-               }
+               },
+    "lcd":  {
+                "disconnected":  "Nessun EV",
+                "unavailable":  "Non disp",
+                "charging":  "In carica",
+                "complete":  "Completa",
+                "timer":  "Programma",
+                "updating":  "Aggiorna",
+                "control_pilot":  "Errore",
+                "load_balancing":  "Errore",
+                "error":  "Errore",
+                "waiting_power":  "Collegato",
+                "wifi_connected":  "Wifi OK",
+                "wifi_connecting":  "Connessione"
+            }
 } satisfies Dictionary;

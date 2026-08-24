@@ -3,7 +3,7 @@ import { property, state } from "lit/decorators.js";
 import { chargerArtRatio, renderChargerArt } from "./charger-art";
 import { normalizeConfig, stubConfig } from "../config";
 import { getDictionary, getLanguage, translate, type Language } from "../localization";
-import { getLcdCopy } from "../localization/lcd-copy";
+import { formatLcdErrorCode, getLcdCopy } from "../localization/lcd-copy";
 import type {
   EntityMap,
   EntityRole,
@@ -15,7 +15,7 @@ import type {
 import { setLight, setNumber, setSelect, setSwitch } from "../services/actions";
 import { isActionTargetValid, resolveRegistryRoles } from "../services/discovery";
 import { normalizeEnergyFlow } from "../services/energy";
-import { formatDuration, formatEnergy, formatMeasure, formatPower } from "../services/format";
+import { formatDuration, formatEnergy, formatLcdKw, formatPower } from "../services/format";
 import { entityBoolean, resolveSnapshot, resolveVisualState } from "../services/state";
 import { renderAdvancedControls } from "./advanced-controls";
 import { renderEnergyFlow } from "./energy-flow";
@@ -326,11 +326,18 @@ export class V2cTrydanCard extends LitElement {
       : undefined;
 
     const showArtwork = this.config.show_charger !== false && this.config.display_mode !== "ultra_compact";
-    const lcd = getLcdCopy(language,visual.unavailable ? "unavailable" : visual.key,{
-      power:formatPower(chargePower.watts,language),
-      current:formatMeasure(intensity?.state ?? null,"A",language),
-      voltage:formatMeasure(voltage?.state ?? null,"V",language),
-      energy:formatEnergy(energy?.state ?? null,language),
+    // "T:" prefers the native house_power reading (V2C's own ControlBox or a direct solar-
+    // inverter integration); a third-party bidirectional meter has no house_power role at
+    // all, only grid_power, which is the fallback - V2C's own docs show "T/GRID" as the
+    // same slot under either metering setup.
+    const totalKw = formatLcdKw(normalizeEnergyFlow("home", this.#entity("house_power")).watts)
+      ?? formatLcdKw(normalizeEnergyFlow("grid", this.#entity("grid_power")).watts);
+    const solarKw = formatLcdKw(normalizeEnergyFlow("solar", this.#entity("fv_power")).watts);
+    const lcd = getLcdCopy(language, visual.unavailable ? "unavailable" : visual.key, {
+      evKw: formatLcdKw(chargePower.watts),
+      totalKw,
+      solarKw,
+      errorCode: formatLcdErrorCode(visual.diagnostic),
     });
     const crop = this.config.charger_art ?? "focus";
     /*
