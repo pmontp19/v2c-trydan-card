@@ -3798,7 +3798,7 @@ var Q = class extends I {
 			current: Lt(l?.state ?? null, "A", e),
 			voltage: Lt(u?.state ?? null, "V", e),
 			energy: Ft(s?.state ?? null, e)
-		}), _ = this.config.charger_art ?? "focus", v = i.phase === "disconnected" || i.phase === "unavailable", y = this.config.show_connector === !0, ne = qe(_, y), b = Ke({
+		}), _ = this.config.charger_art ?? "focus", v = a.key === "disconnected" || a.unavailable || i.phase === "disconnected" || i.phase === "unavailable", y = this.config.show_connector === !0, ne = qe(_, y), b = Ke({
 			crop: _,
 			showConnector: y,
 			connectorHoldered: v,

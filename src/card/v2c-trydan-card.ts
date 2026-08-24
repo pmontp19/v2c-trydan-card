@@ -333,8 +333,17 @@ export class V2cTrydanCard extends LitElement {
       energy:formatEnergy(energy?.state ?? null,language),
     });
     const crop = this.config.charger_art ?? "focus";
-    // The connector is in the car from the moment it is plugged in, not only while charging.
-    const connectorHoldered = snapshot.phase === "disconnected" || snapshot.phase === "unavailable";
+    /*
+     * The connector is in the car from the moment it is plugged in, not only while
+     * charging. Read it from the state the card is actually showing rather than from the
+     * snapshot alone: a status_entity override can say "no vehicle" while the underlying
+     * booleans still read connected, and the artwork has to agree with the text next to it.
+     */
+    const connectorHoldered =
+      visual.key === "disconnected" ||
+      visual.unavailable ||
+      snapshot.phase === "disconnected" ||
+      snapshot.phase === "unavailable";
     const showConnector = this.config.show_connector === true;
     const artRatio = chargerArtRatio(crop, showConnector);
     const chargerArt = renderChargerArt({

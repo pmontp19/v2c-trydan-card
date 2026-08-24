@@ -67,4 +67,33 @@ describe("v0.4.2 localization and defaults", () => {
     card.hass=hass;await card.updateComplete;
     expect(card.shadowRoot?.querySelector(".charger-stage")).toBeNull();
   });
+
+  it("holsters the connector whenever the card says there is no vehicle", async () => {
+    const hass = {
+      language: "en",
+      states: {
+        "binary_sensor.trydan": { entity_id: "binary_sensor.trydan", state: "off", attributes: {} },
+      },
+      callService: vi.fn(),
+    } as unknown as HomeAssistant;
+    const card = document.createElement("v2c-trydan-card") as V2cTrydanCard;
+    card.setConfig({
+      type: "custom:v2c-trydan-card",
+      entity: "binary_sensor.trydan",
+      language: "en",
+      show_connector: true,
+      charger_art: "full",
+      entities: { connected: "binary_sensor.trydan" },
+    });
+    card.hass = hass;
+    document.body.append(card);
+    await card.updateComplete;
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await card.updateComplete;
+    const art = card.shadowRoot?.querySelector(".charger-art");
+    expect(art?.getAttribute("data-state")).toBe("disconnected");
+    // Nothing is plugged in, so the connector hangs in its holster.
+    expect(art?.getAttribute("data-connector")).toBe("in");
+    expect(art?.querySelectorAll("image").length).toBe(2);
+  });
 });
