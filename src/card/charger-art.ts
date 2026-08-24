@@ -3,7 +3,7 @@ import bodyLayer from "../assets/trydan/body.webp";
 import connectorLayer from "../assets/trydan/plug.webp";
 import { ARTWORK_PX, chargerArtFrame, type ArtworkCrop } from "../assets/trydan/geometry";
 import { V2C_LOGO_PATH, V2C_LOGO_VIEWBOX } from "../assets/trydan/logo";
-import { LCD_GRIDS, lcdPaths, type LcdGrid } from "./lcd-matrix";
+import { LCD_GRIDS, foldForLcd, lcdPaths, type LcdGrid } from "./lcd-matrix";
 
 export interface ChargerArtOptions {
   crop: ArtworkCrop;
@@ -25,18 +25,26 @@ export interface ChargerArtOptions {
 /**
  * Pick the coarsest grid the copy actually fits in.
  *
- * Coarser means bigger dots and a readable screen, but fewer cells. The translated status
- * strings were written for a text overlay, not for a 12-cell line, so several of them
- * ("Trydan preparado", "Cargando 4,2 kW") overflow and would be cut mid-word, which reads
- * as a bug rather than as a small screen. Falling back to the hardware's real 16-cell grid
- * keeps them whole. The old card solved the same problem by stepping the font size down;
- * this is that idea applied to the dot grid.
+ * Coarser means bigger dots and a readable screen, but fewer cells. `lcd-copy.ts` now
+ * builds device-shaped strings ("EV:4.2", "T:3.7 FV:1.7", the twelve short `lcd.*` status
+ * words) with a stated 12-character budget instead of the old translated prose ("Trydan
+ * preparado", "Cargando 4,2 kW"), so `mid` fits the common case and is tried first. The
+ * hardware's real 16-cell grid stays as the fallback for the rare line that still overflows
+ * it (a very large three-digit kW reading, or a language whose word runs long).
  *
- * `big` is deliberately not reachable here: seven cells fits none of the current copy. It
- * becomes usable once the display shows the device's own short strings instead.
+ * `big` - single line, 7 cells, the largest dots of the three - is now reachable: whenever
+ * only one of the two lines actually has content (no power sensor configured at all, so the
+ * measurement line is empty, or a fault with no code to show), a short status word gets the
+ * whole glass to itself instead of sharing it with a blank second row. Length is measured
+ * after `foldForLcd`, not before: a couple of languages' words expand under folding (e.g.
+ * Danish "FÆRDIG" becomes seven-letter "FAERDIG"), and the grid choice has to agree with
+ * what actually gets rendered.
  */
-function gridFor(lines: readonly string[]): LcdGrid {
-  const longest = lines.reduce((max, line) => Math.max(max, line.length), 0);
+export function gridFor(lines: readonly string[]): LcdGrid {
+  const folded = lines.map((line) => foldForLcd(line));
+  const nonEmpty = folded.filter((line) => line.length > 0);
+  const longest = folded.reduce((max, line) => Math.max(max, line.length), 0);
+  if (nonEmpty.length <= 1 && longest <= LCD_GRIDS.big.columns) return "big";
   return longest <= LCD_GRIDS.mid.columns ? "mid" : "authentic";
 }
 

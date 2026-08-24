@@ -112,5 +112,19 @@ export const nl = {
                    "showControls":  "Laadbediening",
                    "showAdvanced":  "Geavanceerde bediening",
                    "showCharger":  "Trydan-afbeelding"
-               }
+               },
+    "lcd":  {
+                "disconnected":  "Geen EV",
+                "unavailable":  "Offline",
+                "charging":  "Laden",
+                "complete":  "Klaar",
+                "timer":  "Timer",
+                "updating":  "Update",
+                "control_pilot":  "Fout",
+                "load_balancing":  "Fout",
+                "error":  "Fout",
+                "waiting_power":  "Verbonden",
+                "wifi_connected":  "Wifi OK",
+                "wifi_connecting":  "Verbinden"
+            }
 } satisfies Dictionary;

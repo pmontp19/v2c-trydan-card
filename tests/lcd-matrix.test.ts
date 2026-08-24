@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { LCD_GRIDS, foldForLcd, lcdGeometry, lcdPaths } from "../src/card/lcd-matrix";
+import { gridFor } from "../src/card/charger-art";
 import { TRYDAN_MM } from "../src/assets/trydan/geometry";
 
 const GLASS_W = TRYDAN_MM.displayWidth;
@@ -73,6 +74,37 @@ describe("grid choice", () => {
     const cut = lcdPaths(["Trydan prepa", "Sin vehiculo"], "mid", GLASS_W, GLASS_H);
     expect(countSquares(long.on)).toBeGreaterThan(countSquares(cut.on));
   });
+
+  it("picks the 12-column grid for the device's own short two-line readouts", () => {
+    // The exact pair from V2C's documented display, at its full 12-character width.
+    expect(gridFor(["ESPERANT EV", "T:3.7 FV:1.7"])).toBe("mid");
+    expect(gridFor(["EV:4.2", "T:1.2 FV:2.8"])).toBe("mid");
+  });
+
+  it("reaches the large single-line grid once a short status has nothing to share the glass with", () => {
+    // No power sensors configured: the measurement line is empty, so the status word gets
+    // the whole screen at the biggest available dot size instead of sharing it with a blank
+    // second row.
+    expect(gridFor(["Ready", ""])).toBe("big");
+    expect(gridFor(["Error", ""])).toBe("big");
+    // A pair still beats a lone line, even a short one: two rows of real content still
+    // needs the finer grid.
+    expect(gridFor(["Klar", "T:1.2"])).toBe("mid");
+  });
+
+  it("falls back to mid, not big, once the lone line is too long for seven cells", () => {
+    // Italian's "Connessione" (wifi_connecting) is 11 characters - past the 7-cell budget
+    // but still comfortably inside 12.
+    expect(gridFor(["Connessione", ""])).toBe("mid");
+  });
+
+  it("measures the folded length, not the raw one, so an expanded letter can still overflow", () => {
+    // "Færdig" is 6 raw characters but folds to 7 ("FAERDIG"); pair it with a line that
+    // pushes the folded length just past the 7-cell budget to prove the choice reacts to
+    // what actually gets rendered.
+    expect(gridFor(["Færdig", ""])).toBe("big");
+    expect(gridFor(["Færdigg", ""])).toBe("mid");
+  });
 });
 
 describe("accent folding", () => {
@@ -88,5 +120,20 @@ describe("accent folding", () => {
     const accented = lcdPaths(["Sin vehículo"], "mid", GLASS_W, GLASS_H);
     const plain = lcdPaths(["Sin vehiculo"], "mid", GLASS_W, GLASS_H);
     expect(accented.on).toBe(plain.on);
+  });
+
+  it("spells out the Nordic and Romanian letters that have no combining-mark decomposition", () => {
+    // æ/ø and Romanian's comma-below ș/ț are atomic Unicode letters, not a base plus a
+    // combining mark, so NFD stripping alone (which handles à/ä/å/ă/â/ç/ñ fine) leaves them
+    // untouched. Without the hand-mapped fallback they would render as blank gaps.
+    expect(foldForLcd("Færdig")).toBe("FAERDIG");
+    // å decomposes fine on its own (a + combining ring, stripped by NFD); only æ needs the
+    // hand mapping, so this word folds one letter at a time, not uniformly to "aa".
+    expect(foldForLcd("Blåbær")).toBe("BLABAER");
+    expect(foldForLcd("Købe")).toBe("KOEBE");
+    expect(foldForLcd("Poți")).toBe("POTI");
+    expect(foldForLcd("Fără")).toBe("FARA");
+    // The cedilla-shaped lookalikes already decompose under NFD - both spellings agree.
+    expect(foldForLcd("Poţi")).toBe(foldForLcd("Poți"));
   });
 });

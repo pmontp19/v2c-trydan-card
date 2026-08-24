@@ -108,8 +108,13 @@ export function lcdGeometry(
  * the language menu in the installation manual reads "ESPANOL", not "ESPAÑOL". Passing a
  * translated string straight through would punch holes in every accented word, so the
  * card strips the marks instead of rendering gaps. Decomposing and dropping the combining
- * marks handles the vowels; the two letters that are not a base plus a mark are mapped by
- * hand.
+ * marks handles most vowels (a, a, a, a, a with various accents: Unicode gives every one of
+ * those a canonical decomposition into a base letter plus a combining mark, which the strip
+ * below removes). A handful of letters are not a base plus a mark - Unicode treats them as
+ * atomic - so they survive that step untouched and are mapped by hand instead: n-tilde/
+ * c-cedilla (Spanish/French), ae/oe-ligature (Danish/Norwegian, spelled out AE/OE the way
+ * those languages' own passports do) and the Romanian comma-below s/t forms (their older
+ * cedilla-shaped lookalikes do decompose, and are already handled by the strip).
  */
 export function foldForLcd(text: string): string {
   return text
@@ -119,6 +124,14 @@ export function foldForLcd(text: string): string {
     .replace(/Ñ/g, "N")
     .replace(/ç/g, "c")
     .replace(/Ç/g, "C")
+    .replace(/æ/g, "ae")
+    .replace(/Æ/g, "AE")
+    .replace(/ø/g, "oe")
+    .replace(/Ø/g, "OE")
+    .replace(/ș/g, "s")
+    .replace(/Ș/g, "S")
+    .replace(/ț/g, "t")
+    .replace(/Ț/g, "T")
     .replace(/º|ª/g, "")
     .toUpperCase();
 }
