@@ -50,9 +50,10 @@ function gridFor(lines: readonly string[]): LcdGrid {
  * shadow root's adopted stylesheet, so registered-property transitions hard-cut, while
  * `color` interpolates normally and the fill follows it.
  *
- * `focus` and `mid` fade the last tenth of the frame out. Cutting a photographed object
- * dead leaves a hard rule across the body that reads as a broken image; the fade makes
- * the same crop read as framing.
+ * Cropped frames are faded out along their bottom edge, but that is done in CSS rather
+ * than here: fading to transparency makes no assumption about what is behind, so the same
+ * rule works on a light card and a dark one, and the ramp stays tunable without touching
+ * the artwork.
  *
  * The rendered lines are mirrored onto `data-lcd` on the display group. The dots are
  * paths, so the text is no longer readable from the DOM, and the 120-combination
@@ -94,19 +95,7 @@ export function renderChargerArt(options: ChargerArtOptions): TemplateResult {
           <stop offset="0" stop-color="#4a56ff" stop-opacity=".5" />
           <stop offset="1" stop-color="#0d1180" stop-opacity=".32" />
         </radialGradient>
-        ${crop === "full"
-          ? ""
-          : svg`<linearGradient id="v2c-crop-fade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#fff" />
-              <stop offset=".88" stop-color="#fff" />
-              <stop offset="1" stop-color="#fff" stop-opacity="0" />
-            </linearGradient>
-            <mask id="v2c-crop-mask">
-              <rect x=${frame.x} y=${frame.y} width=${frame.width} height=${frame.height}
-                fill="url(#v2c-crop-fade)" />
-            </mask>`}
       </defs>
-      <g mask=${crop === "full" ? "none" : "url(#v2c-crop-mask)"}>
       <image href=${bodyLayer} x="0" y="0" width=${canvasWidth} height=${canvasHeight} />
       ${showConnector
         ? svg`<image class="charger-connector" href=${connectorLayer} x="0" y="0"
@@ -145,7 +134,6 @@ export function renderChargerArt(options: ChargerArtOptions): TemplateResult {
         </g>
         <rect width="65" height="13.7" rx="2" fill="none" stroke="#000" stroke-opacity=".45"
           stroke-width=".5" />
-      </g>
       </g>
     </svg>`}
   </div>`;

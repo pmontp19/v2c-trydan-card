@@ -107,6 +107,34 @@ export const cardStyles = css`
   }
 
   .charger-art svg { display: block; width: 100%; height: auto; }
+
+  /*
+   * Cropped frames dissolve along the bottom instead of stopping dead.
+   *
+   * A linear ramp is not enough: the shell's bright metallic rim runs down both sides and a
+   * short fade leaves those two highlights ending in mid-air, which is what makes a crop
+   * read as a broken image rather than as framing. This ramp is longer and eased, so the
+   * rim thins out gradually. It starts below the display: the frame is sized to leave room
+   * for the ramp precisely so the screen never gets dimmed by it.
+   *
+   * Fading to transparency rather than to a colour is what makes it work in both themes:
+   * the card's own surface shows through, whatever that surface happens to be.
+   */
+  .charger-art[data-crop="focus"],
+  .charger-art[data-crop="mid"] {
+    --v2c-fade: linear-gradient(
+      to bottom,
+      #000 0 78%,
+      rgb(0 0 0 / 96%) 84%,
+      rgb(0 0 0 / 84%) 88%,
+      rgb(0 0 0 / 62%) 92%,
+      rgb(0 0 0 / 36%) 96%,
+      rgb(0 0 0 / 14%) 98.5%,
+      transparent 100%
+    );
+    -webkit-mask-image: var(--v2c-fade);
+    mask-image: var(--v2c-fade);
+  }
   .charger-art image { image-rendering: auto; }
 
   .charger-logo-glow {

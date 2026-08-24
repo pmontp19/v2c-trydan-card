@@ -112,7 +112,10 @@ export function chargerArtFrame(crop: ArtworkCrop, showConnector: boolean): Artw
   const bottom = crop === "focus"
     ? showConnector
       ? Math.min(focusBottom + 22, CONNECTOR_PX.top)
-      : focusBottom + 40
+      // Deliberately generous: the bottom of the frame dissolves into the card, and a fade
+      // needs room to run. At +40 the display sat at 85% of the frame height and the ramp
+      // had to start above it, dimming the screen; at +82 the display clears the ramp.
+      : focusBottom + 82
     : crop === "mid"
       ? Math.round((CONNECTOR_PX.top + CONNECTOR_PX.bottom) / 2 + 62)
       // The bitmaps are cropped tight to the object, so `full` clamps to the canvas rather
