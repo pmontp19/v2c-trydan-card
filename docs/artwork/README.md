@@ -1,8 +1,20 @@
 # Charger artwork: sources and provenance
 
-The new charger illustration is built from measured hardware geometry plus two layered
-transparent bitmaps, with the illuminated logo and the LCD drawn as SVG on top so they
-stay recolourable and animatable.
+The charger illustration is two transparent WebP layers cut from V2C's own product
+photography, with the illuminated logo and the LCD drawn as SVG on top so they stay
+recolourable and animatable.
+
+## Source
+
+`source-v2c-press-kit.jpg` is `TRYDAN e-Charger/TRYDAN MANGUERA LISA (2).jpg` from
+**Trydan - Images.zip**, the download behind <https://v2charge.com/material-grafico>.
+1500 x 1500, straight-on, pure white background. Its logo happens to be lit green rather
+than white, which does not matter: the logo is erased from the bitmap and redrawn.
+
+A byte-identical smaller version of the same shot circulates through resellers, which is
+how it was found in the first place; `efimarket.com/.../Trydan6.jpg` is byte-identical to
+V2C's own `store/.../Trydan6.jpg`, confirming resellers republish V2C's files verbatim.
+The press-kit original is used here so the provenance runs straight to the manufacturer.
 
 ## Where the numbers come from
 
@@ -11,50 +23,80 @@ stay recolourable and animatable.
 | Body | 240 x 334 mm, ratio 0.7186 | `ficha-tecnica-trydan.pdf`, dimensioned front elevation |
 | Corner radius | 24 mm (10% of width) | least-squares fit of the drawing's rounded-rect inset profile |
 | Display glass | 65 x 13.7 mm, centre at 41.0% of height | the drawing's display slot, measured at 600 dpi |
-| Logo | 63.7 mm wide, centre at 23.2% of height | frontal retail photo; the manual's render gives 59.7 mm / 23.9% |
+| Logo | 63.4 mm wide, centre at 23.5% of height | see below |
 | LCD grid | 16 x 2 cells of 5 x 7 dots, 0.64 mm pitch | display captures embedded in the installation manual |
 | LCD colours | background `#240FBE`, characters `~#DCE4FF` | photograph of a running unit |
 
-Three independent sources (spec drawing, manual render, retail photo) agree on the body
-ratio and the display position to within 2%.
+Four independent sources agree on the body ratio and the display position to within 2%:
+the spec drawing, the render in the installation manual, a reseller crop, and the press-kit
+photograph, which measures the body at 760 x 1058 px (ratio 0.7183) with the display centred
+at 41.49% of the height.
+
+The logo is the one measurement that moves: 59.7 mm at 23.9% from the manual's render,
+63.7 mm at 23.0% from the reseller crop, 63.3 mm at 23.75% from the press kit. All three
+measure a *lit* logo whose glow inflates the box, so the model takes the middle of the
+range. For the same reason the drawn logo and display are positioned from the millimetre
+model rather than traced from the photograph: the photo's lit display area measures 68 mm
+across a 65 mm glass, which cannot be right.
 
 Two things the manual gets wrong about the display: its captures are **positive** (pale
-backlight, dark characters) while real hardware is **negative** (deep blue backlight,
-light characters), and its idealised screens do not match what a running unit shows.
-A real screen reads `ESPERANT EV` over `T:0.1 FV:1.7`.
+backlight, dark characters) while real hardware is **negative** (deep blue backlight, light
+characters), and its idealised screens do not match a running unit, which reads
+`ESPERANT EV` over `T:0.1 FV:1.7`.
 
-## The bitmaps
+## The layers
 
-Both layers share one 584 x 649 canvas, downscaled to 408 x 454 for shipping.
+Both share one 483 x 580 canvas, downscaled so the body is 360 px wide.
 
 | Layer | Size | Contents |
 | --- | --- | --- |
-| `body.webp` | 2.3 KB | body only; the lit logo and display are removed by multigrid Laplace diffusion so the card can draw its own |
-| `plug.webp` | 4.5 KB | the connector hanging at the side, with the cable hook |
+| `body.webp` | 4.3 KB | body only; the lit logo and display are removed by multigrid Laplace diffusion |
+| `plug.webp` | 5.9 KB | the connector hanging at the side, with its lead |
 
-6.8 KB together, 9 KB once base64-inlined. `scripts/smoke.mjs` caps the bundle at
-307200 bytes and the current build uses 193509, so this fits with room to spare. A
-separate bitmap *per state* never would: eleven states at 25 KB is 275 KB on its own.
+10 KB together, 13 KB once base64-inlined. `scripts/smoke.mjs` caps the bundle at 307200
+bytes; replacing the eleven per-state SVGs with this brings the build down from 193509 to
+183321 bytes. A bitmap *per state* was never possible: eleven at 25 KB is 275 KB on its own.
 
-Cutting an object off a white background needs alpha matting **and** un-premultiplication
-(`O = (P - 255(1-a)) / a`), otherwise a white fringe survives every edge and shows up as
-a halo on a dark dashboard. Near-zero alpha has to be clamped to zero as well, or the
-WebP alpha channel triples in size encoding an invisible drop shadow.
+The coiled cable was cut too and then dropped. It was 26 KB and made the card noisy; the
+connector alone carries the same "this is a tethered Trydan" signal.
 
-## Licensing: unresolved
+### Extraction notes
 
-`source-product-photo.jpg` is a retailer's product photograph and
-`source-connector-cut.png` is a hand cut of it. **Neither is cleared for redistribution.**
-Separately, V2C's own brand repository (`V2Charge/v2c-media-kit`) states that "use by
-unauthorized third parties is not permitted, nor is modification of the logo", which
-covers the traced wordmark in `src/assets/trydan/logo.ts`.
+Cutting an object off a white background needs alpha matting **and**
+un-premultiplication (`O = (P - 255(1-a)) / a`), otherwise a white fringe survives every
+edge and reads as a halo on a dark dashboard. Near-zero alpha has to be clamped to zero as
+well, or the WebP alpha channel triples in size encoding an invisible drop shadow.
 
-An MIT licence on this repository's code does not license either. Before publishing,
-one of these has to happen:
+The connector needs a different cut from the body. Behind the cable loops the studio
+backdrop is a grey falloff rather than white, so a whiteness-based matte keeps it and it
+appears as a pale smear; the connector is cut on darkness instead. Enclosed bright regions
+are filled only when their mean luminance says they are specular highlights on the cable
+rather than backdrop showing through a gap.
 
-1. written permission from V2C, or
-2. the bitmaps replaced with an original render, and the wordmark either cleared or
-   abstracted.
+## Licensing: better than it was, still worth confirming
 
-The pipeline is source-agnostic: swapping the input photograph and re-running the
-extraction reproduces the layers, so option 2 is a substitution, not a rewrite.
+V2C runs a genuine press-kit page and invites use of the material on it:
+
+> From V2C we provide you with a wide range of images, videos and graphic resources **in
+> order to promote their use**.
+> — <https://v2charge.com/material-grafico>
+
+The restrictive wording that exists elsewhere is narrower than it first appears. V2C's
+`V2Charge/v2c-media-kit` repository says "use by unauthorized third parties is not
+permitted, nor is modification of the logo, legal footer or brand identity", but both its
+README and its LICENSE scope that to the **email templates** and the visual identity, and
+list the permitted users as installers, authorised distributors, contracted agencies and
+press. No document found governs third-party redistribution of the product photography
+specifically, and the store's legal notice contains no image-redistribution clause.
+
+So: the images come from a page whose stated purpose is to promote their use, and the
+"unauthorized third parties" language is about a different asset set. That is a good
+position, not a licence. The traced wordmark in `src/assets/trydan/logo.ts` is a separate
+question, since trademark is not copyright and V2C explicitly asks that the logo not be
+modified.
+
+The cheap resolution is an email to `info@v2charge.com`, the address V2C's own LICENSE
+nominates for uses outside its list, confirming that shipping these images and a redrawn
+wordmark inside an MIT-licensed community card is fine. Until that answer arrives, the
+extraction is source-agnostic: point the pipeline at a different photograph and the layers
+regenerate, so replacing the source is a substitution rather than a rewrite.

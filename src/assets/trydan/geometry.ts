@@ -8,11 +8,12 @@
  *     The corner radius is a least-squares fit of the rounded-rect inset profile: 24.0 mm.
  *  2. The near-frontal render in the V2C installation manual, calibrated against the
  *     display as a ruler, places the logo centre at 23.9% of the height.
- *  3. The retail product photo in `docs/artwork/` measures the body at 354x492 px
- *     (ratio 0.7195 against the spec's 0.7186), the logo at 26.6% of the width and
- *     the display centre at 40.96% of the height.
+ *  3. V2C's own press kit (`docs/artwork/source-v2c-press-kit.jpg`, from
+ *     v2charge.com/material-grafico) measures the body at 760x1058 px, ratio 0.7183
+ *     against the spec's 0.7186, with the display centred at 41.49% of the height and the
+ *     logo at 23.58%.
  *
- * Three independent sources agree to within 2%, so these numbers are treated as fixed.
+ * Four independent sources agree to within 2%, so these numbers are treated as fixed.
  */
 export const TRYDAN_MM = {
   /** Outer body. 240 x 334 mm, ratio 0.7186. */
@@ -25,14 +26,13 @@ export const TRYDAN_MM = {
   /**
    * Illuminated V2C wordmark. Invisible when off: the panel is uniform black glass.
    *
-   * The two sources disagree slightly: the manual's render gives 59.7 mm wide centred at
-   * 23.9% of the height, the frontal retail photo gives 63.7 mm centred at 23.0%. Both
-   * measure a *lit* logo, so both include some bloom and both overstate the physical
-   * wordmark by a millimetre or two. We take the photo's numbers because that is the
-   * image the artwork composites onto, so the model and the bitmap stay consistent.
+   * Four measurements, none identical, all of a *lit* logo whose glow inflates the box:
+   * the manual's render 59.7 mm at 23.9% of the height, a reseller crop 63.7 mm at 23.0%,
+   * and V2C's own 1500 px press-kit shot 63.3 mm at 23.75%. The spread is under 2% of the
+   * body height, so this takes the press kit's figures rounded to the middle of the range.
    */
-  logoWidth: 63.7,
-  logoCentreY: 77.5,
+  logoWidth: 63.4,
+  logoCentreY: 78.5,
   /** Official mark is 378x163 units, so 2.319:1. */
   logoAspect: 2.319,
   /** 2.6" character LCD, 16x2 cells of 5x7 dots. */
@@ -48,11 +48,18 @@ export const TRYDAN_MM = {
  * downscaled together), so these offsets apply to every layer.
  */
 export const ARTWORK_PX = {
-  canvasWidth: 584,
-  canvasHeight: 649,
-  body: { x: 120, y: 37, width: 354, height: 492 },
-  logo: { x: 248, y: 130, width: 94, height: 41 },
-  display: { x: 245, y: 226, width: 105, height: 26 },
+  canvasWidth: 483,
+  canvasHeight: 580,
+  body: { x: 11, y: 12, width: 360, height: 501 },
+  /*
+   * The logo and display boxes are derived from the millimetre model, not traced from the
+   * photograph. Both features are lit in the source, and their glow inflates a pixel
+   * measurement by four or five percent - the display's lit area measures 68 mm wide
+   * against a 65 mm glass, which is impossible. Placing them from the spec keeps the drawn
+   * parts the size the hardware actually is.
+   */
+  logo: { x: 142, y: 109, width: 96, height: 41 },
+  display: { x: 142, y: 207, width: 98, height: 21 },
 } as const;
 
 /**
@@ -68,7 +75,7 @@ export const ARTWORK_CROPS = {
 export type ArtworkCrop = keyof typeof ARTWORK_CROPS;
 
 /** Where the connector layer lives on the canvas, so a frame can decide to include it. */
-export const CONNECTOR_PX = { top: 258, bottom: 613, right: 553 } as const;
+export const CONNECTOR_PX = { top: 243, bottom: 576, right: 476 } as const;
 
 export interface ArtworkFrame {
   x: number;
@@ -92,11 +99,24 @@ export function chargerArtFrame(crop: ArtworkCrop, showConnector: boolean): Artw
   const x = body.x - margin;
   const right = showConnector ? CONNECTOR_PX.right + margin : body.x + body.width + margin;
   const y = body.y - 13;
-  // Each crop stops just past the last feature it is meant to show.
+  /*
+   * Each crop stops just past the last feature it is meant to show.
+   *
+   * `focus` takes a comfortable margin of body below the display when there is no
+   * connector to worry about. With the connector shown it has to stop at the connector's
+   * top instead, and on this canvas that is only fifteen pixels below the display, so the
+   * margin is whatever is left - showing a disembodied sliver of connector would look worse
+   * than a tight crop.
+   */
+  const focusBottom = ARTWORK_PX.display.y + ARTWORK_PX.display.height;
   const bottom = crop === "focus"
-    ? ARTWORK_PX.display.y + ARTWORK_PX.display.height + 22
+    ? showConnector
+      ? Math.min(focusBottom + 22, CONNECTOR_PX.top)
+      : focusBottom + 40
     : crop === "mid"
       ? Math.round((CONNECTOR_PX.top + CONNECTOR_PX.bottom) / 2 + 62)
-      : CONNECTOR_PX.bottom + 12;
+      // The bitmaps are cropped tight to the object, so `full` clamps to the canvas rather
+      // than framing empty space past its edge.
+      : Math.min(CONNECTOR_PX.bottom + 12, ARTWORK_PX.canvasHeight);
   return { x, y, width: right - x, height: bottom - y };
 }

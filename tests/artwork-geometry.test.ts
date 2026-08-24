@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { ARTWORK_CROPS, ARTWORK_PX, TRYDAN_MM } from "../src/assets/trydan/geometry";
+import {
+  ARTWORK_CROPS,
+  ARTWORK_PX,
+  CONNECTOR_PX,
+  TRYDAN_MM,
+  chargerArtFrame,
+} from "../src/assets/trydan/geometry";
 import { V2C_LOGO_PATH, V2C_LOGO_VIEWBOX } from "../src/assets/trydan/logo";
 
 describe("Trydan artwork geometry", () => {
@@ -26,7 +32,7 @@ describe("Trydan artwork geometry", () => {
     const logoBottom = TRYDAN_MM.logoCentreY + logoHeight / 2;
     const displayTop = TRYDAN_MM.displayCentreY - TRYDAN_MM.displayHeight / 2;
     expect(logoBottom).toBeLessThan(displayTop);
-    expect(TRYDAN_MM.logoCentreY / TRYDAN_MM.bodyHeight).toBeCloseTo(0.232, 2);
+    expect(TRYDAN_MM.logoCentreY / TRYDAN_MM.bodyHeight).toBeCloseTo(0.235, 2);
   });
 
   it("keeps the bitmap anchors consistent with the millimetre model", () => {
@@ -36,19 +42,33 @@ describe("Trydan artwork geometry", () => {
     expect(Math.abs(logo.x + logo.width / 2 - (body.x + body.width / 2))).toBeLessThan(3);
     expect(Math.abs(display.x + display.width / 2 - (body.x + body.width / 2))).toBeLessThan(3);
     // And they sit at the measured heights.
-    expect((logo.y + logo.height / 2 - body.y) / body.height).toBeCloseTo(0.232, 2);
+    expect((logo.y + logo.height / 2 - body.y) / body.height).toBeCloseTo(0.235, 2);
     expect((display.y + display.height / 2 - body.y) / body.height).toBeCloseTo(0.41, 2);
     expect(body.x + body.width).toBeLessThanOrEqual(canvasWidth);
     expect(body.y + body.height).toBeLessThanOrEqual(canvasHeight);
   });
 
-  it("orders the crops and keeps focus above the connector", () => {
+  it("orders the crops and frames each one around what it is meant to show", () => {
     expect(ARTWORK_CROPS.focus).toBeLessThan(ARTWORK_CROPS.mid);
     expect(ARTWORK_CROPS.mid).toBeLessThan(ARTWORK_CROPS.full);
-    // The connector starts around canvas y 270; focus must stop short of it.
-    expect(ARTWORK_CROPS.focus * ARTWORK_PX.canvasHeight).toBeLessThan(370);
-    // Mid has to reach far enough down to show most of the connector.
-    expect(ARTWORK_CROPS.mid * ARTWORK_PX.canvasHeight).toBeGreaterThan(500);
+
+    // Expressed against the connector's own position rather than pixel thresholds, so
+    // re-cutting the bitmaps from a different source cannot quietly invalidate it.
+    const bottom = (crop: "focus" | "mid" | "full") => {
+      const frame = chargerArtFrame(crop, true);
+      return frame.y + frame.height;
+    };
+    const connectorMiddle = (CONNECTOR_PX.top + CONNECTOR_PX.bottom) / 2;
+    // With the connector shown, focus must not clip it mid-body.
+    expect(bottom("focus")).toBeLessThanOrEqual(CONNECTOR_PX.top);
+    // With it hidden there is nothing below to avoid, so focus takes more body.
+    const focusNoConnector = chargerArtFrame("focus", false);
+    expect(focusNoConnector.y + focusNoConnector.height).toBeGreaterThan(CONNECTOR_PX.top);
+    expect(focusNoConnector.width).toBeLessThan(chargerArtFrame("focus", true).width);
+    expect(bottom("mid")).toBeGreaterThan(connectorMiddle);
+    expect(bottom("mid")).toBeLessThan(CONNECTOR_PX.bottom);
+    expect(bottom("full")).toBeGreaterThanOrEqual(CONNECTOR_PX.bottom);
+    expect(bottom("full")).toBeLessThanOrEqual(ARTWORK_PX.canvasHeight);
   });
 });
 
