@@ -49,7 +49,7 @@ export const TRYDAN_MM = {
  */
 export const ARTWORK_PX = {
   canvasWidth: 483,
-  canvasHeight: 580,
+  canvasHeight: 604,
   body: { x: 11, y: 12, width: 360, height: 501 },
   /*
    * The logo and display boxes are derived from the millimetre model, not traced from the
@@ -75,7 +75,7 @@ export const ARTWORK_CROPS = {
 export type ArtworkCrop = keyof typeof ARTWORK_CROPS;
 
 /** Where the connector layer lives on the canvas, so a frame can decide to include it. */
-export const CONNECTOR_PX = { top: 243, bottom: 576, right: 476 } as const;
+export const CONNECTOR_PX = { top: 252, bottom: 600, right: 424 } as const;
 
 export interface ArtworkFrame {
   x: number;
@@ -96,8 +96,19 @@ export interface ArtworkFrame {
 export function chargerArtFrame(crop: ArtworkCrop, showConnector: boolean): ArtworkFrame {
   const { body } = ARTWORK_PX;
   const margin = 6;
-  const x = body.x - margin;
-  const right = showConnector ? CONNECTOR_PX.right + margin : body.x + body.width + margin;
+  /*
+   * The frame is always centred on the body, never on its contents. Widening it to the
+   * right to make room for the connector would leave the charger sitting off to one side,
+   * which reads as a mistake rather than as a hanging cable, so the connector's overhang
+   * is matched by empty space on the left. A negative x is fine: the viewBox simply shows
+   * the void beside the canvas, and the body stays where the eye expects it.
+   */
+  const bodyCentreX = body.x + body.width / 2;
+  const halfWidth = Math.max(
+    body.width / 2 + margin,
+    showConnector ? CONNECTOR_PX.right + margin - bodyCentreX : 0,
+  );
+  const x = bodyCentreX - halfWidth;
   const y = body.y - 13;
   /*
    * Each crop stops just past the last feature it is meant to show.
@@ -121,5 +132,5 @@ export function chargerArtFrame(crop: ArtworkCrop, showConnector: boolean): Artw
       // The bitmaps are cropped tight to the object, so `full` clamps to the canvas rather
       // than framing empty space past its edge.
       : Math.min(CONNECTOR_PX.bottom + 12, ARTWORK_PX.canvasHeight);
-  return { x, y, width: right - x, height: bottom - y };
+  return { x, y, width: halfWidth * 2, height: bottom - y };
 }

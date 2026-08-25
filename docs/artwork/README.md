@@ -46,14 +46,15 @@ characters), and its idealised screens do not match a running unit, which reads
 
 ## The layers
 
-Both share one 483 x 580 canvas, downscaled so the body is 360 px wide.
+Both share one 483 x 604 canvas, downscaled so the body is 360 px wide. The canvas is
+taller than the charger because the connector's cable hook hangs below it.
 
 | Layer | Size | Contents |
 | --- | --- | --- |
-| `body.webp` | 4.3 KB | body only; the lit logo and display are removed by multigrid Laplace diffusion |
-| `plug.webp` | 4.2 KB | the connector hanging at the side, with its lead |
+| `body.webp` | 4.6 KB | body only; the lit logo and display are removed by multigrid Laplace diffusion |
+| `plug.webp` | 6.9 KB | the connector hanging at the side, cut by hand by Pere |
 
-10 KB together, 13 KB once base64-inlined. `scripts/smoke.mjs` caps the bundle at 307200
+11.5 KB together, 15 KB once base64-inlined. `scripts/smoke.mjs` caps the bundle at 307200
 bytes; replacing the eleven per-state SVGs with this brings the build down from 193509 to
 183321 bytes. A bitmap *per state* was never possible: eleven at 25 KB is 275 KB on its own.
 
@@ -67,16 +68,26 @@ un-premultiplication (`O = (P - 255(1-a)) / a`), otherwise a white fringe surviv
 edge and reads as a halo on a dark dashboard. Near-zero alpha has to be clamped to zero as
 well, or the WebP alpha channel triples in size encoding an invisible drop shadow.
 
-The connector was first cut by hand, by Pere, on a reseller copy of this shot, and that
-cut was cleaner than anything the thresholding below produces: it isolated the object and
-left the cable ending in a tidy hook. It could not be carried over to the press-kit
-original. Scaling it by the ratio of the two body rectangles lands it 234 px to the left
-of where the connector actually is, because the connector is a loose object that hangs
-differently in every exposure - it is not a framing difference, which a scale would fix.
-Re-cutting by hand on the press-kit frame is still the best option available and is worth
-doing; what follows is what an automatic cut can manage in the meantime.
+**The connector is cut by hand.** `source-connector-cut.png` is Pere's cut on the
+press-kit frame, and it is used as-is: the only processing applied is un-premultiplying
+the white fringe off its soft edges.
 
-The connector needs a different cut from the body. Behind the cable loops the studio
+That is not laziness, it is the better result. Two automatic attempts were made first and
+both were worse. Behind the connector the studio backdrop is a grey falloff rather than
+white, so a whiteness matte keeps it and it shows as a pale smear; cutting on darkness
+instead fixes that but then the box sweeps up the cable strands crossing behind and beside
+the connector, which on a dark card is indistinguishable from the connector itself.
+Narrowing the box drops most of them and also drops the cable's hook. Deciding where the
+connector ends and the coil begins is a judgement, and thresholding does not make
+judgements.
+
+An earlier hand cut, made on a reseller copy of the same shot, could not be carried over.
+Scaling it by the ratio of the two body rectangles lands it 234 px to the left of where the
+press-kit connector actually is: the connector is a loose object and hangs differently in
+every exposure, so no similarity transform maps one frame onto the other. This is worth
+knowing before anyone tries to reuse a mask across sources.
+
+The body still needs a different cut from the connector. Behind the cable loops the studio
 backdrop is a grey falloff rather than white, so a whiteness-based matte keeps it and it
 appears as a pale smear; the connector is cut on darkness instead. Enclosed bright regions
 are filled only when their mean luminance says they are specular highlights on the cable

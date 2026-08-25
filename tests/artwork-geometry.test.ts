@@ -97,3 +97,29 @@ describe("traced V2C wordmark", () => {
     expect(Math.min(...ys)).toBeGreaterThanOrEqual(-1);
   });
 });
+
+describe("frame centring", () => {
+  it("keeps the charger centred whether or not the connector is shown", () => {
+    const bodyCentre = ARTWORK_PX.body.x + ARTWORK_PX.body.width / 2;
+    for (const crop of ["focus", "mid", "full"] as const) {
+      for (const showConnector of [false, true]) {
+        const frame = chargerArtFrame(crop, showConnector);
+        // An off-centre charger reads as a layout mistake rather than as a hanging cable.
+        expect(frame.x + frame.width / 2).toBeCloseTo(bodyCentre, 6);
+      }
+    }
+  });
+
+  it("makes room for the connector by widening both sides, not one", () => {
+    const withConnector = chargerArtFrame("full", true);
+    const without = chargerArtFrame("full", false);
+    expect(withConnector.width).toBeGreaterThan(without.width);
+    // The extra width is split evenly, so the left edge moves out as far as the right.
+    const leftGrowth = without.x - withConnector.x;
+    const rightGrowth =
+      withConnector.x + withConnector.width - (without.x + without.width);
+    expect(leftGrowth).toBeCloseTo(rightGrowth, 6);
+    // And the connector actually fits.
+    expect(withConnector.x + withConnector.width).toBeGreaterThanOrEqual(CONNECTOR_PX.right);
+  });
+});
