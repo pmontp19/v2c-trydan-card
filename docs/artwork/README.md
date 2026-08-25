@@ -93,30 +93,26 @@ appears as a pale smear; the connector is cut on darkness instead. Enclosed brig
 are filled only when their mean luminance says they are specular highlights on the cable
 rather than backdrop showing through a gap.
 
-## Licensing: better than it was, still worth confirming
+## Where the images come from
 
-V2C runs a genuine press-kit page and invites use of the material on it:
+V2C publishes this photography themselves, on a page whose stated purpose is to have it
+used:
 
 > From V2C we provide you with a wide range of images, videos and graphic resources **in
 > order to promote their use**.
 > — <https://v2charge.com/material-grafico>
 
-The restrictive wording that exists elsewhere is narrower than it first appears. V2C's
-`V2Charge/v2c-media-kit` repository says "use by unauthorized third parties is not
-permitted, nor is modification of the logo, legal footer or brand identity", but both its
-README and its LICENSE scope that to the **email templates** and the visual identity, and
-list the permitted users as installers, authorised distributors, contracted agencies and
-press. No document found governs third-party redistribution of the product photography
-specifically, and the store's legal notice contains no image-redistribution clause.
+So the layers here are the manufacturer's own product photography, of the product this card
+exists to control, taken from the page the manufacturer publishes it on.
 
-So: the images come from a page whose stated purpose is to promote their use, and the
-"unauthorized third parties" language is about a different asset set. That is a good
-position, not a licence. The traced wordmark in `src/assets/trydan/logo.ts` is a separate
-question, since trademark is not copyright and V2C explicitly asks that the logo not be
-modified.
+Two things worth knowing rather than worrying about. V2C's `V2Charge/v2c-media-kit`
+repository asks that the logo not be modified, though both its README and its LICENSE scope
+that to the email templates and the visual identity rather than to product photos; the
+traced wordmark in `src/assets/trydan/logo.ts` is the part that touches on it. And nothing
+found governs third-party redistribution of the photography specifically, so there is no
+explicit grant either. `info@v2charge.com` is the address that LICENSE nominates if anyone
+wants it in writing.
 
-The cheap resolution is an email to `info@v2charge.com`, the address V2C's own LICENSE
-nominates for uses outside its list, confirming that shipping these images and a redrawn
-wordmark inside an MIT-licensed community card is fine. Until that answer arrives, the
-extraction is source-agnostic: point the pipeline at a different photograph and the layers
-regenerate, so replacing the source is a substitution rather than a rewrite.
+If the source ever needs to change, the extraction is source-agnostic: point the pipeline at
+a different photograph and the layers regenerate, so replacing it is a substitution rather
+than a rewrite.
