@@ -51,7 +51,7 @@ Both share one 483 x 580 canvas, downscaled so the body is 360 px wide.
 | Layer | Size | Contents |
 | --- | --- | --- |
 | `body.webp` | 4.3 KB | body only; the lit logo and display are removed by multigrid Laplace diffusion |
-| `plug.webp` | 5.9 KB | the connector hanging at the side, with its lead |
+| `plug.webp` | 4.2 KB | the connector hanging at the side, with its lead |
 
 10 KB together, 13 KB once base64-inlined. `scripts/smoke.mjs` caps the bundle at 307200
 bytes; replacing the eleven per-state SVGs with this brings the build down from 193509 to
@@ -66,6 +66,15 @@ Cutting an object off a white background needs alpha matting **and**
 un-premultiplication (`O = (P - 255(1-a)) / a`), otherwise a white fringe survives every
 edge and reads as a halo on a dark dashboard. Near-zero alpha has to be clamped to zero as
 well, or the WebP alpha channel triples in size encoding an invisible drop shadow.
+
+The connector was first cut by hand, by Pere, on a reseller copy of this shot, and that
+cut was cleaner than anything the thresholding below produces: it isolated the object and
+left the cable ending in a tidy hook. It could not be carried over to the press-kit
+original. Scaling it by the ratio of the two body rectangles lands it 234 px to the left
+of where the connector actually is, because the connector is a loose object that hangs
+differently in every exposure - it is not a framing difference, which a scale would fix.
+Re-cutting by hand on the press-kit frame is still the best option available and is worth
+doing; what follows is what an automatic cut can manage in the meantime.
 
 The connector needs a different cut from the body. Behind the cable loops the studio
 backdrop is a grey falloff rather than white, so a whiteness-based matte keeps it and it
